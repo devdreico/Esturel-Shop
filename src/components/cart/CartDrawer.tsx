@@ -1,12 +1,18 @@
+import { useRef } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { useCart } from '../../hooks/useCart'
+import { useFocusTrap } from '../../hooks/useFocusTrap'
 import { formatCOP } from '../../lib/format'
 import { CartBadge } from './CartBadge'
+import { CartLineItem } from './CartLineItem'
 
 export function CartDrawer() {
   const { isOpen, closeCart, items, total, count, setQty, removeItem, clearCart } = useCart()
   const reduce = useReducedMotion()
+  const panelRef = useRef<HTMLElement | null>(null)
+
+  useFocusTrap(isOpen, panelRef, closeCart)
 
   return (
     <AnimatePresence>
@@ -23,6 +29,7 @@ export function CartDrawer() {
             aria-label="Cerrar carrito"
           />
           <motion.aside
+            ref={panelRef}
             initial={reduce ? { opacity: 0 } : { x: '100%' }}
             animate={reduce ? { opacity: 1 } : { x: 0 }}
             exit={reduce ? { opacity: 0 } : { x: '100%' }}
@@ -34,7 +41,7 @@ export function CartDrawer() {
                 <p className="text-xs font-semibold tracking-widest text-urple-500 uppercase">
                   Carrito
                 </p>
-                <h2 className="text-lg font-bold">
+                <h2 className="text-lg font-bold" aria-live="polite">
                   {count} {count === 1 ? 'artículo' : 'artículos'}
                 </h2>
               </div>
@@ -64,62 +71,18 @@ export function CartDrawer() {
                         animate={{ opacity: 1, x: 0 }}
                         exit={reduce ? { opacity: 0 } : { opacity: 0, x: 40, height: 0 }}
                         transition={{ duration: 0.22, ease: [0, 0, 0.2, 1] }}
-                        className="glass-card flex gap-3 rounded-2xl p-3"
+                        className="glass-card overflow-hidden rounded-2xl"
                         style={{ transform: 'none' }}
                       >
-                        <Link
-                          to={`/producto/${product.slug}`}
-                          onClick={closeCart}
-                          className="h-16 w-16 shrink-0 overflow-hidden rounded-xl bg-surface"
-                        >
-                          <img
-                            src={product.image}
-                            alt=""
-                            className="h-full w-full object-cover"
-                            loading="lazy"
-                          />
-                        </Link>
-                        <div className="min-w-0 flex-1">
-                          <Link
-                            to={`/producto/${product.slug}`}
-                            onClick={closeCart}
-                            className="block truncate text-sm font-bold hover:text-urple-500"
-                          >
-                            {product.name}
-                          </Link>
-                          <p className="text-xs text-muted">{formatCOP(product.priceCOP)}</p>
-                          <div className="mt-2 flex items-center gap-2">
-                            <div className="glass flex items-center rounded-full">
-                              <button
-                                type="button"
-                                className="px-2.5 py-1 text-sm font-bold hover:text-urple-500"
-                                onClick={() => setQty(product.id, qty - 1)}
-                                aria-label="Reducir"
-                              >
-                                −
-                              </button>
-                              <span className="min-w-5 text-center text-sm font-semibold">
-                                {qty}
-                              </span>
-                              <button
-                                type="button"
-                                className="px-2.5 py-1 text-sm font-bold hover:text-urple-500"
-                                onClick={() => setQty(product.id, qty + 1)}
-                                aria-label="Aumentar"
-                              >
-                                +
-                              </button>
-                            </div>
-                            <button
-                              type="button"
-                              onClick={() => removeItem(product.id)}
-                              className="text-xs text-muted underline-offset-2 hover:text-urple-500 hover:underline"
-                            >
-                              Quitar
-                            </button>
-                          </div>
-                        </div>
-                        <p className="text-sm font-bold whitespace-nowrap">{formatCOP(lineTotal)}</p>
+                        <CartLineItem
+                          product={product}
+                          qty={qty}
+                          lineTotal={lineTotal}
+                          compact
+                          onQtyChange={setQty}
+                          onRemove={removeItem}
+                          onLinkClick={closeCart}
+                        />
                       </motion.li>
                     ))}
                   </AnimatePresence>
@@ -129,7 +92,7 @@ export function CartDrawer() {
 
             {items.length > 0 && (
               <footer className="border-t border-line px-5 py-4 space-y-3">
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between" aria-live="polite">
                   <span className="text-sm text-muted">Total</span>
                   <span className="text-xl font-bold">{formatCOP(total)}</span>
                 </div>

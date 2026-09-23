@@ -8,12 +8,22 @@ import { NewsCard, NewsSkeleton } from '../components/news/NewsCard'
 import { categories } from '../data/categories'
 import { Reveal } from '../components/ui/Motion'
 import { useCart } from '../hooks/useCart'
+import { useSeo } from '../hooks/useSeo'
+import { organizationJsonLd } from '../lib/seo'
 
 export function HomePage() {
   const featured = getFeaturedProducts()
   const { items: news, loading } = useNews()
   const { addItem } = useCart()
   const reduce = useReducedMotion()
+
+  useSeo({
+    title: 'Esturel · Tecnología en Colombia',
+    description:
+      'Tienda, asesor y noticiero de tecnología en Colombia. Audífonos, periféricos y frontera tech con pago Mercado Pago.',
+    path: '/',
+    jsonLd: organizationJsonLd(),
+  })
 
   return (
     <div className="space-y-20">
@@ -84,38 +94,44 @@ export function HomePage() {
               <p className="text-xs font-bold tracking-widest text-urple-500 uppercase">
                 Destacado de la semana
               </p>
-              {featured[0] && (
-                <>
-                  <h2 className="mt-2 text-2xl font-bold">{featured[0].name}</h2>
-                  <p className="mt-2 text-sm text-muted">{featured[0].shortDesc}</p>
-                  <div className="mt-4 aspect-video overflow-hidden rounded-2xl bg-surface">
-                    <img
-                      src={featured[0].image}
-                      alt=""
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-                  <div className="mt-4 flex items-center justify-between gap-3">
-                    <span className="text-xl font-bold">{formatCOP(featured[0].priceCOP)}</span>
-                    <div className="flex gap-2">
-                      <button
-                        type="button"
-                        onClick={() => addItem(featured[0].id)}
-                        className="btn-primary rounded-full px-4 py-2 text-xs"
-                        style={{ transform: 'none' }}
-                      >
-                        Añadir
-                      </button>
-                      <Link
-                        to={`/producto/${featured[0].slug}`}
-                        className="glass rounded-full px-4 py-2 text-xs font-bold hover:text-urple-500"
-                      >
-                        Detalle
-                      </Link>
+              {(() => {
+                const hero = featured[0]
+                if (!hero) return null
+                return (
+                  <>
+                    <h2 className="mt-2 text-2xl font-bold">{hero.name}</h2>
+                    <p className="mt-2 text-sm text-muted">{hero.shortDesc}</p>
+                    <div className="mt-4 aspect-video overflow-hidden rounded-2xl bg-surface">
+                      <img
+                        src={hero.image}
+                        alt=""
+                        width={800}
+                        height={450}
+                        className="h-full w-full object-cover"
+                      />
                     </div>
-                  </div>
-                </>
-              )}
+                    <div className="mt-4 flex items-center justify-between gap-3">
+                      <span className="text-xl font-bold">{formatCOP(hero.priceCOP)}</span>
+                      <div className="flex gap-2">
+                        <button
+                          type="button"
+                          onClick={() => addItem(hero.id)}
+                          className="btn-primary rounded-full px-4 py-2 text-xs"
+                          style={{ transform: 'none' }}
+                        >
+                          Añadir
+                        </button>
+                        <Link
+                          to={`/producto/${hero.slug}`}
+                          className="glass rounded-full px-4 py-2 text-xs font-bold hover:text-urple-500"
+                        >
+                          Detalle
+                        </Link>
+                      </div>
+                    </div>
+                  </>
+                )
+              })()}
             </div>
             <div className="absolute -right-3 -bottom-3 -z-10 h-full w-full rounded-3xl bg-urple-500/25 blur-2xl" />
           </motion.div>

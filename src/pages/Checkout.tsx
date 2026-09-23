@@ -2,14 +2,24 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useCart } from '../hooks/useCart'
 import { formatCOP } from '../lib/format'
-import { openCartPayments, openProductPayment, paymentNoteForQty } from '../lib/mercadopago'
+import { openProductPayment, paymentNoteForQty } from '../lib/mercadopago'
+import { isDemoPaymentLink } from '../lib/mpValidate'
 import { Reveal } from '../components/ui/Motion'
 import { motion } from 'framer-motion'
+import { useSeo } from '../hooks/useSeo'
 
 export function CheckoutPage() {
   const { items, total, count, clearCart } = useCart()
   const [confirmed, setConfirmed] = useState(false)
   const onlyOne = items.length === 1
+  const hasDemo = items.some((i) => isDemoPaymentLink(i.product.mpPaymentLink))
+
+  useSeo({
+    title: 'Checkout',
+    description: 'Pago seguro con Mercado Pago.',
+    path: '/checkout',
+    noindex: true,
+  })
 
   if (items.length === 0 && !confirmed) {
     return (
@@ -17,7 +27,10 @@ export function CheckoutPage() {
         <div className="glass rounded-3xl p-10">
           <h1 className="text-2xl font-bold">Carrito vacío</h1>
           <p className="mt-2 text-sm text-muted">Añade productos antes de pagar.</p>
-          <Link to="/catalogo" className="btn-primary mt-6 inline-flex rounded-full px-6 py-3 text-sm">
+          <Link
+            to="/catalogo"
+            className="btn-primary mt-6 inline-flex rounded-full px-6 py-3 text-sm"
+          >
             Ver catálogo
           </Link>
         </div>
@@ -36,12 +49,16 @@ export function CheckoutPage() {
           <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-urple-500 text-2xl font-bold text-white">
             ✓
           </div>
-          <h1 className="mt-4 text-2xl font-bold">¡Pedido registrado!</h1>
+          <h1 className="mt-4 text-2xl font-bold">Pedido anotado</h1>
           <p className="mt-2 text-sm text-muted">
-            Si el pago en Mercado Pago fue exitoso, te contactaremos al correo o WhatsApp para
-            coordinar el envío en Colombia.
+            Si completaste el pago en Mercado Pago, te contactaremos (correo o WhatsApp) para
+            coordinar el envío en Colombia. La confirmación automática llegará con la Preference
+            API en la fase de producción.
           </p>
-          <Link to="/catalogo" className="btn-primary mt-6 inline-flex rounded-full px-6 py-3 text-sm">
+          <Link
+            to="/catalogo"
+            className="btn-primary mt-6 inline-flex rounded-full px-6 py-3 text-sm"
+          >
             Seguir comprando
           </Link>
         </motion.div>
@@ -55,8 +72,15 @@ export function CheckoutPage() {
         <p className="text-xs font-bold tracking-widest text-urple-500 uppercase">Checkout</p>
         <h1 className="mt-1 text-3xl font-bold">Pagar con Mercado Pago</h1>
         <p className="mt-2 text-sm text-muted">
-          Cada producto tiene un <strong>link de pago único</strong> de Mercado Pago. {paymentNoteForQty(1)}
+          Cada producto tiene un <strong>link de pago único</strong> de Mercado Pago.{' '}
+          {paymentNoteForQty(1)}
         </p>
+        {hasDemo && (
+          <p className="mt-3 rounded-full bg-amber-500/15 px-3 py-1.5 text-xs font-semibold text-amber-600 dark:text-amber-400 inline-block">
+            Links de pago en demo — configura <code>mpPaymentLink</code> reales en{' '}
+            <code>products.ts</code>.
+          </p>
+        )}
       </Reveal>
 
       <div className="mt-8 grid gap-6 lg:grid-cols-5">
@@ -66,13 +90,15 @@ export function CheckoutPage() {
               <img
                 src={product.image}
                 alt=""
+                width={56}
+                height={56}
                 className="h-14 w-14 rounded-xl bg-surface object-cover"
               />
               <div className="min-w-0 flex-1">
                 <p className="truncate text-sm font-bold">{product.name}</p>
                 <p className="text-xs text-muted">
                   {qty} × {formatCOP(product.priceCOP)}
-                  {qty > 1 ? ` · link unitario MP` : ''}
+                  {qty > 1 ? ' · link unitario MP' : ''}
                 </p>
               </div>
               <div className="text-right">
@@ -110,12 +136,18 @@ export function CheckoutPage() {
           <button
             type="button"
             className="btn-primary mt-5 w-full rounded-full px-5 py-3 text-sm"
+            disabled={onlyOne ? false : true}
             onClick={() => {
-              if (onlyOne) openProductPayment(items[0].product)
-              else openCartPayments(items.map((i) => ({ product: i.product, qty: i.qty })))
+              const first = items[0]
+              if (first) openProductPayment(first.product)
             }}
+            title={
+              onlyOne
+                ? undefined
+                : 'Por limitación de links unitarios MP, paga cada producto con su botón'
+            }
           >
-            {onlyOne ? 'Pagar en Mercado Pago' : 'Abrir links de pago (MP)'}
+            {onlyOne ? 'Pagar en Mercado Pago' : 'Paga línea por línea (links MP)'}
           </button>
 
           <button
@@ -126,12 +158,12 @@ export function CheckoutPage() {
               setConfirmed(true)
             }}
           >
-            Ya pagué · confirmar pedido
+            Ya pagué · anotar pedido
           </button>
 
           <p className="mt-4 text-[11px] leading-relaxed text-muted">
-            El MVP usa links de pago exclusivos por producto (precio fijo). Si llevas más de una
-            unidad, indica la cantidad al confirmar o escríbenos para ajustar el cobro.
+            MVP con links de pago exclusivos por producto (precio fijo). La verificación
+            automática de pagos llega con Preference API + webhook en la fase de producción.
           </p>
         </aside>
       </div>

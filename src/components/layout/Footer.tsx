@@ -46,7 +46,11 @@ export function Footer() {
           <p className="text-xs font-bold tracking-widest text-urple-500 uppercase">Contacto</p>
           <ul className="mt-3 space-y-2 text-sm text-muted">
             <li>Bogotá, Colombia</li>
-            <li>hola@esturel.co</li>
+            <li>
+              <a className="hover:text-urple-500" href="mailto:hola@esturel.co">
+                hola@esturel.co
+              </a>
+            </li>
             <li>Lun–Vie 9:00–18:00</li>
           </ul>
         </div>

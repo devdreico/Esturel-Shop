@@ -1,6 +1,14 @@
 import { Link } from 'react-router-dom'
+import { useSeo } from '../hooks/useSeo'
 
 export function NotFoundPage() {
+  useSeo({
+    title: 'Página no encontrada',
+    description: 'La ruta no existe o el producto fue removido del catálogo.',
+    path: '/404',
+    noindex: true,
+  })
+
   return (
     <div className="mx-auto max-w-lg px-4 py-24 text-center">
       <p className="text-xs font-bold tracking-widest text-urple-500 uppercase">404</p>

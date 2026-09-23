@@ -44,33 +44,6 @@ export function Reveal({
   )
 }
 
-export function StaggerItem({
-  children,
-  index = 0,
-  className,
-}: {
-  children: ReactNode
-  index?: number
-  className?: string
-}) {
-  const reduce = useReducedMotion()
-  return (
-    <motion.div
-      className={className}
-      initial={reduce ? { opacity: 0 } : { opacity: 0, y: 28 }}
-      whileInView={reduce ? { opacity: 1 } : { opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-8%' }}
-      transition={{
-        duration: reduce ? 0.15 : 0.45,
-        delay: reduce ? 0 : Math.min(index * 0.05, 0.4),
-        ease: [0, 0, 0.2, 1],
-      }}
-    >
-      {children}
-    </motion.div>
-  )
-}
-
 export function FadePage({ children }: { children: ReactNode }) {
   const reduce = useReducedMotion()
   return (

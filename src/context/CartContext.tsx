@@ -8,7 +8,7 @@ import {
 } from 'react'
 import { getProductById } from '../data/products'
 import type { CartLine, Product } from '../data/types'
-import { STORAGE_KEYS, readJSON, writeJSON } from '../lib/storage'
+import { STORAGE_KEYS, readCartLines, writeJSON } from '../lib/storage'
 
 export type ResolvedLine = { product: Product; qty: number; lineTotal: number }
 
@@ -29,10 +29,13 @@ export type CartContextValue = {
 
 export const CartContext = createContext<CartContextValue | null>(null)
 
+function clampQty(qty: number): number {
+  if (!Number.isFinite(qty)) return 1
+  return Math.min(Math.max(Math.floor(qty), 1), 99)
+}
+
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [lines, setLines] = useState<CartLine[]>(() =>
-    readJSON<CartLine[]>(STORAGE_KEYS.cart, []),
-  )
+  const [lines, setLines] = useState<CartLine[]>(() => readCartLines())
   const [isOpen, setIsOpen] = useState(false)
   const [lastAddedId, setLastAddedId] = useState<string | null>(null)
 
@@ -47,14 +50,15 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [lastAddedId])
 
   const addItem = useCallback((productId: string, qty = 1) => {
+    const nextQty = clampQty(qty)
     setLines((prev) => {
       const found = prev.find((l) => l.productId === productId)
       if (found) {
         return prev.map((l) =>
-          l.productId === productId ? { ...l, qty: Math.min(l.qty + qty, 99) } : l,
+          l.productId === productId ? { ...l, qty: clampQty(l.qty + nextQty) } : l,
         )
       }
-      return [...prev, { productId, qty }]
+      return [...prev, { productId, qty: nextQty }]
     })
     setLastAddedId(productId)
     setIsOpen(true)
@@ -67,7 +71,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const setQty = useCallback((productId: string, qty: number) => {
     setLines((prev) => {
       if (qty <= 0) return prev.filter((l) => l.productId !== productId)
-      return prev.map((l) => (l.productId === productId ? { ...l, qty: Math.min(qty, 99) } : l))
+      return prev.map((l) => (l.productId === productId ? { ...l, qty: clampQty(qty) } : l))
     })
   }, [])
 
@@ -78,7 +82,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
       .map((l) => {
         const product = getProductById(l.productId)
         if (!product) return null
-        return { product, qty: l.qty, lineTotal: product.priceCOP * l.qty }
+        const qty = clampQty(l.qty)
+        return { product, qty, lineTotal: product.priceCOP * qty }
       })
       .filter((x): x is ResolvedLine => x !== null)
   }, [lines])

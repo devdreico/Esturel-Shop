@@ -43,13 +43,14 @@ export function BackToTop() {
       type="button"
       initial={{ opacity: 0, scale: 0.8, y: 12 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.8 }}
       whileTap={{ scale: 0.92 }}
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       className="glass fixed right-4 bottom-4 z-40 flex h-11 w-11 items-center justify-center rounded-full text-ink shadow-glow-sm sm:right-6 sm:bottom-6"
       aria-label="Volver arriba"
     >
-      <span aria-hidden className="text-lg leading-none">↑</span>
+      <span aria-hidden className="text-lg leading-none">
+        ↑
+      </span>
     </motion.button>
   )
 }

@@ -5,6 +5,7 @@ const cop = new Intl.NumberFormat('es-CO', {
 })
 
 export function formatCOP(value: number): string {
+  if (!Number.isFinite(value)) return '$ 0'
   return cop.format(value)
 }
 
@@ -21,9 +22,11 @@ export function formatDate(iso: string): string {
 }
 
 export function relativeTime(iso: string): string {
-  const diff = Date.now() - new Date(iso).getTime()
-  const mins = Math.floor(diff / 60000)
-  if (mins < 60) return `hace ${Math.max(mins, 1)} min`
+  const t = new Date(iso).getTime()
+  if (Number.isNaN(t)) return formatDate(iso)
+  const mins = Math.floor((Date.now() - t) / 60000)
+  if (mins < 1) return 'ahora'
+  if (mins < 60) return `hace ${mins} min`
   const hours = Math.floor(mins / 60)
   if (hours < 24) return `hace ${hours} h`
   const days = Math.floor(hours / 24)

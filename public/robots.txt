@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /carrito
+Disallow: /checkout
+
+Sitemap: https://esturel.shop/sitemap.xml

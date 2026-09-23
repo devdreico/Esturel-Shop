@@ -5,6 +5,7 @@ import type { Product } from '../../data/types'
 import { formatCOP } from '../../lib/format'
 import { useCart } from '../../hooks/useCart'
 import { openProductPayment } from '../../lib/mercadopago'
+import { isDemoPaymentLink } from '../../lib/mpValidate'
 
 const stockMap = {
   disponible: { label: 'Disponible', cls: 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400' },
@@ -35,6 +36,8 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
           <img
             src={product.image}
             alt={product.name}
+            width={800}
+            height={800}
             loading="lazy"
             decoding="async"
             className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
@@ -76,6 +79,11 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
               type="button"
               onClick={() => openProductPayment(product)}
               disabled={product.stockHint === 'agotado'}
+              title={
+                isDemoPaymentLink(product.mpPaymentLink)
+                  ? 'Link MP demo — configura mpPaymentLink real'
+                  : undefined
+              }
               className="glass rounded-full px-3 py-2 text-xs font-bold hover:border-urple-500/40 hover:text-urple-500 disabled:cursor-not-allowed disabled:opacity-40"
             >
               Comprar

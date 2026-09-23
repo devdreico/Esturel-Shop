@@ -1,9 +1,10 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { categories } from '../data/categories'
 import { filterProducts } from '../data/products'
 import { ProductCard } from '../components/product/ProductCard'
 import { Reveal } from '../components/ui/Motion'
+import { useSeo } from '../hooks/useSeo'
 
 type Sort = 'relevance' | 'price-asc' | 'price-desc' | 'name'
 
@@ -12,6 +13,24 @@ export function CatalogPage() {
   const category = params.get('cat') ?? 'all'
   const q = params.get('q') ?? ''
   const sort = (params.get('sort') as Sort) || 'relevance'
+  const [draft, setDraft] = useState(q)
+  const [prevQ, setPrevQ] = useState(q)
+  const timerRef = useRef<number | undefined>(undefined)
+
+  useSeo({
+    title: 'Catálogo de tecnología',
+    description:
+      'Audífonos, periféricos y frontera tech con precios en COP y pago seguro por Mercado Pago.',
+    path: '/catalogo',
+    noindex: Boolean(params.toString()),
+  })
+
+  if (prevQ !== q) {
+    setPrevQ(q)
+    setDraft(q)
+  }
+
+  useEffect(() => () => window.clearTimeout(timerRef.current), [])
 
   const products = useMemo(
     () => filterProducts({ category, query: q, sort }),
@@ -25,13 +44,20 @@ export function CatalogPage() {
     setParams(next, { replace: true })
   }
 
+  function onSearch(value: string) {
+    setDraft(value)
+    window.clearTimeout(timerRef.current)
+    timerRef.current = window.setTimeout(() => update('q', value), 250)
+  }
+
   return (
     <div className="mx-auto max-w-7xl px-4 pt-8 sm:px-6">
       <Reveal>
         <p className="text-xs font-bold tracking-widest text-urple-500 uppercase">Catálogo</p>
         <h1 className="mt-1 text-3xl font-bold sm:text-4xl">Toda la tecnología Esturel</h1>
         <p className="mt-2 max-w-2xl text-sm text-muted">
-          Audífonos, periféricos y frontera tech con precios en COP y pago seguro por Mercado Pago.
+          Audífonos, periféricos y frontera tech con precios en COP y pago seguro por Mercado
+          Pago.
         </p>
       </Reveal>
 
@@ -66,15 +92,8 @@ export function CatalogPage() {
 
         <div className="flex flex-wrap gap-3">
           <input
-            defaultValue={q}
-            key={q}
-            onChange={(e) => {
-              const v = e.target.value
-              window.clearTimeout((window as unknown as { __catT?: number }).__catT)
-              ;(window as unknown as { __catT?: number }).__catT = window.setTimeout(() => {
-                update('q', v)
-              }, 250)
-            }}
+            value={draft}
+            onChange={(e) => onSearch(e.target.value)}
             placeholder="Buscar…"
             className="glass w-44 rounded-full px-4 py-2 text-sm outline-none focus:border-urple-500/50 sm:w-56"
             aria-label="Buscar en catálogo"
@@ -93,7 +112,7 @@ export function CatalogPage() {
         </div>
       </div>
 
-      <p className="mt-4 text-xs text-muted">
+      <p className="mt-4 text-xs text-muted" aria-live="polite">
         {products.length} {products.length === 1 ? 'producto' : 'productos'}
         {q ? ` para “${q}”` : ''}
       </p>
@@ -101,7 +120,7 @@ export function CatalogPage() {
       {products.length === 0 ? (
         <div className="glass mt-10 rounded-3xl p-12 text-center">
           <p className="text-lg font-bold">Sin resultados</p>
-          <p className="mt-2 text-sm text-muted">Prueba otra categoría o limpiá el filtro.</p>
+          <p className="mt-2 text-sm text-muted">Prueba otra categoría o limpia el filtro.</p>
           <button
             type="button"
             onClick={() => setParams(new URLSearchParams(), { replace: true })}

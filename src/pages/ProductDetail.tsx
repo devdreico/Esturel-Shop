@@ -6,8 +6,11 @@ import { getProductBySlug, products } from '../data/products'
 import { formatCOP } from '../lib/format'
 import { useCart } from '../hooks/useCart'
 import { openProductPayment, paymentNoteForQty } from '../lib/mercadopago'
+import { isDemoPaymentLink } from '../lib/mpValidate'
 import { ProductCard } from '../components/product/ProductCard'
 import { NotFoundPage } from './NotFound'
+import { useSeo } from '../hooks/useSeo'
+import { breadcrumbJsonLd, productJsonLd } from '../lib/seo'
 
 export function ProductDetailPage() {
   const { slug } = useParams()
@@ -22,12 +25,37 @@ export function ProductDetailPage() {
   })
   const imgY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 40])
 
+  useSeo(
+    product
+      ? {
+          title: `${product.name} · ${formatCOP(product.priceCOP)}`,
+          description: product.shortDesc,
+          path: `/producto/${product.slug}`,
+          image: product.image,
+          jsonLd: [
+            productJsonLd({ ...product, availability: product.stockHint ?? 'disponible' }),
+            breadcrumbJsonLd([
+              { name: 'Inicio', path: '/' },
+              { name: 'Catálogo', path: '/catalogo' },
+              { name: product.name, path: `/producto/${product.slug}` },
+            ]),
+          ],
+        }
+      : {
+          title: 'Producto no encontrado',
+          description: 'El producto no existe en el catálogo Esturel.',
+          path: `/producto/${slug ?? ''}`,
+          noindex: true,
+        },
+  )
+
   if (!product) return <NotFoundPage />
 
   const related = products
     .filter((p) => p.category === product.category && p.id !== product.id)
     .slice(0, 4)
   const out = product.stockHint === 'agotado'
+  const demoMp = isDemoPaymentLink(product.mpPaymentLink)
 
   return (
     <div className="mx-auto max-w-7xl px-4 pt-6 sm:px-6">
@@ -50,6 +78,8 @@ export function ProductDetailPage() {
             style={{ y: imgY }}
             src={product.image}
             alt={product.name}
+            width={800}
+            height={800}
             className="aspect-square w-full object-cover"
           />
         </motion.div>
@@ -109,12 +139,19 @@ export function ProductDetailPage() {
             <button
               type="button"
               disabled={out}
+              title={demoMp ? 'Configura el link real de Mercado Pago en products.ts' : undefined}
               onClick={() => openProductPayment(product)}
               className="glass rounded-full px-6 py-3 text-sm font-bold hover:border-urple-500/40 hover:text-urple-500 disabled:cursor-not-allowed disabled:opacity-40"
             >
               Comprar ahora · MP
             </button>
           </div>
+          {demoMp && (
+            <p className="mt-3 text-xs text-amber-600 dark:text-amber-400">
+              Link de pago en modo demo — reemplaza <code>mpPaymentLink</code> con tu link real de
+              Mercado Pago.
+            </p>
+          )}
 
           <p className="mt-4 text-xs text-muted">
             Pago en Mercado Pago · Envíos Colombia · Soporte Esturel

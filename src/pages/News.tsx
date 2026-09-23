@@ -2,10 +2,17 @@ import { useMemo, useState } from 'react'
 import { useNews } from '../hooks/useNews'
 import { NewsCard, NewsSkeleton } from '../components/news/NewsCard'
 import { Reveal } from '../components/ui/Motion'
+import { useSeo } from '../hooks/useSeo'
 
 export function NewsPage() {
   const { items, loading, ok, reload } = useNews()
   const [q, setQ] = useState('')
+
+  useSeo({
+    title: 'Noticias tech',
+    description: 'Feed de noticias de tecnología: IA, gadgets, audio y más.',
+    path: '/noticias',
+  })
 
   const filtered = useMemo(() => {
     const t = q.trim().toLowerCase()
