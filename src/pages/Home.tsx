@@ -137,7 +137,7 @@ export function HomePage() {
       </section>
 
       {/* Trust */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6">
+      <section className="mx-auto max-w-7xl px-3 sm:px-6">
         <Reveal>
           <div className="flex flex-wrap justify-center gap-3">
             {[
@@ -155,9 +155,9 @@ export function HomePage() {
       </section>
 
       {/* Categorías */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6">
+      <section className="mx-auto max-w-7xl px-3 sm:px-6">
         <Reveal>
-          <div className="mb-6 flex items-end justify-between">
+          <div className="mb-4 flex items-end justify-between sm:mb-6">
             <div>
               <p className="text-xs font-bold tracking-widest text-urple-500 uppercase">
                 Categorías
@@ -188,9 +188,9 @@ export function HomePage() {
       </section>
 
       {/* Destacados */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6">
+      <section className="mx-auto max-w-7xl px-3 sm:px-6">
         <Reveal>
-          <div className="mb-6 flex items-end justify-between">
+          <div className="mb-4 flex items-end justify-between sm:mb-6">
             <div>
               <p className="text-xs font-bold tracking-widest text-urple-500 uppercase">
                 Selección Esturel
@@ -202,7 +202,7 @@ export function HomePage() {
             </Link>
           </div>
         </Reveal>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-2.5 sm:gap-4 lg:grid-cols-4">
           {featured.slice(0, 8).map((p, i) => (
             <ProductCard key={p.id} product={p} index={i} />
           ))}
@@ -210,9 +210,9 @@ export function HomePage() {
       </section>
 
       {/* News preview */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6">
+      <section className="mx-auto max-w-7xl px-3 sm:px-6">
         <Reveal>
-          <div className="mb-6 flex items-end justify-between">
+          <div className="mb-4 flex items-end justify-between sm:mb-6">
             <div>
               <p className="text-xs font-bold tracking-widest text-urple-500 uppercase">
                 Noticiero tech
@@ -232,7 +232,7 @@ export function HomePage() {
       </section>
 
       {/* Sitio asociado Paceform */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6">
+      <section className="mx-auto max-w-7xl px-3 sm:px-6">
         <Reveal>
           <a
             href={PACEFORM_URL}
@@ -260,7 +260,7 @@ export function HomePage() {
       </section>
 
       {/* CTA Asesor */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6">
+      <section className="mx-auto max-w-7xl px-3 sm:px-6">
         <Reveal>
           <div className="glass-strong relative overflow-hidden rounded-3xl p-8 text-center sm:p-12">
             <div className="absolute -top-20 left-1/2 h-40 w-80 -translate-x-1/2 rounded-full bg-urple-500/30 blur-3xl" />

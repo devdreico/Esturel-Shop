@@ -27,7 +27,7 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
         ease: [0, 0, 0.2, 1],
       }}
       whileHover={reduce ? undefined : { y: -4 }}
-      className="glass-card group flex flex-col overflow-hidden rounded-2xl"
+      className="glass-card group flex h-full flex-col overflow-hidden rounded-2xl"
     >
       <Link to={`/producto/${product.slug}`} className="relative block overflow-hidden bg-surface/60">
         <div className="aspect-square">
@@ -42,33 +42,38 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
           />
         </div>
         <span
-          className={`absolute top-3 left-3 rounded-full px-2.5 py-1 text-[11px] font-bold ${stockMap[stock].cls}`}
+          className={`absolute top-2 left-2 rounded-full px-2 py-0.5 text-[10px] font-bold sm:top-3 sm:left-3 sm:px-2.5 sm:py-1 sm:text-[11px] ${stockMap[stock].cls}`}
         >
           {stockMap[stock].label}
         </span>
         {product.featured && (
-          <span className="absolute top-3 right-3 rounded-full bg-urple-500 px-2.5 py-1 text-[11px] font-bold text-white shadow-glow-sm">
+          <span className="absolute top-2 right-2 rounded-full bg-urple-500 px-2 py-0.5 text-[10px] font-bold text-white shadow-glow-sm sm:top-3 sm:right-3 sm:px-2.5 sm:py-1 sm:text-[11px]">
             Destacado
           </span>
         )}
       </Link>
 
-      <div className="flex flex-1 flex-col gap-2 p-4">
-        <p className="text-[11px] font-semibold tracking-widest text-urple-500 uppercase">
+      <div className="flex flex-1 flex-col p-2.5 sm:gap-2 sm:p-4">
+        <p className="text-[10px] font-semibold tracking-widest text-urple-500 uppercase sm:text-[11px]">
           {categoryLabel[product.category]}
         </p>
-        <Link to={`/producto/${product.slug}`} className="font-bold leading-snug hover:text-urple-500">
+        <Link
+          to={`/producto/${product.slug}`}
+          className="mt-0.5 line-clamp-2 text-[13px] leading-snug font-bold hover:text-urple-500 sm:mt-0 sm:text-base"
+        >
           {product.name}
         </Link>
-        <p className="line-clamp-2 text-sm text-muted">{product.shortDesc}</p>
-        <div className="mt-auto flex flex-wrap items-center justify-between gap-2 pt-2">
-          <span className="text-lg font-bold">{formatCOP(product.priceCOP)}</span>
+        <p className="mt-1 hidden line-clamp-2 text-sm text-muted sm:mt-0 sm:block">
+          {product.shortDesc}
+        </p>
+        <div className="mt-auto pt-2 sm:pt-3">
+          <span className="block text-sm font-bold sm:text-lg">{formatCOP(product.priceCOP)}</span>
           <button
             type="button"
             onClick={() => addItem(product.id)}
             disabled={product.stockHint === 'agotado'}
             aria-label={`Añadir ${product.name} al carrito`}
-            className="btn-primary shrink-0 rounded-full px-4 py-2 text-xs disabled:cursor-not-allowed disabled:opacity-40"
+            className="btn-primary mt-1.5 w-full rounded-full px-2.5 py-1.5 text-[11px] disabled:cursor-not-allowed disabled:opacity-40 sm:mt-2 sm:w-auto sm:px-4 sm:py-2 sm:text-xs"
             style={{ transform: 'none' }}
           >
             Añadir

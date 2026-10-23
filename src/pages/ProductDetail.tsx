@@ -158,7 +158,7 @@ export function ProductDetailPage() {
       {related.length > 0 && (
         <section className="mt-16">
           <h2 className="text-xl font-bold">También te puede interesar</h2>
-          <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-4 grid grid-cols-2 gap-2.5 sm:gap-4 lg:grid-cols-4">
             {related.map((p, i) => (
               <ProductCard key={p.id} product={p} index={i} />
             ))}

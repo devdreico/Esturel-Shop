@@ -51,22 +51,25 @@ export function CatalogPage() {
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-4 pt-8 sm:px-6">
+    <div className="mx-auto max-w-7xl px-3 pt-5 sm:px-6 sm:pt-8">
       <Reveal>
-        <p className="text-xs font-bold tracking-widest text-urple-500 uppercase">Catálogo</p>
-        <h1 className="mt-1 text-3xl font-bold sm:text-4xl">Toda la tecnología Esturel</h1>
-        <p className="mt-2 max-w-2xl text-sm text-muted">
-          Audífonos, periféricos y frontera tech con precios en COP y pago contraentrega en
-          Colombia.
+        <p className="text-[11px] font-bold tracking-widest text-urple-500 uppercase">
+          Catálogo
+        </p>
+        <h1 className="mt-0.5 text-2xl font-bold sm:mt-1 sm:text-4xl">
+          Toda la tecnología Esturel
+        </h1>
+        <p className="mt-1.5 max-w-2xl text-xs text-muted sm:mt-2 sm:text-sm">
+          Precios en COP · Pago contraentrega · Envíos a todo Colombia.
         </p>
       </Reveal>
 
-      <div className="mt-8 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-        <div className="hide-scrollbar -mx-1 flex snap-x snap-mandatory gap-2 overflow-x-auto px-1 pb-1">
+      <div className="mt-4 flex flex-col gap-3 sm:mt-6 lg:flex-row lg:items-center lg:justify-between">
+        <div className="hide-scrollbar -mx-1 flex snap-x snap-mandatory gap-1.5 overflow-x-auto px-1 pb-1 sm:gap-2">
           <button
             type="button"
             onClick={() => update('cat', 'all')}
-            className={`shrink-0 snap-start rounded-full px-4 py-2.5 text-xs font-bold transition ${
+            className={`shrink-0 snap-start rounded-full px-3 py-2 text-[11px] font-bold transition sm:px-4 sm:py-2.5 sm:text-xs ${
               category === 'all'
                 ? 'bg-urple-500 text-white shadow-glow-sm'
                 : 'glass hover:border-urple-500/40'
@@ -79,7 +82,7 @@ export function CatalogPage() {
               key={c.id}
               type="button"
               onClick={() => update('cat', c.id)}
-              className={`shrink-0 snap-start rounded-full px-4 py-2.5 text-xs font-bold transition ${
+              className={`shrink-0 snap-start rounded-full px-3 py-2 text-[11px] font-bold transition sm:px-4 sm:py-2.5 sm:text-xs ${
                 category === c.id
                   ? 'bg-urple-500 text-white shadow-glow-sm'
                   : 'glass hover:border-urple-500/40'
@@ -90,18 +93,18 @@ export function CatalogPage() {
           ))}
         </div>
 
-        <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+        <div className="flex gap-2 sm:gap-3">
           <input
             value={draft}
             onChange={(e) => onSearch(e.target.value)}
             placeholder="Buscar…"
-            className="glass w-full rounded-full px-4 py-2.5 text-sm outline-none focus:border-urple-500/50 sm:w-56"
+            className="glass min-w-0 flex-1 rounded-full px-3 py-2 text-sm outline-none focus:border-urple-500/50 sm:w-56 sm:flex-none sm:px-4 sm:py-2.5"
             aria-label="Buscar en catálogo"
           />
           <select
             value={sort}
             onChange={(e) => update('sort', e.target.value)}
-            className="glass w-full cursor-pointer appearance-none rounded-full px-4 py-2.5 text-xs font-bold outline-none sm:w-auto"
+            className="glass w-auto shrink-0 cursor-pointer appearance-none rounded-full px-3 py-2 text-[11px] font-bold outline-none sm:px-4 sm:py-2.5 sm:text-xs"
             aria-label="Ordenar"
           >
             <option value="relevance">Relevancia</option>
@@ -112,13 +115,13 @@ export function CatalogPage() {
         </div>
       </div>
 
-      <p className="mt-4 text-xs text-muted" aria-live="polite">
+      <p className="mt-3 text-[11px] text-muted sm:mt-4 sm:text-xs" aria-live="polite">
         {products.length} {products.length === 1 ? 'producto' : 'productos'}
         {q ? ` para “${q}”` : ''}
       </p>
 
       {products.length === 0 ? (
-        <div className="glass mt-10 rounded-3xl p-8 text-center sm:p-12">
+        <div className="glass mt-8 rounded-3xl p-8 text-center sm:mt-10 sm:p-12">
           <p className="text-lg font-bold">Sin resultados</p>
           <p className="mt-2 text-sm text-muted">Prueba otra categoría o limpia el filtro.</p>
           <button
@@ -130,7 +133,7 @@ export function CatalogPage() {
           </button>
         </div>
       ) : (
-        <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="mt-4 grid grid-cols-2 gap-2.5 sm:mt-6 sm:gap-4 lg:grid-cols-3 xl:grid-cols-4">
           {products.map((p, i) => (
             <ProductCard key={p.id} product={p} index={i} />
           ))}
