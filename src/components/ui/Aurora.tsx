@@ -45,7 +45,8 @@ export function BackToTop() {
       animate={{ opacity: 1, scale: 1, y: 0 }}
       whileTap={{ scale: 0.92 }}
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-      className="glass fixed right-4 bottom-4 z-40 flex h-11 w-11 items-center justify-center rounded-full text-ink shadow-glow-sm sm:right-6 sm:bottom-6"
+      className="glass fixed right-4 z-40 flex h-11 w-11 items-center justify-center rounded-full text-ink shadow-glow-sm sm:right-6"
+      style={{ bottom: 'calc(1rem + env(safe-area-inset-bottom, 0px))' }}
       aria-label="Volver arriba"
     >
       <span aria-hidden className="text-lg leading-none">

@@ -102,7 +102,7 @@ export function CartDrawer() {
                     onClick={closeCart}
                     className="btn-primary flex-1 rounded-full px-4 py-3 text-center text-sm"
                   >
-                    Checkout
+                    Ir al pedido
                   </Link>
                   <button
                     type="button"

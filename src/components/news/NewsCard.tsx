@@ -31,7 +31,7 @@ export function NewsCard({ item, index = 0 }: { item: NewsItem; index?: number }
       {item.summary && (
         <p className="line-clamp-3 text-sm text-muted">{item.summary}</p>
       )}
-      <span className="mt-auto pt-2 text-xs font-bold text-urple-500 opacity-0 transition group-hover:opacity-100">
+      <span className="mt-auto pt-2 text-xs font-bold text-urple-500 opacity-100 transition sm:opacity-0 sm:group-hover:opacity-100">
         Leer en fuente →
       </span>
     </motion.a>

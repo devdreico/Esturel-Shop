@@ -6,6 +6,7 @@ type NewsState = {
   items: NewsItem[]
   loading: boolean
   ok: boolean
+  fetchedAt: number
 }
 
 export function useNews() {
@@ -13,12 +14,13 @@ export function useNews() {
     items: [],
     loading: true,
     ok: true,
+    fetchedAt: 0,
   })
 
-  const load = useCallback(async () => {
+  const load = useCallback(async (force: boolean) => {
     setState((s) => ({ ...s, loading: true }))
-    const res = await fetchTechNews()
-    setState({ items: res.items, loading: false, ok: res.ok })
+    const res = await fetchTechNews({ force })
+    setState({ items: res.items, loading: false, ok: res.ok, fetchedAt: res.fetchedAt })
   }, [])
 
   useEffect(() => {
@@ -26,7 +28,12 @@ export function useNews() {
     void (async () => {
       const res = await fetchTechNews()
       if (!cancelled) {
-        setState({ items: res.items, loading: false, ok: res.ok })
+        setState({
+          items: res.items,
+          loading: false,
+          ok: res.ok,
+          fetchedAt: res.fetchedAt,
+        })
       }
     })()
     return () => {
@@ -34,5 +41,7 @@ export function useNews() {
     }
   }, [])
 
-  return { items: state.items, loading: state.loading, ok: state.ok, reload: load }
+  const reload = useCallback(() => load(true), [load])
+
+  return { items: state.items, loading: state.loading, ok: state.ok, fetchedAt: state.fetchedAt, reload }
 }

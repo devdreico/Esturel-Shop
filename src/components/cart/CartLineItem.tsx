@@ -63,7 +63,7 @@ export function CartLineItem({
               <div className="glass flex items-center rounded-full">
                 <button
                   type="button"
-                  className="px-2.5 py-1 text-sm font-bold hover:text-urple-500"
+                  className="px-3 py-1.5 text-sm font-bold hover:text-urple-500"
                   onClick={() => onQtyChange(product.id, qty - 1)}
                   aria-label={`Reducir cantidad de ${product.name}`}
                 >
@@ -72,7 +72,7 @@ export function CartLineItem({
                 <span className="min-w-5 text-center text-sm font-semibold">{qty}</span>
                 <button
                   type="button"
-                  className="px-2.5 py-1 text-sm font-bold hover:text-urple-500"
+                  className="px-3 py-1.5 text-sm font-bold hover:text-urple-500"
                   onClick={() => onQtyChange(product.id, qty + 1)}
                   aria-label={`Aumentar cantidad de ${product.name}`}
                 >

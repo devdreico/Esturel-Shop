@@ -14,7 +14,7 @@ export function AddToast() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 16, scale: 0.96 }}
           transition={{ type: 'spring', stiffness: 380, damping: 28 }}
-          className="glass-strong fixed bottom-6 left-1/2 z-[55] flex -translate-x-1/2 items-center gap-3 rounded-full px-4 py-2.5 shadow-glow-sm"
+          className="glass-strong fixed bottom-6 left-1/2 z-[55] flex max-w-[min(22rem,calc(100vw-2rem))] -translate-x-1/2 items-center gap-3 rounded-full px-4 py-2.5 shadow-glow-sm"
           role="status"
         >
           <span className="flex h-7 w-7 items-center justify-center rounded-full bg-urple-500 text-xs font-bold text-white">

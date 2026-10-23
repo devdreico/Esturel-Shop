@@ -1,4 +1,4 @@
-import { motion, useMotionValueEvent, useScroll } from 'framer-motion'
+import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useCart } from '../../hooks/useCart'
@@ -98,7 +98,7 @@ export function Header() {
             <CartBadge count={count} pulseKey={count} onClick={openCart} />
             <button
               type="button"
-              className="glass rounded-full p-2 md:hidden"
+              className="glass rounded-full p-2.5 md:hidden"
               onClick={() => setMobileOpen((v) => !v)}
               aria-label="Menú"
               aria-expanded={mobileOpen}
@@ -123,12 +123,15 @@ export function Header() {
         </div>
       </div>
 
-      {mobileOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -8 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="glass-strong border-b border-line px-4 py-4 md:hidden"
-        >
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.22, ease: [0, 0, 0.2, 1] }}
+            className="glass-strong border-b border-line px-4 py-4 md:hidden"
+          >
           <nav className="flex flex-col gap-1" aria-label="Móvil">
             {nav.map((item) => (
               <NavLink
@@ -165,8 +168,9 @@ export function Header() {
               aria-label="Buscar productos"
             />
           </form>
-        </motion.div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   )
 }

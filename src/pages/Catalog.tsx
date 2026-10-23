@@ -62,11 +62,11 @@ export function CatalogPage() {
       </Reveal>
 
       <div className="mt-8 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-        <div className="hide-scrollbar -mx-1 flex gap-2 overflow-x-auto px-1 pb-1">
+        <div className="hide-scrollbar -mx-1 flex snap-x snap-mandatory gap-2 overflow-x-auto px-1 pb-1">
           <button
             type="button"
             onClick={() => update('cat', 'all')}
-            className={`shrink-0 rounded-full px-4 py-2 text-xs font-bold transition ${
+            className={`shrink-0 snap-start rounded-full px-4 py-2.5 text-xs font-bold transition ${
               category === 'all'
                 ? 'bg-urple-500 text-white shadow-glow-sm'
                 : 'glass hover:border-urple-500/40'
@@ -79,7 +79,7 @@ export function CatalogPage() {
               key={c.id}
               type="button"
               onClick={() => update('cat', c.id)}
-              className={`shrink-0 rounded-full px-4 py-2 text-xs font-bold transition ${
+              className={`shrink-0 snap-start rounded-full px-4 py-2.5 text-xs font-bold transition ${
                 category === c.id
                   ? 'bg-urple-500 text-white shadow-glow-sm'
                   : 'glass hover:border-urple-500/40'
@@ -90,18 +90,18 @@ export function CatalogPage() {
           ))}
         </div>
 
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
           <input
             value={draft}
             onChange={(e) => onSearch(e.target.value)}
             placeholder="Buscar…"
-            className="glass w-44 rounded-full px-4 py-2 text-sm outline-none focus:border-urple-500/50 sm:w-56"
+            className="glass w-full rounded-full px-4 py-2.5 text-sm outline-none focus:border-urple-500/50 sm:w-56"
             aria-label="Buscar en catálogo"
           />
           <select
             value={sort}
             onChange={(e) => update('sort', e.target.value)}
-            className="glass cursor-pointer rounded-full px-4 py-2 text-xs font-bold outline-none"
+            className="glass w-full cursor-pointer appearance-none rounded-full px-4 py-2.5 text-xs font-bold outline-none sm:w-auto"
             aria-label="Ordenar"
           >
             <option value="relevance">Relevancia</option>
@@ -118,7 +118,7 @@ export function CatalogPage() {
       </p>
 
       {products.length === 0 ? (
-        <div className="glass mt-10 rounded-3xl p-12 text-center">
+        <div className="glass mt-10 rounded-3xl p-8 text-center sm:p-12">
           <p className="text-lg font-bold">Sin resultados</p>
           <p className="mt-2 text-sm text-muted">Prueba otra categoría o limpia el filtro.</p>
           <button

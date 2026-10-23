@@ -105,6 +105,7 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
+  min-height: 100dvh;
   font-family: var(--font-sans);
   font-weight: 400;
   color: var(--c-ink);
@@ -265,6 +266,45 @@ h4,
 
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+/* Gradiente animado para títulos */
+.gradient-text-animated {
+  background: linear-gradient(
+    90deg,
+    var(--color-urple-500),
+    var(--color-urple-400),
+    var(--color-urple-600),
+    var(--color-urple-500)
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-x 5s linear infinite;
+}
+
+@keyframes gradient-x {
+  from {
+    background-position: 0% center;
+  }
+  to {
+    background-position: 200% center;
+  }
+}
+
+/* Elementos fijos abajo: respetan el home indicator de iOS */
+.safe-b {
+  bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+}
+
+/* Chips de filtros: snap para swipe natural en mobile */
+.snap-x {
+  scroll-snap-type: x mandatory;
+}
+
+.snap-start {
+  scroll-snap-align: start;
 }
 
 /* Scroll margin for sticky header */

@@ -26,7 +26,7 @@ export function CartPage() {
       </Reveal>
 
       {items.length === 0 ? (
-        <div className="glass mt-10 rounded-3xl p-12 text-center">
+        <div className="glass mt-10 rounded-3xl p-8 text-center sm:p-12">
           <p className="text-lg font-bold">No hay productos aún</p>
           <p className="mt-2 text-sm text-muted">Explora el catálogo y arma tu setup.</p>
           <Link
@@ -66,7 +66,7 @@ export function CartPage() {
                 Vaciar
               </button>
               <Link to="/checkout" className="btn-primary rounded-full px-6 py-3 text-sm">
-                Continuar al pago
+                Continuar al pedido
               </Link>
             </div>
           </div>

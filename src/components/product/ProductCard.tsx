@@ -61,16 +61,17 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
           {product.name}
         </Link>
         <p className="line-clamp-2 text-sm text-muted">{product.shortDesc}</p>
-        <div className="mt-auto flex items-center justify-between gap-2 pt-2">
+        <div className="mt-auto flex flex-wrap items-center justify-between gap-2 pt-2">
           <span className="text-lg font-bold">{formatCOP(product.priceCOP)}</span>
           <button
             type="button"
             onClick={() => addItem(product.id)}
             disabled={product.stockHint === 'agotado'}
-            className="btn-primary rounded-full px-4 py-2 text-xs disabled:cursor-not-allowed disabled:opacity-40"
+            aria-label={`Añadir ${product.name} al carrito`}
+            className="btn-primary shrink-0 rounded-full px-4 py-2 text-xs disabled:cursor-not-allowed disabled:opacity-40"
             style={{ transform: 'none' }}
           >
-            Añadir al carrito
+            Añadir
           </button>
         </div>
       </div>

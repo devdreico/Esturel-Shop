@@ -137,20 +137,28 @@ async function loadFeed(source: string, feedUrl: string): Promise<NewsItem[]> {
   throw lastErr ?? new Error('feed failed')
 }
 
-export async function fetchTechNews(): Promise<{ items: NewsItem[]; ok: boolean }> {
-  try {
-    const cached = localStorage.getItem(STORAGE_KEYS.newsCache)
-    if (cached) {
-      const data: unknown = JSON.parse(cached)
-      if (isValidCache(data) && Date.now() - data.t < CACHE_TTL_MS && data.items.length > 0) {
-        return {
-          items: data.items.filter((i) => Boolean(safeHttpsUrl(i.link))),
-          ok: true,
+export async function fetchTechNews(opts?: { force?: boolean }): Promise<{
+  items: NewsItem[]
+  ok: boolean
+  fetchedAt: number
+}> {
+  const force = opts?.force ?? false
+  if (!force) {
+    try {
+      const cached = localStorage.getItem(STORAGE_KEYS.newsCache)
+      if (cached) {
+        const data: unknown = JSON.parse(cached)
+        if (isValidCache(data) && Date.now() - data.t < CACHE_TTL_MS && data.items.length > 0) {
+          return {
+            items: data.items.filter((i) => Boolean(safeHttpsUrl(i.link))),
+            ok: true,
+            fetchedAt: data.t,
+          }
         }
       }
+    } catch {
+      /* ignore */
     }
-  } catch {
-    /* ignore */
   }
 
   try {
@@ -163,13 +171,17 @@ export async function fetchTechNews(): Promise<{ items: NewsItem[]; ok: boolean 
 
     if (items.length === 0) throw new Error('empty')
 
+    const fetchedAt = Date.now()
     try {
-      localStorage.setItem(STORAGE_KEYS.newsCache, JSON.stringify({ t: Date.now(), items }))
+      localStorage.setItem(
+        STORAGE_KEYS.newsCache,
+        JSON.stringify({ t: fetchedAt, items }),
+      )
     } catch {
       /* ignore */
     }
-    return { items, ok: true }
+    return { items, ok: true, fetchedAt }
   } catch {
-    return { items: newsFallback, ok: false }
+    return { items: newsFallback, ok: false, fetchedAt: Date.now() }
   }
 }

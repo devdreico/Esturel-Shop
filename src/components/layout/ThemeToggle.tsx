@@ -21,7 +21,7 @@ export function ThemeToggle() {
         if (pref === 'system') setPref(isDark ? 'light' : 'dark')
         else toggle()
       }}
-      className="glass relative rounded-full p-2 hover:border-urple-500/40"
+      className="glass relative rounded-full p-2.5 hover:border-urple-500/40"
       aria-label={isDark ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'}
       title={pref === 'system' ? 'Tema del sistema' : pref}
     >

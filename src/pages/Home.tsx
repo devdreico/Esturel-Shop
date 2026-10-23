@@ -7,16 +7,16 @@ import { ProductCard } from '../components/product/ProductCard'
 import { NewsCard, NewsSkeleton } from '../components/news/NewsCard'
 import { categories } from '../data/categories'
 import { Reveal } from '../components/ui/Motion'
-import { useCart } from '../hooks/useCart'
 import { useSeo } from '../hooks/useSeo'
 import { organizationJsonLd } from '../lib/seo'
 import { PACEFORM_BLURB, PACEFORM_NAME, PACEFORM_URL } from '../lib/partners'
+import { HeroCarousel } from '../components/home/HeroCarousel'
 
 export function HomePage() {
   const featured = getFeaturedProducts()
   const { items: news, loading } = useNews()
-  const { addItem } = useCart()
   const reduce = useReducedMotion()
+  const hero = featured[0]
 
   useSeo({
     title: 'Esturel · Tecnología en Colombia',
@@ -27,30 +27,64 @@ export function HomePage() {
   })
 
   return (
-    <div className="space-y-20">
+    <div className="space-y-16 sm:space-y-20">
       {/* Hero */}
-      <section className="relative overflow-hidden pt-8 pb-16 sm:pt-14">
-        <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2">
-          <div>
+      <section className="relative overflow-hidden pt-4 pb-12 sm:pt-8 sm:pb-16">
+        <div className="pointer-events-none absolute -top-32 -left-32 h-96 w-96 rounded-full bg-urple-500/20 blur-3xl" />
+        <div className="pointer-events-none absolute -right-32 top-1/3 h-80 w-80 rounded-full bg-urple-400/15 blur-3xl" />
+
+        <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-14">
+          {/* Visual: primero en mobile para impacto */}
+          <motion.div
+            initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.94, y: 24 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0, 0, 0.2, 1] }}
+            className="order-1 lg:order-2"
+          >
+            <HeroCarousel />
+            {hero && (
+              <div className="glass mt-4 flex items-center justify-between gap-3 rounded-2xl px-4 py-3">
+                <div className="min-w-0">
+                  <p className="text-[10px] font-bold tracking-widest text-urple-500 uppercase">
+                    Destacado · pago contraentrega
+                  </p>
+                  <p className="truncate text-sm font-bold">{hero.name}</p>
+                </div>
+                <div className="flex shrink-0 items-center gap-2">
+                  <span className="text-sm font-bold">{formatCOP(hero.priceCOP)}</span>
+                  <Link
+                    to={`/producto/${hero.slug}`}
+                    className="btn-primary rounded-full px-3.5 py-1.5 text-xs"
+                  >
+                    Ver
+                  </Link>
+                </div>
+              </div>
+            )}
+          </motion.div>
+
+          {/* Copy */}
+          <div className="order-2 lg:order-1">
             <motion.p
               initial={reduce ? { opacity: 0 } : { opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
               className="mb-4 inline-flex items-center gap-2 rounded-full glass px-3 py-1.5 text-xs font-bold tracking-widest text-urple-500 uppercase"
             >
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-urple-400 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-urple-500" />
+              </span>
               Asesor · Tienda · Noticiero
             </motion.p>
             <motion.h1
               initial={reduce ? { opacity: 0 } : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.05, ease: [0, 0, 0.2, 1] }}
-              className="text-4xl leading-[1.05] font-bold tracking-tight sm:text-5xl lg:text-6xl"
+              className="text-[2.5rem] leading-[1.04] font-bold tracking-tight sm:text-5xl lg:text-6xl"
             >
               Tecnología con{' '}
-              <span className="bg-gradient-to-r from-urple-500 to-urple-400 bg-clip-text text-transparent">
-                criterio
-              </span>{' '}
-              en Colombia
+              <span className="gradient-text-animated">criterio</span> en Colombia
             </motion.h1>
             <motion.p
               initial={reduce ? { opacity: 0 } : { opacity: 0, y: 20 }}
@@ -59,7 +93,9 @@ export function HomePage() {
               className="mt-5 max-w-lg text-base text-muted sm:text-lg"
             >
               Desde audífonos hasta frontera tech. Catálogo curado, asesoría real y un feed de
-              noticias al día — con pago contraentrega en efectivo y envíos a todo Colombia.
+              noticias al día — con pago{' '}
+              <strong className="text-ink">contraentrega en efectivo</strong> y envíos a todo
+              Colombia.
             </motion.p>
             <motion.div
               initial={reduce ? { opacity: 0 } : { opacity: 0, y: 20 }}
@@ -71,71 +107,32 @@ export function HomePage() {
                 Ver catálogo
               </Link>
               <Link
-                to="/noticias"
-                className="glass rounded-full px-6 py-3 text-sm font-bold hover:border-urple-500/40 hover:text-urple-500"
-              >
-                Feed tech
-              </Link>
-              <Link
                 to="/asesor"
                 className="glass rounded-full px-6 py-3 text-sm font-bold hover:border-urple-500/40 hover:text-urple-500"
               >
                 Hablar con un asesor
               </Link>
+              <Link
+                to="/noticias"
+                className="glass rounded-full px-6 py-3 text-sm font-bold hover:border-urple-500/40 hover:text-urple-500"
+              >
+                Feed tech
+              </Link>
             </motion.div>
+            <motion.ul
+              initial={reduce ? { opacity: 0 } : { opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="mt-6 flex flex-wrap gap-x-4 gap-y-2 text-xs font-semibold text-muted"
+            >
+              {['Contraentrega', 'Envíos Colombia', 'Soporte por WhatsApp'].map((t) => (
+                <li key={t} className="inline-flex items-center gap-1.5">
+                  <span className="text-urple-500">✓</span>
+                  {t}
+                </li>
+              ))}
+            </motion.ul>
           </div>
-
-          <motion.div
-            initial={reduce ? { opacity: 0, scale: 0.96 } : { opacity: 0, y: 28 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.15, ease: [0, 0, 0.2, 1] }}
-            className="relative"
-          >
-            <div className="glass-strong relative rounded-3xl p-6 sm:p-8">
-              <p className="text-xs font-bold tracking-widest text-urple-500 uppercase">
-                Destacado de la semana
-              </p>
-              {(() => {
-                const hero = featured[0]
-                if (!hero) return null
-                return (
-                  <>
-                    <h2 className="mt-2 text-2xl font-bold">{hero.name}</h2>
-                    <p className="mt-2 text-sm text-muted">{hero.shortDesc}</p>
-                    <div className="mt-4 aspect-video overflow-hidden rounded-2xl bg-surface">
-                      <img
-                        src={hero.image}
-                        alt=""
-                        width={800}
-                        height={450}
-                        className="h-full w-full object-cover"
-                      />
-                    </div>
-                    <div className="mt-4 flex items-center justify-between gap-3">
-                      <span className="text-xl font-bold">{formatCOP(hero.priceCOP)}</span>
-                      <div className="flex gap-2">
-                        <button
-                          type="button"
-                          onClick={() => addItem(hero.id)}
-                          className="btn-primary rounded-full px-4 py-2 text-xs"
-                          style={{ transform: 'none' }}
-                        >
-                          Añadir
-                        </button>
-                        <Link
-                          to={`/producto/${hero.slug}`}
-                          className="glass rounded-full px-4 py-2 text-xs font-bold hover:text-urple-500"
-                        >
-                          Detalle
-                        </Link>
-                      </div>
-                    </div>
-                  </>
-                )
-              })()}
-            </div>
-            <div className="absolute -right-3 -bottom-3 -z-10 h-full w-full rounded-3xl bg-urple-500/25 blur-2xl" />
-          </motion.div>
         </div>
       </section>
 

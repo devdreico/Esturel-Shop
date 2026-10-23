@@ -111,7 +111,7 @@ export function ProductDetailPage() {
             <div className="glass flex items-center rounded-full">
               <button
                 type="button"
-                className="px-3 py-2 font-bold hover:text-urple-500"
+                className="px-3.5 py-2 font-bold hover:text-urple-500"
                 onClick={() => setQty((v) => Math.max(1, v - 1))}
                 aria-label="Menos"
               >
@@ -120,7 +120,7 @@ export function ProductDetailPage() {
               <span className="min-w-6 text-center text-sm font-bold">{qty}</span>
               <button
                 type="button"
-                className="px-3 py-2 font-bold hover:text-urple-500"
+                className="px-3.5 py-2 font-bold hover:text-urple-500"
                 onClick={() => setQty((v) => Math.min(99, v + 1))}
                 aria-label="Más"
               >

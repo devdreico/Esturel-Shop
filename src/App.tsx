@@ -1,5 +1,5 @@
 import { Suspense, lazy, useEffect, type ReactNode } from 'react'
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence, MotionConfig } from 'framer-motion'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import { Header } from './components/layout/Header'
 import { Footer } from './components/layout/Footer'
@@ -143,33 +143,39 @@ export default function App() {
   const location = useLocation()
 
   return (
-    <Shell>
-      <AnimatePresence mode="wait">
-        <FadePage key={location.pathname}>
-          <Suspense fallback={<PageLoader />}>
-            <Routes location={location}>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/catalogo" element={<CatalogPage />} />
-              <Route path="/producto/:slug" element={<ProductDetailPage />} />
-              <Route path="/carrito" element={<CartPage />} />
-              <Route path="/checkout" element={<CheckoutPage />} />
-              <Route path="/noticias" element={<NewsPage />} />
-              <Route path="/asesor" element={<AsesorPage />} />
-              <Route
-                path="/paceform"
-                element={<ExternalRedirect to={PACEFORM_URL} label="Paceform" />}
-              />
-              <Route
-                path="/instagram"
-                element={
-                  <ExternalRedirect to={INSTAGRAM_URL} label="Instagram @esturelco" path="/instagram" />
-                }
-              />
-              <Route path="*" element={<NotFoundPage />} />
-            </Routes>
-          </Suspense>
-        </FadePage>
-      </AnimatePresence>
-    </Shell>
+    <MotionConfig reducedMotion="user">
+      <Shell>
+        <AnimatePresence mode="wait">
+          <FadePage key={location.pathname}>
+            <Suspense fallback={<PageLoader />}>
+              <Routes location={location}>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/catalogo" element={<CatalogPage />} />
+                <Route path="/producto/:slug" element={<ProductDetailPage />} />
+                <Route path="/carrito" element={<CartPage />} />
+                <Route path="/checkout" element={<CheckoutPage />} />
+                <Route path="/noticias" element={<NewsPage />} />
+                <Route path="/asesor" element={<AsesorPage />} />
+                <Route
+                  path="/paceform"
+                  element={<ExternalRedirect to={PACEFORM_URL} label="Paceform" />}
+                />
+                <Route
+                  path="/instagram"
+                  element={
+                    <ExternalRedirect
+                      to={INSTAGRAM_URL}
+                      label="Instagram @esturelco"
+                      path="/instagram"
+                    />
+                  }
+                />
+                <Route path="*" element={<NotFoundPage />} />
+              </Routes>
+            </Suspense>
+          </FadePage>
+        </AnimatePresence>
+      </Shell>
+    </MotionConfig>
   )
 }
