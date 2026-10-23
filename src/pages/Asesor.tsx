@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Reveal } from '../components/ui/Motion'
 import { motion } from 'framer-motion'
 import { useSeo } from '../hooks/useSeo'
+import { waUrl, WHATSAPP_DISPLAY } from '../lib/whatsapp'
 
 const topics = [
   'Audífonos / audio',
@@ -37,10 +38,11 @@ export function AsesorPage() {
           <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-urple-500 text-2xl font-bold text-white">
             ✓
           </div>
-          <h1 className="mt-4 text-2xl font-bold">Abrimos tu correo</h1>
+          <h1 className="mt-4 text-2xl font-bold">Abrimos WhatsApp</h1>
           <p className="mt-2 text-sm text-muted">
-            Se preparó el mensaje para {CONTACT_EMAIL}. Si tu cliente de correo no abrió,
-            escríbenos directo. Respuesta en horario hábil (Lun–Vie 9:00–18:00 CO).
+            Se preparó el mensaje hacia {WHATSAPP_DISPLAY}. Si tu app de WhatsApp no abrió,
+            escríbenos directo. También puedes usar {CONTACT_EMAIL}. Respuesta en horario hábil
+            (Lun–Vie 9:00–18:00 CO).
           </p>
           <button
             type="button"
@@ -100,16 +102,19 @@ export function AsesorPage() {
             const name = String(data.get('name') ?? '')
             const contact = String(data.get('contact') ?? '')
             const message = String(data.get('message') ?? '')
-            const subject = encodeURIComponent(`Asesoría Esturel — ${topic}`)
-            const body = encodeURIComponent(
-              `Nombre: ${name}\nContacto: ${contact}\nTema: ${topic}\n\n${message}`,
-            )
-            window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`
+            const text = [
+              `Hola Esturel, solicito asesoría (${topic}).`,
+              `Nombre: ${name}`,
+              `Contacto: ${contact}`,
+              '',
+              message,
+            ].join('\n')
+            window.open(waUrl(text), '_blank', 'noopener,noreferrer')
             setSent(true)
           }}
         >
           <h2 className="text-lg font-bold">Solicitar asesoría</h2>
-          <p className="mt-1 text-xs text-muted">Abre tu app de correo hacia {CONTACT_EMAIL}.</p>
+          <p className="mt-1 text-xs text-muted">Abre WhatsApp hacia {WHATSAPP_DISPLAY}.</p>
 
           <label className="mt-4 block text-xs font-semibold text-muted">
             Nombre

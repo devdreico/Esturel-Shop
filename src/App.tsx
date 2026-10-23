@@ -7,7 +7,11 @@ import { CartDrawer } from './components/cart/CartDrawer'
 import { AddToast } from './components/cart/AddToast'
 import { AuroraBackdrop, BackToTop } from './components/ui/Aurora'
 import { ScrollProgress, FadePage } from './components/ui/Motion'
+import { WhatsAppFab } from './components/ui/WhatsAppFab'
+import { ExternalRedirect } from './components/ui/ExternalRedirect'
 import { applySeo, organizationJsonLd } from './lib/seo'
+import { PACEFORM_URL } from './lib/partners'
+import { INSTAGRAM_URL } from './lib/social'
 
 const HomePage = lazy(() => import('./pages/Home').then((m) => ({ default: m.HomePage })))
 const CatalogPage = lazy(() =>
@@ -56,7 +60,7 @@ function RootSeo() {
       applySeo({
         title: 'Esturel · Tecnología en Colombia',
         description:
-          'Tienda, asesor y noticiero de tecnología en Colombia. Audífonos, periféricos y frontera tech con pago Mercado Pago.',
+          'Tienda, asesor y noticiero de tecnología en Colombia. Audífonos, periféricos y frontera tech con pago contraentrega.',
         path: '/',
         jsonLd: organizationJsonLd(),
       })
@@ -91,7 +95,7 @@ function RootSeo() {
     } else if (path === '/checkout') {
       applySeo({
         title: 'Checkout',
-        description: 'Pago seguro con Mercado Pago.',
+        description: 'Pedido con pago contraentrega en efectivo. Envíos a todo Colombia.',
         path: '/checkout',
         noindex: true,
       })
@@ -129,6 +133,7 @@ function Shell({ children }: { children: ReactNode }) {
       </div>
       <CartDrawer />
       <AddToast />
+      <WhatsAppFab />
       <BackToTop />
     </div>
   )
@@ -150,6 +155,16 @@ export default function App() {
               <Route path="/checkout" element={<CheckoutPage />} />
               <Route path="/noticias" element={<NewsPage />} />
               <Route path="/asesor" element={<AsesorPage />} />
+              <Route
+                path="/paceform"
+                element={<ExternalRedirect to={PACEFORM_URL} label="Paceform" />}
+              />
+              <Route
+                path="/instagram"
+                element={
+                  <ExternalRedirect to={INSTAGRAM_URL} label="Instagram @esturelco" path="/instagram" />
+                }
+              />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </Suspense>

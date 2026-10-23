@@ -1,12 +1,10 @@
 import { useRef, useState } from 'react'
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { categoryLabel } from '../data/categories'
 import { getProductBySlug, products } from '../data/products'
 import { formatCOP } from '../lib/format'
 import { useCart } from '../hooks/useCart'
-import { openProductPayment, paymentNoteForQty } from '../lib/mercadopago'
-import { isDemoPaymentLink } from '../lib/mpValidate'
 import { ProductCard } from '../components/product/ProductCard'
 import { NotFoundPage } from './NotFound'
 import { useSeo } from '../hooks/useSeo'
@@ -16,6 +14,7 @@ export function ProductDetailPage() {
   const { slug } = useParams()
   const product = slug ? getProductBySlug(slug) : undefined
   const { addItem } = useCart()
+  const navigate = useNavigate()
   const [qty, setQty] = useState(1)
   const reduce = useReducedMotion()
   const heroRef = useRef<HTMLDivElement>(null)
@@ -55,7 +54,6 @@ export function ProductDetailPage() {
     .filter((p) => p.category === product.category && p.id !== product.id)
     .slice(0, 4)
   const out = product.stockHint === 'agotado'
-  const demoMp = isDemoPaymentLink(product.mpPaymentLink)
 
   return (
     <div className="mx-auto max-w-7xl px-4 pt-6 sm:px-6">
@@ -105,7 +103,9 @@ export function ProductDetailPage() {
           </ul>
 
           <p className="mt-6 text-3xl font-bold">{formatCOP(product.priceCOP)}</p>
-          <p className="mt-1 text-xs text-muted">{paymentNoteForQty(qty)}</p>
+          <p className="mt-1 text-xs text-muted">
+            Pago contraentrega en efectivo · Envíos a todo Colombia
+          </p>
 
           <div className="mt-5 flex flex-wrap items-center gap-3">
             <div className="glass flex items-center rounded-full">
@@ -139,22 +139,18 @@ export function ProductDetailPage() {
             <button
               type="button"
               disabled={out}
-              title={demoMp ? 'Configura el link real de Mercado Pago en products.ts' : undefined}
-              onClick={() => openProductPayment(product)}
+              onClick={() => {
+                addItem(product.id, qty)
+                navigate('/checkout')
+              }}
               className="glass rounded-full px-6 py-3 text-sm font-bold hover:border-urple-500/40 hover:text-urple-500 disabled:cursor-not-allowed disabled:opacity-40"
             >
-              Comprar ahora · MP
+              Comprar ahora · contraentrega
             </button>
           </div>
-          {demoMp && (
-            <p className="mt-3 text-xs text-amber-600 dark:text-amber-400">
-              Link de pago en modo demo — reemplaza <code>mpPaymentLink</code> con tu link real de
-              Mercado Pago.
-            </p>
-          )}
 
           <p className="mt-4 text-xs text-muted">
-            Pago en Mercado Pago · Envíos Colombia · Soporte Esturel
+            Contraentrega · Envíos Colombia · Soporte Esturel por WhatsApp
           </p>
         </motion.div>
       </div>

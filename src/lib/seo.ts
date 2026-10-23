@@ -141,6 +141,7 @@ export function organizationJsonLd(): Record<string, unknown> {
       contactType: 'customer service',
       areaServed: 'CO',
       availableLanguage: ['es'],
+      telephone: '+573144572008',
     },
   }
 }

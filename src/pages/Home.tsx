@@ -10,6 +10,7 @@ import { Reveal } from '../components/ui/Motion'
 import { useCart } from '../hooks/useCart'
 import { useSeo } from '../hooks/useSeo'
 import { organizationJsonLd } from '../lib/seo'
+import { PACEFORM_BLURB, PACEFORM_NAME, PACEFORM_URL } from '../lib/partners'
 
 export function HomePage() {
   const featured = getFeaturedProducts()
@@ -20,7 +21,7 @@ export function HomePage() {
   useSeo({
     title: 'Esturel · Tecnología en Colombia',
     description:
-      'Tienda, asesor y noticiero de tecnología en Colombia. Audífonos, periféricos y frontera tech con pago Mercado Pago.',
+      'Tienda, asesor y noticiero de tecnología en Colombia. Audífonos, periféricos y frontera tech con pago contraentrega.',
     path: '/',
     jsonLd: organizationJsonLd(),
   })
@@ -58,7 +59,7 @@ export function HomePage() {
               className="mt-5 max-w-lg text-base text-muted sm:text-lg"
             >
               Desde audífonos hasta frontera tech. Catálogo curado, asesoría real y un feed de
-              noticias al día — con pagos seguros por Mercado Pago.
+              noticias al día — con pago contraentrega en efectivo y envíos a todo Colombia.
             </motion.p>
             <motion.div
               initial={reduce ? { opacity: 0 } : { opacity: 0, y: 20 }}
@@ -144,7 +145,7 @@ export function HomePage() {
           <div className="flex flex-wrap justify-center gap-3">
             {[
               'Envíos Colombia',
-              'Pago Mercado Pago',
+              'Pago contraentrega',
               'Asesoría humana',
               'Garantía local',
             ].map((t) => (
@@ -231,6 +232,34 @@ export function HomePage() {
             ? Array.from({ length: 3 }).map((_, i) => <NewsSkeleton key={i} />)
             : news.slice(0, 3).map((n, i) => <NewsCard key={n.id} item={n} index={i} />)}
         </div>
+      </section>
+
+      {/* Sitio asociado Paceform */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6">
+        <Reveal>
+          <a
+            href={PACEFORM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="glass-strong group flex flex-col items-start justify-between gap-5 rounded-3xl p-6 transition hover:border-urple-500/40 sm:flex-row sm:items-center sm:p-8"
+          >
+            <div>
+              <p className="text-xs font-bold tracking-widest text-urple-500 uppercase">
+                Sitio asociado
+              </p>
+              <h2 className="mt-1 text-2xl font-bold">
+                {PACEFORM_NAME} · running con datos
+              </h2>
+              <p className="mt-2 max-w-xl text-sm text-muted">
+                {PACEFORM_BLURB} Planifica tus carreras, registra tus tiempos y analiza tu
+                progreso.
+              </p>
+            </div>
+            <span className="btn-primary inline-flex shrink-0 rounded-full px-6 py-3 text-sm">
+              Ir a {PACEFORM_NAME} ↗
+            </span>
+          </a>
+        </Reveal>
       </section>
 
       {/* CTA Asesor */}

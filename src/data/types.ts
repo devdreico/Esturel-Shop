@@ -18,7 +18,6 @@ export type Product = {
   description: string
   specs: string[]
   featured?: boolean
-  mpPaymentLink: string
   stockHint?: StockHint
 }
 

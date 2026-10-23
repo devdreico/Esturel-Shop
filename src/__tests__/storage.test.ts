@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest'
 import { sanitizeCartLines } from '../lib/storage'
-import { isDemoPaymentLink } from '../lib/mpValidate'
 import { safeHttpsUrl } from '../lib/rss'
 import { products } from '../data/products'
 
@@ -34,10 +33,4 @@ describe('safeHttpsUrl', () => {
   })
 })
 
-describe('isDemoPaymentLink', () => {
-  it('marca placeholders demo', () => {
-    expect(isDemoPaymentLink('https://www.mercadopago.com.co/pay/esturel-pulse-anc')).toBe(true)
-    expect(isDemoPaymentLink('')).toBe(true)
-    expect(isDemoPaymentLink('ftp://x')).toBe(true)
-  })
-})
+

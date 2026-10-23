@@ -1,4 +1,7 @@
 import { Link } from 'react-router-dom'
+import { waUrl, WHATSAPP_DISPLAY } from '../../lib/whatsapp'
+import { PACEFORM_URL } from '../../lib/partners'
+import { INSTAGRAM_URL } from '../../lib/social'
 
 export function Footer() {
   return (
@@ -10,11 +13,11 @@ export function Footer() {
             <span className="text-lg font-bold">ESTUREL</span>
           </div>
           <p className="mt-3 max-w-md text-sm text-muted">
-            Asesor, tienda y noticiero de tecnología en Colombia. Desde audífonos hasta
-            frontera tech, con pagos seguros vía Mercado Pago.
+            Asesor, tienda y noticiero de tecnología en Colombia. Desde audífonos hasta frontera
+            tech, con pago contraentrega en efectivo.
           </p>
           <p className="mt-4 text-xs text-muted">
-            Pagos seguros · Efecty · PSE · Nequi · Tarjetas
+            Contraentrega · Envíos a todo Colombia · Coordinamos por WhatsApp
           </p>
         </div>
         <div>
@@ -40,12 +43,42 @@ export function Footer() {
                 Asesoría
               </Link>
             </li>
+            <li>
+              <a
+                className="hover:text-urple-500"
+                href={PACEFORM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Paceform (running) ↗
+              </a>
+            </li>
           </ul>
         </div>
         <div>
           <p className="text-xs font-bold tracking-widest text-urple-500 uppercase">Contacto</p>
           <ul className="mt-3 space-y-2 text-sm text-muted">
             <li>Bogotá, Colombia</li>
+            <li>
+              <a
+                className="hover:text-urple-500"
+                href={waUrl('Hola Esturel, quiero información.')}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                WhatsApp {WHATSAPP_DISPLAY}
+              </a>
+            </li>
+            <li>
+              <a
+                className="hover:text-urple-500"
+                href={INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Instagram @esturelco ↗
+              </a>
+            </li>
             <li>
               <a className="hover:text-urple-500" href="mailto:hola@esturel.co">
                 hola@esturel.co

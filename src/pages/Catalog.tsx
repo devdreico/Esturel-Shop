@@ -20,7 +20,7 @@ export function CatalogPage() {
   useSeo({
     title: 'Catálogo de tecnología',
     description:
-      'Audífonos, periféricos y frontera tech con precios en COP y pago seguro por Mercado Pago.',
+      'Audífonos, periféricos y frontera tech con precios en COP y pago contraentrega en Colombia.',
     path: '/catalogo',
     noindex: Boolean(params.toString()),
   })
@@ -56,8 +56,8 @@ export function CatalogPage() {
         <p className="text-xs font-bold tracking-widest text-urple-500 uppercase">Catálogo</p>
         <h1 className="mt-1 text-3xl font-bold sm:text-4xl">Toda la tecnología Esturel</h1>
         <p className="mt-2 max-w-2xl text-sm text-muted">
-          Audífonos, periféricos y frontera tech con precios en COP y pago seguro por Mercado
-          Pago.
+          Audífonos, periféricos y frontera tech con precios en COP y pago contraentrega en
+          Colombia.
         </p>
       </Reveal>
 
