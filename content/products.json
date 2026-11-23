@@ -1,12 +1,100 @@
 [
   {
+    "id": "p-14",
+    "sku": "EST-ONN-STICK",
+    "slug": "watch-onn-tv-stick",
+    "name": "Watch ONN TV Stick",
+    "brand": "ONN",
+    "category": "streaming",
+    "priceCOP": 120000,
+    "image": "/products/watch-onn-tv-stick/01.webp",
+    "images": [
+      "/products/watch-onn-tv-stick/01.webp"
+    ],
+    "shortDesc": "Convierte tu TV en Smart TV 4K. Contrólalo desde Google Home o con control opcional.",
+    "description": "TV Stick con Android TV que convierte cualquier televisor con HDMI en un Smart TV 4K. Accede a Netflix, YouTube, Disney+ y más. Se puede controlar desde el celular con Google Home, por lo que el control físico es opcional. Incluye control remoto por voz si eliges la versión con control.",
+    "specs": [
+      {
+        "label": "Sistema",
+        "value": "Android TV"
+      },
+      {
+        "label": "Resolución",
+        "value": "4K Ultra HD"
+      },
+      {
+        "label": "Control",
+        "value": "Google Home (celular) o control físico opcional"
+      },
+      {
+        "label": "Conectividad",
+        "value": "WiFi dual band, Bluetooth, HDMI"
+      },
+      {
+        "label": "Almacenamiento",
+        "value": "8 GB"
+      },
+      {
+        "label": "RAM",
+        "value": "2 GB"
+      },
+      {
+        "label": "Asistente",
+        "value": "Google Assistant por voz"
+      },
+      {
+        "label": "Apps",
+        "value": "Netflix, YouTube, Disney+, Prime Video y más"
+      }
+    ],
+    "features": [
+      "Android TV",
+      "4K",
+      "Control por voz",
+      "Google Home",
+      "Control opcional"
+    ],
+    "stock": 40,
+    "stockPolicy": "deny",
+    "condition": "nuevo",
+    "warrantyMonths": 12,
+    "weightG": 50,
+    "badge": "Producto estrella",
+    "featured": true,
+    "tags": [
+      "tv-stick",
+      "streaming",
+      "android",
+      "smart-tv",
+      "estrella",
+      "mvp"
+    ],
+    "isDemo": false,
+    "variants": [
+      {
+        "id": "sin-control",
+        "label": "Solo TV Stick (Google Home)",
+        "sku": "EST-ONN-STICK",
+        "stock": 40,
+        "priceCOP": 120000
+      },
+      {
+        "id": "con-control",
+        "label": "TV Stick + control remoto",
+        "sku": "EST-ONN-STICK-CTRL",
+        "stock": 20,
+        "priceCOP": 280000
+      }
+    ]
+  },
+  {
     "id": "p-01",
     "sku": "EST-PB-SOLAR",
     "slug": "power-bank-con-panel-solar-20000mah",
     "name": "Power bank con panel solar 20000mAh",
     "brand": "Esturel",
     "category": "accesorios",
-    "priceCOP": 149900,
+    "priceCOP": 95000,
     "image": "/products/power-bank-con-panel-solar-20000mah/01.webp",
     "images": [
       "/products/power-bank-con-panel-solar-20000mah/01.webp",
@@ -70,7 +158,7 @@
     "name": "Aspiradora robot inteligente",
     "brand": "Esturel",
     "category": "accesorios",
-    "priceCOP": 499900,
+    "priceCOP": 72000,
     "image": "/products/aspiradora-robot/01.webp",
     "images": [
       "/products/aspiradora-robot/01.webp",
@@ -133,7 +221,7 @@
     "name": "Micrófono condensador gamer ZX-776",
     "brand": "ZX",
     "category": "streaming",
-    "priceCOP": 129900,
+    "priceCOP": 134000,
     "image": "/products/microfono-condensador-gamer-zx-776/01.webp",
     "images": [
       "/products/microfono-condensador-gamer-zx-776/01.webp"
@@ -193,7 +281,7 @@
     "name": "AirPods 2da generación",
     "brand": "Apple",
     "category": "audifonos",
-    "priceCOP": 399900,
+    "priceCOP": 58000,
     "image": "/products/airpods-2da-generacion/01.webp",
     "images": [
       "/products/airpods-2da-generacion/01.webp",
@@ -257,7 +345,7 @@
     "name": "Audífonos inalámbricos LE302",
     "brand": "Esturel",
     "category": "audifonos",
-    "priceCOP": 99900,
+    "priceCOP": 88000,
     "image": "/products/audifonos-inalambricos-le302/01.webp",
     "images": [
       "/products/audifonos-inalambricos-le302/01.webp",
@@ -318,7 +406,7 @@
     "name": "Audífonos inalámbricos Lenovo HT38",
     "brand": "Lenovo",
     "category": "audifonos",
-    "priceCOP": 119900,
+    "priceCOP": 49000,
     "image": "/products/audifonos-inalambricos-lenovo-ht38/01.webp",
     "images": [
       "/products/audifonos-inalambricos-lenovo-ht38/01.webp",
@@ -382,7 +470,7 @@
     "name": "Xiaomi Redmi Buds 4 Lite",
     "brand": "Xiaomi",
     "category": "audifonos",
-    "priceCOP": 99900,
+    "priceCOP": 99000,
     "image": "/products/xiaomi-redmi-buds-4-lite/01.webp",
     "images": [
       "/products/xiaomi-redmi-buds-4-lite/01.webp",
@@ -447,7 +535,7 @@
     "name": "Cámara deportes video 4K WiFi",
     "brand": "Esturel",
     "category": "streaming",
-    "priceCOP": 249900,
+    "priceCOP": 119000,
     "image": "/products/camara-deportes-video-4k-wifi/01.webp",
     "images": [
       "/products/camara-deportes-video-4k-wifi/01.webp",
@@ -495,7 +583,7 @@
     "warrantyMonths": 6,
     "weightG": 120,
     "badge": null,
-    "featured": false,
+    "featured": true,
     "tags": [
       "camara",
       "deportes",
@@ -511,7 +599,7 @@
     "name": "Diadema AirPods Max",
     "brand": "Apple",
     "category": "audifonos",
-    "priceCOP": 899900,
+    "priceCOP": 100000,
     "image": "/products/diadema-airpods-max/01.webp",
     "images": [
       "/products/diadema-airpods-max/01.webp",
@@ -577,7 +665,7 @@
     "name": "Diadema alámbrica gamer G2000",
     "brand": "G2000",
     "category": "audifonos",
-    "priceCOP": 129900,
+    "priceCOP": 78500,
     "image": "/products/diadema-alambrica-gamer-g2000/01.webp",
     "images": [
       "/products/diadema-alambrica-gamer-g2000/01.webp",
@@ -639,7 +727,7 @@
     "name": "Mouse alámbrico gamer USB V02",
     "brand": "Esturel",
     "category": "perifericos",
-    "priceCOP": 79900,
+    "priceCOP": 39000,
     "image": "/products/mouse-alambrico-gamer-usb-v02/01.webp",
     "images": [
       "/products/mouse-alambrico-gamer-usb-v02/01.webp",
@@ -700,7 +788,7 @@
     "name": "Parlante Boombox 4 Mini",
     "brand": "Esturel",
     "category": "audifonos",
-    "priceCOP": 199900,
+    "priceCOP": 76000,
     "image": "/products/parlante-boombox-4-mini/01.webp",
     "images": [
       "/products/parlante-boombox-4-mini/01.webp",
@@ -766,7 +854,7 @@
     "name": "Proyector HY300",
     "brand": "Esturel",
     "category": "streaming",
-    "priceCOP": 299900,
+    "priceCOP": 159000,
     "image": "/products/proyector-hy300/01.webp",
     "images": [
       "/products/proyector-hy300/01.webp",
@@ -820,66 +908,6 @@
       "streaming",
       "video",
       "cine"
-    ],
-    "isDemo": false
-  },
-  {
-    "id": "p-14",
-    "sku": "EST-ONN-STICK",
-    "slug": "watch-onn-tv-stick",
-    "name": "Watch ONN TV Stick",
-    "brand": "ONN",
-    "category": "streaming",
-    "priceCOP": 149900,
-    "image": "/products/watch-onn-tv-stick/01.webp",
-    "images": [
-      "/products/watch-onn-tv-stick/01.webp"
-    ],
-    "shortDesc": "TV Stick con sistema Android TV.",
-    "description": "TV Stick con Android TV, control por voz y acceso a apps de streaming. Convierte tu TV en smart TV.",
-    "specs": [
-      {
-        "label": "Sistema",
-        "value": "Android TV"
-      },
-      {
-        "label": "Resolución",
-        "value": "4K"
-      },
-      {
-        "label": "Control",
-        "value": "Voz incluido"
-      },
-      {
-        "label": "Conectividad",
-        "value": "WiFi, HDMI"
-      },
-      {
-        "label": "Almacenamiento",
-        "value": "8 GB"
-      },
-      {
-        "label": "RAM",
-        "value": "2 GB"
-      }
-    ],
-    "features": [
-      "Android TV",
-      "4K",
-      "Control por voz"
-    ],
-    "stock": 9,
-    "stockPolicy": "deny",
-    "condition": "nuevo",
-    "warrantyMonths": 6,
-    "weightG": 50,
-    "badge": null,
-    "featured": false,
-    "tags": [
-      "tv-stick",
-      "streaming",
-      "android",
-      "smart-tv"
     ],
     "isDemo": false
   }
