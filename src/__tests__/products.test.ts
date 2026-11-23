@@ -9,8 +9,8 @@ describe('products catalog', () => {
   })
 
   it('getProductBySlug encuentra producto', () => {
-    const p = getProductBySlug('esturel-pulse-anc')
-    expect(p?.name).toBe('Esturel Pulse ANC')
+    const p = getProductBySlug('airpods-2da-generacion')
+    expect(p?.name).toBe('AirPods 2da generación')
   })
 
   it('filtra por categoría', () => {
@@ -20,8 +20,8 @@ describe('products catalog', () => {
   })
 
   it('busca por texto', () => {
-    const list = filterProducts({ query: 'anc' })
-    expect(list.some((p) => p.slug === 'esturel-pulse-anc')).toBe(true)
+    const list = filterProducts({ query: 'xiaomi' })
+    expect(list.some((p) => p.slug === 'xiaomi-redmi-buds-4-lite')).toBe(true)
   })
 
   it('ordena por precio ascendente', () => {

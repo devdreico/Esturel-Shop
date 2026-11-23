@@ -1,365 +1,886 @@
 [
   {
     "id": "p-01",
-    "sku": "EST-PULSE-ANC",
-    "slug": "esturel-pulse-anc",
-    "name": "Esturel Pulse ANC",
+    "sku": "EST-PB-SOLAR",
+    "slug": "power-bank-con-panel-solar-20000mah",
+    "name": "Power bank con panel solar 20000mAh",
     "brand": "Esturel",
-    "category": "audifonos",
-    "priceCOP": 349900,
-    "image": "/products/pulse-anc.svg",
-    "images": ["/products/pulse-anc.svg"],
-    "shortDesc": "Cancelación activa híbrida y 40 h de batería.",
-    "description": "Audífonos over-ear con ANC híbrido, drivers de 40 mm y modo transparencia. Pensados para trabajo remoto, viajes y sesiones largas en Colombia.",
-    "specs": [
-      { "label": "Cancelación de ruido", "value": "ANC híbrido hasta -42 dB" },
-      { "label": "Drivers", "value": "40 mm" },
-      { "label": "Bluetooth", "value": "5.3 con multipoint" },
-      { "label": "Batería", "value": "40 h (ANC off) / 30 h (ANC on)" },
-      { "label": "Carga", "value": "USB-C, 10 min = 5 h" },
-      { "label": "Peso", "value": "260 g" }
-    ],
-    "features": ["Modo transparencia", "Multipoint", "Carga rápida USB-C"],
-    "stock": 8,
-    "stockPolicy": "deny",
-    "condition": "nuevo",
-    "warrantyMonths": 12,
-    "weightG": 260,
-    "badge": "Más vendido",
-    "featured": true,
-    "tags": ["anc", "bluetooth", "audio", "trabajo", "viaje"],
-    "isDemo": true
-  },
-  {
-    "id": "p-02",
-    "sku": "EST-NOVA-BUDS",
-    "slug": "esturel-nova-buds",
-    "name": "Esturel Nova Buds",
-    "brand": "Esturel",
-    "category": "audifonos",
-    "priceCOP": 189900,
-    "image": "/products/nova-buds.svg",
-    "images": ["/products/nova-buds.svg"],
-    "shortDesc": "TWS ligeros con multipoint y IPX5.",
-    "description": "True wireless con sonido balanceado, conexión multipoint a dos dispositivos y resistencia al sudor para el día a día.",
-    "specs": [
-      { "label": "Formato", "value": "TWS in-ear" },
-      { "label": "Resistencia", "value": "IPX5" },
-      { "label": "Batería", "value": "7 h + 21 h con estuche" },
-      { "label": "Conexión", "value": "Bluetooth 5.3 multipoint" },
-      { "label": "Latencia", "value": "Modo gaming de baja latencia" },
-      { "label": "Carga", "value": "USB-C" }
-    ],
-    "features": ["Multipoint", "IPX5", "Modo gaming"],
-    "stock": 15,
-    "stockPolicy": "deny",
-    "condition": "nuevo",
-    "warrantyMonths": 12,
-    "weightG": 48,
-    "badge": "Nuevo",
-    "featured": true,
-    "tags": ["tws", "bluetooth", "deporte", "audio"],
-    "isDemo": true
-  },
-  {
-    "id": "p-03",
-    "sku": "EST-KESTREL-MX",
-    "slug": "kestrel-mx-keys",
-    "name": "Kestrel MX Keys",
-    "brand": "Kestrel",
-    "category": "perifericos",
-    "priceCOP": 429900,
-    "image": "/products/kestrel-mx.svg",
-    "images": ["/products/kestrel-mx.svg"],
-    "shortDesc": "Mecánico hot-swap 75% con RGB suave.",
-    "description": "Teclado mecánico compacto con switches hot-swap, keycaps PBT y perfil bajo para oficina o gaming sin ruido excesivo.",
-    "specs": [
-      { "label": "Layout", "value": "75% (82 teclas)" },
-      { "label": "Switches", "value": "Hot-swap, lineales silenciosos" },
-      { "label": "Keycaps", "value": "PBT doble inyección" },
-      { "label": "Conexión", "value": "USB-C + 2.4 GHz + Bluetooth" },
-      { "label": "Batería", "value": "Hasta 90 h sin RGB" },
-      { "label": "Iluminación", "value": "RGB surtido, 18 efectos" }
-    ],
-    "features": ["Hot-swap", "Triple conexión", "Keycaps PBT"],
-    "stock": 6,
-    "stockPolicy": "deny",
-    "condition": "nuevo",
-    "warrantyMonths": 12,
-    "weightG": 780,
-    "featured": true,
-    "tags": ["teclado", "mecanico", "gaming", "oficina"],
-    "isDemo": true
-  },
-  {
-    "id": "p-04",
-    "sku": "EST-ORBIT-PRO",
-    "slug": "orbit-pro-mouse",
-    "name": "Orbit Pro Mouse",
-    "brand": "Orbit",
-    "category": "perifericos",
-    "priceCOP": 259900,
-    "image": "/products/orbit-pro.svg",
-    "images": ["/products/orbit-pro.svg"],
-    "shortDesc": "Sensor 26K DPI y 8 botones programables.",
-    "description": "Mouse ergonómico con sensor de alta precisión, switches durables y batería de 70 días. Ideal para diseño y productividad.",
-    "specs": [
-      { "label": "Sensor", "value": "26.000 DPI" },
-      { "label": "Botones", "value": "8 programables" },
-      { "label": "Batería", "value": "70 días" },
-      { "label": "Conexión", "value": "2.4 GHz + Bluetooth" },
-      { "label": "Switches", "value": "Ópticos 80 M clics" },
-      { "label": "Peso", "value": "88 g" }
-    ],
-    "features": ["Perfil ergonómico", "Dual wireless", "Software de macros"],
-    "stock": 10,
-    "stockPolicy": "deny",
-    "condition": "nuevo",
-    "warrantyMonths": 12,
-    "weightG": 88,
-    "tags": ["mouse", "productividad", "gaming", "inalambrico"],
-    "isDemo": true
-  },
-  {
-    "id": "p-05",
-    "sku": "EST-AETHER-RING",
-    "slug": "aether-ring-ai",
-    "name": "Aether Ring AI",
-    "brand": "Aether",
-    "category": "frontier",
-    "priceCOP": 899900,
-    "image": "/products/aether-ring.svg",
-    "images": ["/products/aether-ring.svg"],
-    "shortDesc": "Anillo inteligente con métricas de sueño y IA.",
-    "description": "Wearable de frontera: seguimiento de sueño, HRV y resúmenes diarios generados con IA en la app companion.",
-    "specs": [
-      { "label": "Material", "value": "Titanio grado 5" },
-      { "label": "Sensores", "value": "HRV, SpO2, temperatura, sueño" },
-      { "label": "Batería", "value": "7 días" },
-      { "label": "Resistencia", "value": "10 ATM" },
-      { "label": "App", "value": "iOS y Android con resúmenes IA" },
-      { "label": "Tallas", "value": "8, 9, 10 y 11" }
-    ],
-    "features": ["Análisis de sueño", "HRV", "Resumen diario con IA"],
-    "variants": [
-      { "id": "t8", "label": "Talla 8", "sku": "EST-AETHER-RING-8", "stock": 0 },
-      { "id": "t9", "label": "Talla 9", "sku": "EST-AETHER-RING-9", "stock": 0 },
-      { "id": "t10", "label": "Talla 10", "sku": "EST-AETHER-RING-10", "stock": 0 },
-      { "id": "t11", "label": "Talla 11", "sku": "EST-AETHER-RING-11", "stock": 0 }
-    ],
-    "stock": 0,
-    "stockPolicy": "backorder",
-    "condition": "nuevo",
-    "warrantyMonths": 12,
-    "weightG": 4,
-    "badge": "A pedido",
-    "featured": true,
-    "tags": ["wearable", "ia", "salud", "sueño"],
-    "isDemo": true
-  },
-  {
-    "id": "p-06",
-    "sku": "EST-LUMEN-4K",
-    "slug": "lumen-cam-4k",
-    "name": "Lumen Cam 4K",
-    "brand": "Lumen",
-    "category": "streaming",
-    "priceCOP": 519900,
-    "image": "/products/lumen-cam.svg",
-    "images": ["/products/lumen-cam.svg"],
-    "shortDesc": "Webcam 4K con AI framing y doble micrófono.",
-    "description": "Cámara para stream y reuniones con enfoque automático, corrección de luz y micrófonos duales con reducción de ruido.",
-    "specs": [
-      { "label": "Video", "value": "4K30 / 1080p60" },
-      { "label": "Campo de visión", "value": "90° ajustable" },
-      { "label": "Enfoque", "value": "AI framing + autofoco" },
-      { "label": "Micrófonos", "value": "Duales con cancelación de ruido" },
-      { "label": "Conexión", "value": "USB-C plug and play" },
-      { "label": "Montaje", "value": "Clip para monitor + trípode 1/4\"" }
-    ],
-    "features": ["4K", "AI framing", "Micrófonos duales"],
-    "stock": 4,
-    "stockPolicy": "deny",
-    "condition": "nuevo",
-    "warrantyMonths": 12,
-    "weightG": 190,
-    "featured": true,
-    "tags": ["webcam", "streaming", "reuniones", "4k"],
-    "isDemo": true
-  },
-  {
-    "id": "p-07",
-    "sku": "EST-VANTA-HUB9",
-    "slug": "vanta-hub-9in1",
-    "name": "Vanta Hub 9 en 1",
-    "brand": "Vanta",
     "category": "accesorios",
-    "priceCOP": 219900,
-    "image": "/products/vanta-hub.svg",
-    "images": ["/products/vanta-hub.svg"],
-    "shortDesc": "Hub USB-C con HDMI 4K y PD 100 W.",
-    "description": "Hub aluminio para laptops: HDMI, SD, USB 3.0, ethernet y carga passthrough de 100 W en un solo cable.",
-    "specs": [
-      { "label": "Puertos", "value": "HDMI, 3× USB-A, USB-C PD, SD, microSD, LAN" },
-      { "label": "Video", "value": "HDMI 4K60" },
-      { "label": "Carga", "value": "PD 100 W passthrough" },
-      { "label": "Red", "value": "Gigabit Ethernet" },
-      { "label": "Material", "value": "Aluminio anodizado" },
-      { "label": "Compatibilidad", "value": "macOS, Windows, iPadOS" }
+    "priceCOP": 149900,
+    "image": "/products/power-bank-con-panel-solar-20000mah/01.webp",
+    "images": [
+      "/products/power-bank-con-panel-solar-20000mah/01.webp",
+      "/products/power-bank-con-panel-solar-20000mah/02.webp",
+      "/products/power-bank-con-panel-solar-20000mah/03.webp",
+      "/products/power-bank-con-panel-solar-20000mah/04.webp",
+      "/products/power-bank-con-panel-solar-20000mah/05.webp"
     ],
-    "features": ["HDMI 4K60", "PD 100 W", "Gigabit LAN"],
+    "shortDesc": "Batería externa con panel solar y carga rápida.",
+    "description": "Power bank de 20000 mAh con panel solar integrado, ideal para viajes y emergencias. Carga hasta 3 dispositivos a la vez.",
+    "specs": [
+      {
+        "label": "Capacidad",
+        "value": "20000 mAh"
+      },
+      {
+        "label": "Panel solar",
+        "value": "5 W integrado"
+      },
+      {
+        "label": "Salida",
+        "value": "USB-C 22.5 W + 2× USB-A"
+      },
+      {
+        "label": "Entrada",
+        "value": "USB-C"
+      },
+      {
+        "label": "Protección",
+        "value": "Sobrecarga, cortocircuito"
+      },
+      {
+        "label": "Peso",
+        "value": "420 g"
+      }
+    ],
+    "features": [
+      "Panel solar",
+      "Carga rápida",
+      "3 puertos"
+    ],
     "stock": 12,
     "stockPolicy": "deny",
     "condition": "nuevo",
-    "warrantyMonths": 12,
-    "weightG": 120,
-    "tags": ["hub", "usb-c", "laptop", "oficina"],
-    "isDemo": true
+    "warrantyMonths": 6,
+    "weightG": 420,
+    "badge": "Nuevo",
+    "featured": true,
+    "tags": [
+      "powerbank",
+      "solar",
+      "viaje",
+      "bateria"
+    ],
+    "isDemo": false
   },
   {
-    "id": "p-08",
-    "sku": "EST-ECHO-BAR",
-    "slug": "echo-bar-mini",
-    "name": "Echo Bar Mini",
-    "brand": "Echo",
-    "category": "audifonos",
-    "priceCOP": 279900,
-    "image": "/products/echo-bar.svg",
-    "images": ["/products/echo-bar.svg"],
-    "shortDesc": "Barra de sonido USB con DSP para escritorio.",
-    "description": "Barra compacta bajo monitor con Bluetooth, entrada aux y ecualizador por software. Audio claro sin ocupar el escritorio.",
-    "specs": [
-      { "label": "Formato", "value": "Barra 2.0 bajo monitor" },
-      { "label": "Potencia", "value": "2 × 8 W" },
-      { "label": "Conexión", "value": "USB-C, AUX 3.5 mm, Bluetooth 5.2" },
-      { "label": "Procesamiento", "value": "DSP 5 bandas" },
-      { "label": "Iluminación", "value": "RGB sutil configurable" },
-      { "label": "Largo", "value": "42 cm" }
+    "id": "p-02",
+    "sku": "EST-ROBOT-VAC",
+    "slug": "aspiradora-robot",
+    "name": "Aspiradora robot inteligente",
+    "brand": "Esturel",
+    "category": "accesorios",
+    "priceCOP": 499900,
+    "image": "/products/aspiradora-robot/01.webp",
+    "images": [
+      "/products/aspiradora-robot/01.webp",
+      "/products/aspiradora-robot/02.webp",
+      "/products/aspiradora-robot/03.webp",
+      "/products/aspiradora-robot/04.webp"
     ],
-    "features": ["Bluetooth 5.2", "DSP", "USB-C"],
-    "stock": 9,
-    "stockPolicy": "deny",
-    "condition": "nuevo",
-    "warrantyMonths": 12,
-    "weightG": 650,
-    "tags": ["audio", "escritorio", "bluetooth", "parlante"],
-    "isDemo": true
-  },
-  {
-    "id": "p-09",
-    "sku": "EST-PRISM-KEY",
-    "slug": "prism-keylight",
-    "name": "Prism Key Light",
-    "brand": "Prism",
-    "category": "streaming",
-    "priceCOP": 389900,
-    "image": "/products/prism-keylight.svg",
-    "images": ["/products/prism-keylight.svg"],
-    "shortDesc": "Panel de luz bicolor 256 LEDs app-control.",
-    "description": "Iluminación de clave para streams y videollamadas con temperatura bicolor, app móvil y brazo incluido.",
+    "shortDesc": "Limpieza automática con mapeo y app.",
+    "description": "Aspiradora robot con mapeo inteligente, control por app y programación. Ideal para pisos duros y alfombras bajas.",
     "specs": [
-      { "label": "LEDs", "value": "256 bicolor" },
-      { "label": "Temperatura", "value": "2800–6500 K" },
-      { "label": "Potencia", "value": "45 W" },
-      { "label": "Control", "value": "App móvil + botones" },
-      { "label": "Montaje", "value": "Brazo de escritorio incluido" },
-      { "label": "CRI", "value": "96+" }
+      {
+        "label": "Succión",
+        "value": "2500 Pa"
+      },
+      {
+        "label": "Navegación",
+        "value": "Mapeo inteligente"
+      },
+      {
+        "label": "Batería",
+        "value": "120 min"
+      },
+      {
+        "label": "Depósito",
+        "value": "500 ml"
+      },
+      {
+        "label": "Control",
+        "value": "App + voz"
+      },
+      {
+        "label": "Nivel de ruido",
+        "value": "< 65 dB"
+      }
     ],
-    "features": ["Bicolor", "App control", "Brazo incluido"],
+    "features": [
+      "Mapeo",
+      "App",
+      "Programable"
+    ],
     "stock": 5,
     "stockPolicy": "deny",
     "condition": "nuevo",
     "warrantyMonths": 12,
-    "weightG": 1100,
-    "tags": ["luz", "streaming", "video", "creadores"],
-    "isDemo": true
+    "weightG": 2800,
+    "badge": null,
+    "featured": false,
+    "tags": [
+      "aspiradora",
+      "robot",
+      "limpieza",
+      "hogar"
+    ],
+    "isDemo": false
+  },
+  {
+    "id": "p-03",
+    "sku": "EST-MIC-ZX776",
+    "slug": "microfono-condensador-gamer-zx-776",
+    "name": "Micrófono condensador gamer ZX-776",
+    "brand": "ZX",
+    "category": "streaming",
+    "priceCOP": 129900,
+    "image": "/products/microfono-condensador-gamer-zx-776/01.webp",
+    "images": [
+      "/products/microfono-condensador-gamer-zx-776/01.webp"
+    ],
+    "shortDesc": "Micrófono USB con brazo y RGB.",
+    "description": "Micrófono condensador USB con brazo articulado, patrón cardioide y iluminación RGB. Plug and play para streaming y gaming.",
+    "specs": [
+      {
+        "label": "Patrón",
+        "value": "Cardioide"
+      },
+      {
+        "label": "Conexión",
+        "value": "USB plug and play"
+      },
+      {
+        "label": "Respuesta",
+        "value": "20 Hz – 20 kHz"
+      },
+      {
+        "label": "Brazo",
+        "value": "Articulado incluido"
+      },
+      {
+        "label": "RGB",
+        "value": "Sí"
+      },
+      {
+        "label": "Compatibilidad",
+        "value": "Windows, macOS"
+      }
+    ],
+    "features": [
+      "Plug and play",
+      "Brazo incluido",
+      "RGB"
+    ],
+    "stock": 8,
+    "stockPolicy": "deny",
+    "condition": "nuevo",
+    "warrantyMonths": 6,
+    "weightG": 380,
+    "badge": null,
+    "featured": true,
+    "tags": [
+      "microfono",
+      "streaming",
+      "gaming",
+      "audio"
+    ],
+    "isDemo": false
+  },
+  {
+    "id": "p-04",
+    "sku": "EST-AIRPODS-2",
+    "slug": "airpods-2da-generacion",
+    "name": "AirPods 2da generación",
+    "brand": "Apple",
+    "category": "audifonos",
+    "priceCOP": 399900,
+    "image": "/products/airpods-2da-generacion/01.webp",
+    "images": [
+      "/products/airpods-2da-generacion/01.webp",
+      "/products/airpods-2da-generacion/02.webp",
+      "/products/airpods-2da-generacion/03.webp",
+      "/products/airpods-2da-generacion/04.webp",
+      "/products/airpods-2da-generacion/05.webp"
+    ],
+    "shortDesc": "Audífonos inalámbricos con estuche de carga.",
+    "description": "Audífonos tipo AirPods con estuche de carga, conexión Bluetooth y controles táctiles. Compatibles con iOS y Android.",
+    "specs": [
+      {
+        "label": "Formato",
+        "value": "In-ear TWS"
+      },
+      {
+        "label": "Bluetooth",
+        "value": "5.0"
+      },
+      {
+        "label": "Batería",
+        "value": "5 h + 24 h con estuche"
+      },
+      {
+        "label": "Carga",
+        "value": "Lightning / USB-C"
+      },
+      {
+        "label": "Micrófono",
+        "value": "Sí"
+      },
+      {
+        "label": "Controles",
+        "value": "Táctiles"
+      }
+    ],
+    "features": [
+      "TWS",
+      "Multipoint",
+      "Carga rápida"
+    ],
+    "stock": 10,
+    "stockPolicy": "deny",
+    "condition": "nuevo",
+    "warrantyMonths": 6,
+    "weightG": 45,
+    "badge": "Nuevo",
+    "featured": true,
+    "tags": [
+      "airpods",
+      "bluetooth",
+      "audio",
+      "tws"
+    ],
+    "isDemo": false
+  },
+  {
+    "id": "p-05",
+    "sku": "EST-LE302",
+    "slug": "audifonos-inalambricos-le302",
+    "name": "Audífonos inalámbricos LE302",
+    "brand": "Esturel",
+    "category": "audifonos",
+    "priceCOP": 99900,
+    "image": "/products/audifonos-inalambricos-le302/01.webp",
+    "images": [
+      "/products/audifonos-inalambricos-le302/01.webp",
+      "/products/audifonos-inalambricos-le302/02.webp",
+      "/products/audifonos-inalambricos-le302/03.webp"
+    ],
+    "shortDesc": "Diadema inalámbrica con micrófono.",
+    "description": "Audífonos over-ear inalámbricos con micrófono integrado, cancelación pasiva y batería de larga duración.",
+    "specs": [
+      {
+        "label": "Formato",
+        "value": "Over-ear"
+      },
+      {
+        "label": "Bluetooth",
+        "value": "5.3"
+      },
+      {
+        "label": "Batería",
+        "value": "20 h"
+      },
+      {
+        "label": "Micrófono",
+        "value": "Integrado"
+      },
+      {
+        "label": "Plegable",
+        "value": "Sí"
+      },
+      {
+        "label": "Carga",
+        "value": "USB-C"
+      }
+    ],
+    "features": [
+      "Bluetooth 5.3",
+      "Plegable",
+      "Micrófono"
+    ],
+    "stock": 15,
+    "stockPolicy": "deny",
+    "condition": "nuevo",
+    "warrantyMonths": 6,
+    "weightG": 220,
+    "badge": null,
+    "featured": false,
+    "tags": [
+      "audifonos",
+      "bluetooth",
+      "inalambrico"
+    ],
+    "isDemo": false
+  },
+  {
+    "id": "p-06",
+    "sku": "EST-HT38",
+    "slug": "audifonos-inalambricos-lenovo-ht38",
+    "name": "Audífonos inalámbricos Lenovo HT38",
+    "brand": "Lenovo",
+    "category": "audifonos",
+    "priceCOP": 119900,
+    "image": "/products/audifonos-inalambricos-lenovo-ht38/01.webp",
+    "images": [
+      "/products/audifonos-inalambricos-lenovo-ht38/01.webp",
+      "/products/audifonos-inalambricos-lenovo-ht38/02.webp",
+      "/products/audifonos-inalambricos-lenovo-ht38/03.webp",
+      "/products/audifonos-inalambricos-lenovo-ht38/04.webp",
+      "/products/audifonos-inalambricos-lenovo-ht38/05.webp"
+    ],
+    "shortDesc": "Lenovo HT38 con cancelación de ruido.",
+    "description": "Audífonos inalámbricos Lenovo HT38 con ANC, modo transparencia y hasta 30 h de batería.",
+    "specs": [
+      {
+        "label": "Cancelación",
+        "value": "ANC activa"
+      },
+      {
+        "label": "Bluetooth",
+        "value": "5.3"
+      },
+      {
+        "label": "Batería",
+        "value": "30 h"
+      },
+      {
+        "label": "Modo transparencia",
+        "value": "Sí"
+      },
+      {
+        "label": "Carga",
+        "value": "USB-C"
+      },
+      {
+        "label": "Peso",
+        "value": "240 g"
+      }
+    ],
+    "features": [
+      "ANC",
+      "Transparencia",
+      "USB-C"
+    ],
+    "stock": 12,
+    "stockPolicy": "deny",
+    "condition": "nuevo",
+    "warrantyMonths": 12,
+    "weightG": 240,
+    "badge": "Nuevo",
+    "featured": true,
+    "tags": [
+      "lenovo",
+      "anc",
+      "audifonos",
+      "bluetooth"
+    ],
+    "isDemo": false
+  },
+  {
+    "id": "p-07",
+    "sku": "EST-REDBUDS4L",
+    "slug": "xiaomi-redmi-buds-4-lite",
+    "name": "Xiaomi Redmi Buds 4 Lite",
+    "brand": "Xiaomi",
+    "category": "audifonos",
+    "priceCOP": 99900,
+    "image": "/products/xiaomi-redmi-buds-4-lite/01.webp",
+    "images": [
+      "/products/xiaomi-redmi-buds-4-lite/01.webp",
+      "/products/xiaomi-redmi-buds-4-lite/02.webp",
+      "/products/xiaomi-redmi-buds-4-lite/03.webp",
+      "/products/xiaomi-redmi-buds-4-lite/04.webp",
+      "/products/xiaomi-redmi-buds-4-lite/05.webp",
+      "/products/xiaomi-redmi-buds-4-lite/06.webp"
+    ],
+    "shortDesc": "TWS con cancelación de ruido ambiental.",
+    "description": "Redmi Buds 4 Lite con ENC para llamadas, hasta 20 h de batería y resistencia IP54.",
+    "specs": [
+      {
+        "label": "Formato",
+        "value": "TWS in-ear"
+      },
+      {
+        "label": "Cancelación",
+        "value": "ENC para llamadas"
+      },
+      {
+        "label": "Batería",
+        "value": "5 h + 15 h estuche"
+      },
+      {
+        "label": "Resistencia",
+        "value": "IP54"
+      },
+      {
+        "label": "Bluetooth",
+        "value": "5.3"
+      },
+      {
+        "label": "Carga",
+        "value": "USB-C"
+      }
+    ],
+    "features": [
+      "ENC",
+      "IP54",
+      "Bluetooth 5.3"
+    ],
+    "stock": 20,
+    "stockPolicy": "deny",
+    "condition": "nuevo",
+    "warrantyMonths": 6,
+    "weightG": 40,
+    "badge": "Más vendido",
+    "featured": true,
+    "tags": [
+      "xiaomi",
+      "redmi",
+      "tws",
+      "audifonos"
+    ],
+    "isDemo": false
+  },
+  {
+    "id": "p-08",
+    "sku": "EST-CAM-4K",
+    "slug": "camara-deportes-video-4k-wifi",
+    "name": "Cámara deportes video 4K WiFi",
+    "brand": "Esturel",
+    "category": "streaming",
+    "priceCOP": 249900,
+    "image": "/products/camara-deportes-video-4k-wifi/01.webp",
+    "images": [
+      "/products/camara-deportes-video-4k-wifi/01.webp",
+      "/products/camara-deportes-video-4k-wifi/02.webp",
+      "/products/camara-deportes-video-4k-wifi/03.webp",
+      "/products/camara-deportes-video-4k-wifi/04.webp",
+      "/products/camara-deportes-video-4k-wifi/05.webp"
+    ],
+    "shortDesc": "Cámara de acción 4K con accesorios.",
+    "description": "Cámara deportiva 4K con WiFi, estabilización electrónica y kit de accesorios para casco y manubrio.",
+    "specs": [
+      {
+        "label": "Video",
+        "value": "4K30 / 1080p60"
+      },
+      {
+        "label": "Foto",
+        "value": "16 MP"
+      },
+      {
+        "label": "Conexión",
+        "value": "WiFi + app"
+      },
+      {
+        "label": "Estabilización",
+        "value": "EIS"
+      },
+      {
+        "label": "Resistencia",
+        "value": "IP68 con carcasa"
+      },
+      {
+        "label": "Batería",
+        "value": "90 min"
+      }
+    ],
+    "features": [
+      "4K",
+      "WiFi",
+      "Accesorios incluidos"
+    ],
+    "stock": 6,
+    "stockPolicy": "deny",
+    "condition": "nuevo",
+    "warrantyMonths": 6,
+    "weightG": 120,
+    "badge": null,
+    "featured": false,
+    "tags": [
+      "camara",
+      "deportes",
+      "4k",
+      "streaming"
+    ],
+    "isDemo": false
+  },
+  {
+    "id": "p-09",
+    "sku": "EST-DIAD-AIRMAX",
+    "slug": "diadema-airpods-max",
+    "name": "Diadema AirPods Max",
+    "brand": "Apple",
+    "category": "audifonos",
+    "priceCOP": 899900,
+    "image": "/products/diadema-airpods-max/01.webp",
+    "images": [
+      "/products/diadema-airpods-max/01.webp",
+      "/products/diadema-airpods-max/02.webp",
+      "/products/diadema-airpods-max/03.webp",
+      "/products/diadema-airpods-max/04.webp",
+      "/products/diadema-airpods-max/05.webp",
+      "/products/diadema-airpods-max/06.webp",
+      "/products/diadema-airpods-max/07.webp"
+    ],
+    "shortDesc": "Diadema over-ear con ANC y audio espacial.",
+    "description": "Diadema over-ear con cancelación activa de ruido, modo transparencia y audio espacial. Estructura de aluminio.",
+    "specs": [
+      {
+        "label": "Cancelación",
+        "value": "ANC activa"
+      },
+      {
+        "label": "Modo transparencia",
+        "value": "Sí"
+      },
+      {
+        "label": "Audio espacial",
+        "value": "Sí"
+      },
+      {
+        "label": "Batería",
+        "value": "20 h"
+      },
+      {
+        "label": "Conexión",
+        "value": "Bluetooth 5.0"
+      },
+      {
+        "label": "Material",
+        "value": "Aluminio"
+      }
+    ],
+    "features": [
+      "ANC",
+      "Audio espacial",
+      "Premium"
+    ],
+    "stock": 4,
+    "stockPolicy": "deny",
+    "condition": "nuevo",
+    "warrantyMonths": 6,
+    "weightG": 385,
+    "badge": "Premium",
+    "featured": false,
+    "tags": [
+      "airpods",
+      "max",
+      "audifonos",
+      "premium"
+    ],
+    "isDemo": false
   },
   {
     "id": "p-10",
-    "sku": "EST-DRIFT-MINI",
-    "slug": "drift-drone-mini",
-    "name": "Drift Drone Mini",
-    "brand": "Drift",
-    "category": "frontier",
-    "priceCOP": 1599900,
-    "image": "/products/drift-drone.svg",
-    "images": ["/products/drift-drone.svg"],
-    "shortDesc": "Drone sub-250 g con cámara 4K y obstáculos.",
-    "description": "Drone plegable ultraligero para creadores: estabilización de 3 ejes, seguimiento activo y hasta 31 min de vuelo.",
-    "specs": [
-      { "label": "Peso", "value": "249 g" },
-      { "label": "Cámara", "value": "4K HDR, 3 ejes" },
-      { "label": "Vuelo", "value": "Hasta 31 min" },
-      { "label": "Sensores", "value": "Obstáculos omnidireccionales" },
-      { "label": "Transmisión", "value": "Hasta 10 km" },
-      { "label": "Modos", "value": "Seguimiento, cine y nocturno" }
+    "sku": "EST-G2000",
+    "slug": "diadema-alambrica-gamer-g2000",
+    "name": "Diadema alámbrica gamer G2000",
+    "brand": "G2000",
+    "category": "audifonos",
+    "priceCOP": 129900,
+    "image": "/products/diadema-alambrica-gamer-g2000/01.webp",
+    "images": [
+      "/products/diadema-alambrica-gamer-g2000/01.webp",
+      "/products/diadema-alambrica-gamer-g2000/02.webp",
+      "/products/diadema-alambrica-gamer-g2000/03.webp"
     ],
-    "features": ["Sub-250 g", "4K HDR", "31 min"],
-    "stock": 0,
-    "stockPolicy": "backorder",
+    "shortDesc": "Diadema gaming con micrófono e iluminación.",
+    "description": "Diadema gamer con micrófono flexible, sonido estéreo e iluminación LED. Conexión 3.5 mm.",
+    "specs": [
+      {
+        "label": "Sonido",
+        "value": "Estéreo 7.1 virtual"
+      },
+      {
+        "label": "Micrófono",
+        "value": "Flexible con cancelación"
+      },
+      {
+        "label": "Conexión",
+        "value": "3.5 mm + USB"
+      },
+      {
+        "label": "Iluminación",
+        "value": "LED RGB"
+      },
+      {
+        "label": "Compatibilidad",
+        "value": "PC, consola, móvil"
+      },
+      {
+        "label": "Cable",
+        "value": "2.2 m"
+      }
+    ],
+    "features": [
+      "Micrófono",
+      "LED RGB",
+      "Multiplataforma"
+    ],
+    "stock": 10,
+    "stockPolicy": "deny",
     "condition": "nuevo",
     "warrantyMonths": 6,
-    "weightG": 249,
-    "badge": "A pedido",
-    "tags": ["drone", "camara", "creadores", "4k"],
-    "isDemo": true
+    "weightG": 320,
+    "badge": null,
+    "featured": false,
+    "tags": [
+      "gaming",
+      "diadema",
+      "microfono",
+      "audio"
+    ],
+    "isDemo": false
   },
   {
     "id": "p-11",
-    "sku": "EST-FLUX-100",
-    "slug": "flux-power-100",
-    "name": "Flux Power 100 W",
-    "brand": "Flux",
-    "category": "accesorios",
-    "priceCOP": 319900,
-    "image": "/products/flux-power.svg",
-    "images": ["/products/flux-power.svg"],
-    "shortDesc": "Power bank GaN 20.000 mAh con 100 W PD.",
-    "description": "Batería externa capaz de cargar laptop, phone y earbuds a la vez. Indicador OLED y carcasa ignífuga.",
-    "specs": [
-      { "label": "Capacidad", "value": "20.000 mAh" },
-      { "label": "Salida", "value": "100 W PD máx." },
-      { "label": "Puertos", "value": "2× USB-C + 1× USB-A" },
-      { "label": "Pantalla", "value": "OLED de estado" },
-      { "label": "Recarga", "value": "0–80 % en 45 min" },
-      { "label": "Seguridad", "value": "Carcasa ignífuga, 9 protecciones" }
+    "sku": "EST-MOUSE-V02",
+    "slug": "mouse-alambrico-gamer-usb-v02",
+    "name": "Mouse alámbrico gamer USB V02",
+    "brand": "Esturel",
+    "category": "perifericos",
+    "priceCOP": 79900,
+    "image": "/products/mouse-alambrico-gamer-usb-v02/01.webp",
+    "images": [
+      "/products/mouse-alambrico-gamer-usb-v02/01.webp",
+      "/products/mouse-alambrico-gamer-usb-v02/02.webp"
     ],
-    "features": ["100 W PD", "OLED", "Carga laptop"],
-    "stock": 7,
+    "shortDesc": "Mouse gaming con iluminación RGB.",
+    "description": "Mouse gamer con sensor óptico, 6 botones programables e iluminación RGB. Cable USB reforzado.",
+    "specs": [
+      {
+        "label": "DPI",
+        "value": "7200 DPI ajustable"
+      },
+      {
+        "label": "Botones",
+        "value": "6 programables"
+      },
+      {
+        "label": "Iluminación",
+        "value": "RGB"
+      },
+      {
+        "label": "Sensor",
+        "value": "Óptico"
+      },
+      {
+        "label": "Cable",
+        "value": "1.5 m trenzado"
+      },
+      {
+        "label": "Peso",
+        "value": "110 g"
+      }
+    ],
+    "features": [
+      "RGB",
+      "6 botones",
+      "Gaming"
+    ],
+    "stock": 18,
     "stockPolicy": "deny",
     "condition": "nuevo",
-    "warrantyMonths": 12,
-    "weightG": 480,
-    "tags": ["powerbank", "usb-c", "viaje", "laptop"],
-    "isDemo": true
+    "warrantyMonths": 6,
+    "weightG": 110,
+    "badge": null,
+    "featured": false,
+    "tags": [
+      "mouse",
+      "gaming",
+      "perifericos",
+      "usb"
+    ],
+    "isDemo": false
   },
   {
     "id": "p-12",
-    "sku": "EST-NOVA-PAD",
-    "slug": "nova-track-pad",
-    "name": "Nova Track Pad",
-    "brand": "Nova",
-    "category": "perifericos",
-    "priceCOP": 299900,
-    "image": "/products/nova-trackpad.svg",
-    "images": ["/products/nova-trackpad.svg"],
-    "shortDesc": "Trackpad háptico multi-touch con gestos.",
-    "description": "Superficie háptica con gestos de sistema, conexión dual y batería de 4 meses para setups minimalistas.",
-    "specs": [
-      { "label": "Superficie", "value": "Vidrio templado" },
-      { "label": "Feedback", "value": "Háptico multi-touch" },
-      { "label": "Conexión", "value": "Bluetooth + 2.4 GHz" },
-      { "label": "Batería", "value": "4 meses" },
-      { "label": "Gestos", "value": "macOS y Windows" },
-      { "label": "Tamaño", "value": "13 × 9 cm" }
+    "sku": "EST-BOOMBOX4",
+    "slug": "parlante-boombox-4-mini",
+    "name": "Parlante Boombox 4 Mini",
+    "brand": "Esturel",
+    "category": "audifonos",
+    "priceCOP": 199900,
+    "image": "/products/parlante-boombox-4-mini/01.webp",
+    "images": [
+      "/products/parlante-boombox-4-mini/01.webp",
+      "/products/parlante-boombox-4-mini/02.webp",
+      "/products/parlante-boombox-4-mini/03.webp",
+      "/products/parlante-boombox-4-mini/04.webp",
+      "/products/parlante-boombox-4-mini/05.webp",
+      "/products/parlante-boombox-4-mini/06.webp",
+      "/products/parlante-boombox-4-mini/07.webp"
     ],
-    "features": ["Háptico", "Dual wireless", "Gestos OS"],
-    "stock": 0,
+    "shortDesc": "Parlante portátil con sonido potente.",
+    "description": "Parlante Bluetooth portátil con sonido potente, luces LED y resistencia al agua IPX5.",
+    "specs": [
+      {
+        "label": "Potencia",
+        "value": "30 W"
+      },
+      {
+        "label": "Bluetooth",
+        "value": "5.3"
+      },
+      {
+        "label": "Batería",
+        "value": "12 h"
+      },
+      {
+        "label": "Resistencia",
+        "value": "IPX5"
+      },
+      {
+        "label": "Luces",
+        "value": "LED ritmo"
+      },
+      {
+        "label": "Entradas",
+        "value": "USB, AUX, microSD"
+      }
+    ],
+    "features": [
+      "Bluetooth 5.3",
+      "IPX5",
+      "LED"
+    ],
+    "stock": 7,
     "stockPolicy": "deny",
     "condition": "nuevo",
-    "warrantyMonths": 12,
-    "weightG": 230,
-    "tags": ["trackpad", "productividad", "minimalista"],
-    "isDemo": true
+    "warrantyMonths": 6,
+    "weightG": 950,
+    "badge": null,
+    "featured": false,
+    "tags": [
+      "parlante",
+      "bluetooth",
+      "portatil",
+      "audio"
+    ],
+    "isDemo": false
+  },
+  {
+    "id": "p-13",
+    "sku": "EST-HY300",
+    "slug": "proyector-hy300",
+    "name": "Proyector HY300",
+    "brand": "Esturel",
+    "category": "streaming",
+    "priceCOP": 299900,
+    "image": "/products/proyector-hy300/01.webp",
+    "images": [
+      "/products/proyector-hy300/01.webp",
+      "/products/proyector-hy300/02.webp",
+      "/products/proyector-hy300/03.webp",
+      "/products/proyector-hy300/04.webp",
+      "/products/proyector-hy300/05.webp"
+    ],
+    "shortDesc": "Mini proyector portátil con Android.",
+    "description": "Proyector portátil HY300 con sistema Android, WiFi y Bluetooth. Ideal para cine en casa y presentaciones.",
+    "specs": [
+      {
+        "label": "Resolución",
+        "value": "1080p (nativo 720p)"
+      },
+      {
+        "label": "Brillo",
+        "value": "150 ANSI lumens"
+      },
+      {
+        "label": "Sistema",
+        "value": "Android 11"
+      },
+      {
+        "label": "Conectividad",
+        "value": "WiFi, Bluetooth 5.0"
+      },
+      {
+        "label": "Batería",
+        "value": "No (corriente)"
+      },
+      {
+        "label": "Proyección",
+        "value": "30-120 pulgadas"
+      }
+    ],
+    "features": [
+      "Android",
+      "WiFi",
+      "Bluetooth"
+    ],
+    "stock": 5,
+    "stockPolicy": "deny",
+    "condition": "nuevo",
+    "warrantyMonths": 6,
+    "weightG": 450,
+    "badge": "Nuevo",
+    "featured": true,
+    "tags": [
+      "proyector",
+      "streaming",
+      "video",
+      "cine"
+    ],
+    "isDemo": false
+  },
+  {
+    "id": "p-14",
+    "sku": "EST-ONN-STICK",
+    "slug": "watch-onn-tv-stick",
+    "name": "Watch ONN TV Stick",
+    "brand": "ONN",
+    "category": "streaming",
+    "priceCOP": 149900,
+    "image": "/products/watch-onn-tv-stick/01.webp",
+    "images": [
+      "/products/watch-onn-tv-stick/01.webp"
+    ],
+    "shortDesc": "TV Stick con sistema Android TV.",
+    "description": "TV Stick con Android TV, control por voz y acceso a apps de streaming. Convierte tu TV en smart TV.",
+    "specs": [
+      {
+        "label": "Sistema",
+        "value": "Android TV"
+      },
+      {
+        "label": "Resolución",
+        "value": "4K"
+      },
+      {
+        "label": "Control",
+        "value": "Voz incluido"
+      },
+      {
+        "label": "Conectividad",
+        "value": "WiFi, HDMI"
+      },
+      {
+        "label": "Almacenamiento",
+        "value": "8 GB"
+      },
+      {
+        "label": "RAM",
+        "value": "2 GB"
+      }
+    ],
+    "features": [
+      "Android TV",
+      "4K",
+      "Control por voz"
+    ],
+    "stock": 9,
+    "stockPolicy": "deny",
+    "condition": "nuevo",
+    "warrantyMonths": 6,
+    "weightG": 50,
+    "badge": null,
+    "featured": false,
+    "tags": [
+      "tv-stick",
+      "streaming",
+      "android",
+      "smart-tv"
+    ],
+    "isDemo": false
   }
 ]
