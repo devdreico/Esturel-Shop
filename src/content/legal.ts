@@ -131,7 +131,7 @@ export const legalPages: LegalPage[] = [
       {
         heading: 'Costo',
         paragraphs: [
-          `Tarifa plana de $${site.shipping.flatRateCOP.toLocaleString('es-CO')} COP. Envío gratis en pedidos desde $${site.shipping.freeFromCOP.toLocaleString('es-CO')} COP.`,
+          'El envío es gratis a nivel nacional. No cobramos por el envío de tu pedido.',
           site.shipping.note,
         ],
       },
@@ -225,7 +225,7 @@ export const faqItems = [
   },
   {
     q: '¿Hacen envíos a todo Colombia?',
-    a: `Sí, enviamos a todo Colombia. Tiempo estimado: ${site.shipping.estimate}. Costo: tarifa plana de $${site.shipping.flatRateCOP.toLocaleString('es-CO')} COP, gratis desde $${site.shipping.freeFromCOP.toLocaleString('es-CO')} COP.`,
+    a: `Sí, enviamos a todo Colombia con envío gratis. Tiempo estimado de entrega: ${site.shipping.estimate}. Pagas al recibir (contraentrega).`,
   },
   {
     q: '¿Cuánto tarda en llegar?',

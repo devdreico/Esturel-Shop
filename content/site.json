@@ -28,7 +28,7 @@
   },
   "announcement": {
     "enabled": true,
-    "text": "Pago contraentrega en todo Colombia · Envío gratis desde $350.000",
+    "text": "Envío gratis a todo Colombia · Paga al recibir",
     "linkLabel": "Ver catálogo",
     "linkHref": "/catalogo"
   },
@@ -39,9 +39,9 @@
     "titleEnd": "en Colombia",
     "subtitle": "Curamos hardware que vale la pena: audio, periféricos, streaming y frontera tech. Pagas contraentrega cuando lo recibes en tu casa.",
     "bullets": [
-      "Pago contraentrega en efectivo",
-      "Envíos a todo Colombia",
-      "Garantía y soporte real"
+      "Envío gratis a todo Colombia",
+      "Entrega en 1 a 3 días",
+      "Pagas al recibir (contraentrega)"
     ],
     "primaryCta": "Ver catálogo",
     "secondaryCta": "Hablar con un asesor"
@@ -58,11 +58,11 @@
     "addToCart": "Añadir al carrito"
   },
   "shipping": {
-    "flatRateCOP": 15000,
-    "freeFromCOP": 350000,
-    "estimate": "2–5 días hábiles",
+    "flatRateCOP": 0,
+    "freeFromCOP": 0,
+    "estimate": "1–3 días hábiles",
     "coverage": "Todo Colombia",
-    "note": "Envío gratis desde $350.000. Zonas remotas pueden tener recargo; lo confirmamos por WhatsApp antes de despachar."
+    "note": "Envío gratis a nivel nacional. Entrega en 1 a 3 días hábiles. Pagas al recibir (contraentrega)."
   },
   "payments": {
     "cod": true,

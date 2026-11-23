@@ -362,11 +362,9 @@ export function CheckoutPage() {
                 {quote.shipping === 0 ? 'Gratis' : formatCOP(quote.shipping)}
               </dd>
             </div>
-            {quote.remainingForFree > 0 && (
-              <div className="rounded-xl bg-urple-500/10 px-3 py-2 text-[11px] text-urple-600 dark:text-urple-300">
-                Te faltan {formatCOP(quote.remainingForFree)} para envío gratis.
-              </div>
-            )}
+            <div className="rounded-xl bg-emerald-500/10 px-3 py-2 text-[11px] text-emerald-600 dark:text-emerald-400">
+              Envío gratis a todo Colombia. Entrega en {site.shipping.estimate}.
+            </div>
             <div className="flex justify-between border-t border-line pt-3 text-base">
               <dt className="font-bold">Total a pagar</dt>
               <dd className="font-bold">{formatCOP(quote.total)}</dd>

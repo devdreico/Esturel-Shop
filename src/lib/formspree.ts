@@ -12,6 +12,8 @@ export type OrderPayload = {
   notas: string
   resumen: string
   totalProductos: number
+  envio?: string
+  tiempoEntrega?: string
   idempotencyKey?: string
 }
 
@@ -36,6 +38,8 @@ export async function submitOrder(payload: OrderPayload): Promise<void> {
         notas: payload.notas || '(sin notas)',
         pedido: payload.resumen,
         total_productos: payload.totalProductos,
+        envio: payload.envio ?? 'Gratis',
+        tiempo_entrega: payload.tiempoEntrega ?? site.shipping.estimate,
         idempotency_key: payload.idempotencyKey,
         _gotcha: '',
         tipo_pago: 'Contraentrega',

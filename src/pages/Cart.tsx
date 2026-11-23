@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useCart } from '../hooks/useCart'
 import { formatCOP } from '../lib/format'
-import { quoteShipping } from '../lib/shipping'
 import { site } from '../config/site'
 import { Reveal } from '../components/ui/Motion'
 import { CartLineItem } from '../components/cart/CartLineItem'
@@ -9,7 +8,6 @@ import { useSeo } from '../hooks/useSeo'
 
 export function CartPage() {
   const { items, subtotal, shipping, grandTotal, count, setQty, removeItem, clearCart } = useCart()
-  const quote = quoteShipping(subtotal)
 
   useSeo({
     title: 'Carrito',
@@ -71,11 +69,9 @@ export function CartPage() {
                   {shipping === 0 ? 'Gratis' : formatCOP(shipping)}
                 </span>
               </div>
-              {quote.remainingForFree > 0 && (
-                <div className="rounded-xl bg-urple-500/10 px-3 py-2 text-xs text-urple-600 dark:text-urple-300">
-                  Te faltan {formatCOP(quote.remainingForFree)} para envío gratis.
-                </div>
-              )}
+              <div className="rounded-xl bg-emerald-500/10 px-3 py-2 text-xs text-emerald-600 dark:text-emerald-400">
+                Envío gratis a todo Colombia. Entrega en {site.shipping.estimate}.
+              </div>
               <div className="flex justify-between border-t border-line pt-3 text-base">
                 <span className="font-bold">Total estimado</span>
                 <span className="font-bold">{formatCOP(grandTotal)}</span>

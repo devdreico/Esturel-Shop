@@ -37,8 +37,8 @@ create table if not exists public.products (
 
 create table if not exists public.store_settings (
   id integer primary key default 1,
-  flat_rate_cop integer not null default 15000,
-  free_from_cop integer not null default 350000,
+  flat_rate_cop integer not null default 0,
+  free_from_cop integer not null default 0,
   check (id = 1)
 );
 insert into public.store_settings (id) values (1) on conflict (id) do nothing;

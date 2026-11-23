@@ -35,7 +35,7 @@ export function orderWhatsAppMessage(input: {
     items,
     '',
     `Total productos: ${formatCOP(input.productsTotal)}`,
-    `Envío: ${formatCOP(input.shipping)}`,
+    `Envío: ${input.shipping === 0 ? 'Gratis' : formatCOP(input.shipping)}`,
     `Total a pagar: ${formatCOP(input.productsTotal + input.shipping)}`,
   ]
   if (input.orderCode) parts.push(`Código de pedido: ${input.orderCode}`)

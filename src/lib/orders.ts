@@ -181,6 +181,8 @@ export async function createOrder(draft: OrderDraft): Promise<CreatedOrder> {
       notas: draft.customer.notas,
       resumen,
       totalProductos: subtotal,
+      envio: 'Gratis',
+      tiempoEntrega: site.shipping.estimate,
       idempotencyKey,
     })
 

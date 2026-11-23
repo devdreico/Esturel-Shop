@@ -336,7 +336,7 @@ export function ProductDetailPage() {
             <ul className="mt-2 space-y-1.5 text-sm text-muted">
               <li>· Pago contraentrega en efectivo al recibir.</li>
               <li>· Garantía de {product.warrantyMonths} meses.</li>
-              <li>· Envío {site.shipping.estimate} a {site.shipping.coverage.toLowerCase()}.</li>
+              <li>· Envío gratis en {site.shipping.estimate} a {site.shipping.coverage.toLowerCase()}.</li>
               <li>· Retracto de {site.legal.returnsDays} días hábiles (Ley 1480).</li>
               <li>· Soporte por WhatsApp {WHATSAPP_DISPLAY}.</li>
             </ul>
