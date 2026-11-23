@@ -1,6 +1,6 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { getFeaturedProducts, categoryCounts } from '../data/products'
+import { getFeaturedProducts, categoryCounts, getProductBySlug } from '../data/products'
 import { useNews } from '../hooks/useNews'
 import { formatCOP } from '../lib/format'
 import { ProductCard } from '../components/product/ProductCard'
@@ -20,6 +20,7 @@ export function HomePage() {
   const { items: news, loading } = useNews()
   const reduce = useReducedMotion()
   const hero = featured[0]
+  const star = getProductBySlug('watch-onn-tv-stick')
   const counts = categoryCounts()
 
   useSeo({
@@ -191,6 +192,69 @@ export function HomePage() {
           </div>
         </Reveal>
       </section>
+
+      {/* Producto estrella */}
+      {star && (
+        <section className="mx-auto max-w-7xl px-4 sm:px-6">
+          <Reveal>
+            <div className="glass-strong relative overflow-hidden rounded-3xl p-6 sm:p-10">
+              <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-urple-500/20 blur-3xl" />
+              <div className="grid items-center gap-8 lg:grid-cols-2">
+                <div className="min-w-0">
+                  <span className="inline-flex items-center gap-2 rounded-full bg-urple-500 px-3 py-1 text-[11px] font-bold tracking-widest text-white uppercase">
+                    Producto estrella · MVP
+                  </span>
+                  <h2 className="mt-3 text-2xl font-bold sm:text-3xl">{star.name}</h2>
+                  <p className="mt-2 text-sm text-muted">{star.description}</p>
+                  <ul className="mt-4 flex flex-wrap gap-2">
+                    {star.features?.map((f) => (
+                      <li key={f} className="rounded-full bg-surface px-3 py-1 text-xs font-semibold">
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-5 flex items-baseline gap-3">
+                    <span className="text-3xl font-bold">{formatCOP(star.priceCOP)}</span>
+                    {star.variants && star.variants.length > 1 && (
+                      <span className="text-xs text-muted">
+                        o {formatCOP(star.variants?.[1]?.priceCOP ?? star.priceCOP)} con control
+                      </span>
+                    )}
+                  </div>
+                  <div className="mt-6 flex flex-wrap gap-3">
+                    <Link to={`/producto/${star.slug}`} className="btn-primary rounded-full px-6 py-3 text-sm">
+                      {site.cta.viewProduct}
+                    </Link>
+                    <a
+                      href={waUrl(`Hola Esturel, me interesa el ${star.name}.`)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => trackWhatsApp('star-product')}
+                      className="glass rounded-full px-6 py-3 text-sm font-bold hover:text-urple-500"
+                    >
+                      {site.cta.whatsapp}
+                    </a>
+                  </div>
+                  <p className="mt-3 text-[11px] text-muted">
+                    Control físico opcional: se puede manejar desde Google Home con tu celular.
+                  </p>
+                </div>
+                <div className="min-w-0">
+                  <div className="glass-strong relative aspect-[4/3] overflow-hidden rounded-2xl">
+                    <img
+                      src={star.image}
+                      alt={star.name}
+                      className="h-full w-full object-cover"
+                      loading="eager"
+                      decoding="async"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </section>
+      )}
 
       {/* Destacados */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6">
