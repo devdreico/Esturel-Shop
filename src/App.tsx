@@ -121,7 +121,7 @@ function SkipLink() {
 
 function Shell({ children }: { children: ReactNode }) {
   return (
-    <div className="relative min-h-screen font-sans">
+    <div className="relative min-h-screen bg-page font-sans">
       <AuroraBackdrop />
       <ScrollProgress />
       <AnnouncementBar />
