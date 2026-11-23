@@ -32,7 +32,7 @@ export function HomePage() {
   return (
     <div className="space-y-16 sm:space-y-24">
       {/* Hero */}
-      <section className="relative overflow-hidden pt-4 pb-12 sm:pt-8 sm:pb-16">
+      <section className="relative overflow-hidden pt-2 pb-8 sm:pt-6 sm:pb-12">
         <div className="pointer-events-none absolute -top-32 -left-32 h-96 w-96 rounded-full bg-urple-500/20 blur-3xl" />
         <div className="pointer-events-none absolute -right-32 top-1/3 h-80 w-80 rounded-full bg-urple-400/15 blur-3xl" />
 
@@ -82,7 +82,7 @@ export function HomePage() {
               initial={reduce ? { opacity: 0 } : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.05, ease: [0, 0, 0.2, 1] }}
-              className="text-[2.5rem] leading-[1.04] font-bold tracking-tight sm:text-5xl lg:text-6xl"
+              className="text-[2.25rem] leading-[1.04] font-bold tracking-tight sm:text-4xl lg:text-5xl"
             >
               {site.hero.title}{' '}
               <span className="gradient-text-animated">{site.hero.titleAccent}</span>{' '}

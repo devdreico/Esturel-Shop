@@ -48,7 +48,7 @@ export function HeroCarousel() {
       onFocusCapture={() => setPaused(true)}
       onBlurCapture={() => setPaused(false)}
     >
-      <div className="glass-strong relative aspect-[4/3] overflow-hidden rounded-3xl sm:aspect-video">
+      <div className="glass-strong relative aspect-[16/10] max-h-[360px] w-full overflow-hidden rounded-2xl sm:aspect-video sm:max-h-[420px]">
         <AnimatePresence initial={false}>
           <motion.div
             key={slide.id}
@@ -96,14 +96,14 @@ export function HeroCarousel() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.45, ease: [0, 0, 0.2, 1] }}
-            className="absolute bottom-12 right-4 left-4 flex flex-wrap items-end justify-between gap-3 sm:bottom-14 sm:right-6 sm:left-6"
+            className="absolute bottom-8 right-4 left-4 flex flex-wrap items-end justify-between gap-3 sm:bottom-10 sm:right-6 sm:left-6"
           >
             <div>
-              <span className="inline-flex items-center gap-2 rounded-full bg-black/40 px-3 py-1 text-[11px] font-bold tracking-widest text-white uppercase backdrop-blur-md">
+              <span className="inline-flex items-center gap-2 rounded-full bg-black/40 px-3 py-1 text-[10px] font-bold tracking-widest text-white uppercase backdrop-blur-md">
                 <span className="h-1.5 w-1.5 rounded-full bg-urple-400" />
                 {slide.label}
               </span>
-              <p className="mt-2 text-lg font-bold text-white drop-shadow sm:text-2xl">
+              <p className="mt-1.5 text-base font-bold text-white drop-shadow sm:text-xl">
                 {slide.caption}
               </p>
             </div>
