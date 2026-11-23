@@ -1,4 +1,4 @@
-/** Redes sociales oficiales de Esturel. */
+import { site } from '../config/site'
 
-export const INSTAGRAM_HANDLE = 'esturelco'
-export const INSTAGRAM_URL = 'https://www.instagram.com/esturelco/'
+export const INSTAGRAM_URL = site.contact.instagram
+export const INSTAGRAM_HANDLE = site.contact.instagramHandle

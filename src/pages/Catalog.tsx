@@ -1,18 +1,20 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { categories } from '../data/categories'
-import { filterProducts } from '../data/products'
+import { filterProducts, categoryCounts } from '../data/products'
+import type { ProductSort } from '../data/products'
 import { ProductCard } from '../components/product/ProductCard'
 import { Reveal } from '../components/ui/Motion'
 import { useSeo } from '../hooks/useSeo'
 
-type Sort = 'relevance' | 'price-asc' | 'price-desc' | 'name'
+type Sort = ProductSort
 
 export function CatalogPage() {
   const [params, setParams] = useSearchParams()
   const category = params.get('cat') ?? 'all'
   const q = params.get('q') ?? ''
   const sort = (params.get('sort') as Sort) || 'relevance'
+  const inStockOnly = params.get('stock') === '1'
   const [draft, setDraft] = useState(q)
   const [prevQ, setPrevQ] = useState(q)
   const timerRef = useRef<number | undefined>(undefined)
@@ -32,9 +34,10 @@ export function CatalogPage() {
 
   useEffect(() => () => window.clearTimeout(timerRef.current), [])
 
+  const counts = categoryCounts()
   const products = useMemo(
-    () => filterProducts({ category, query: q, sort }),
-    [category, q, sort],
+    () => filterProducts({ category, query: q, sort, inStockOnly }),
+    [category, q, sort, inStockOnly],
   )
 
   function update(key: string, value: string) {
@@ -88,7 +91,7 @@ export function CatalogPage() {
                   : 'glass hover:border-urple-500/40'
               }`}
             >
-              {c.emoji} {c.label}
+              {c.emoji} {c.label} ({counts[c.id]})
             </button>
           ))}
         </div>
@@ -112,6 +115,15 @@ export function CatalogPage() {
             <option value="price-desc">Precio ↓</option>
             <option value="name">Nombre</option>
           </select>
+          <button
+            type="button"
+            onClick={() => update('stock', inStockOnly ? '' : '1')}
+            className={`shrink-0 rounded-full px-3 py-2 text-[11px] font-bold transition sm:px-4 sm:py-2.5 sm:text-xs ${
+              inStockOnly ? 'bg-urple-500 text-white shadow-glow-sm' : 'glass hover:border-urple-500/40'
+            }`}
+          >
+            En stock
+          </button>
         </div>
       </div>
 

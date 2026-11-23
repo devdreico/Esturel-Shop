@@ -1,14 +1,12 @@
+import { site } from '../config/site'
 import { formatCOP } from './format'
 
-/**
- * WhatsApp Esturel — canal de coordinación, soporte y pedidos.
- * Número en formato E.164 (Colombia): +57 314 457 2008.
- */
-export const WHATSAPP_NUMBER_E164 = '573144572008'
-export const WHATSAPP_DISPLAY = '+57 314 457 2008'
+export const WHATSAPP_NUMBER_E164 = site.contact.whatsappNumber
+export const WHATSAPP_DISPLAY = site.contact.whatsappDisplay
 
-export function waUrl(message?: string): string {
-  const base = `https://wa.me/${WHATSAPP_NUMBER_E164}`
+export function waUrl(message?: string, number?: string): string {
+  const num = (number ?? site.contact.whatsappNumber).replace(/\D/g, '')
+  const base = `https://wa.me/${num}`
   if (!message) return base
   return `${base}?text=${encodeURIComponent(message)}`
 }
@@ -24,6 +22,9 @@ export function orderWhatsAppMessage(input: {
   notas?: string
   lines: OrderMessageLine[]
   productsTotal: number
+  shipping: number
+  orderCode?: string
+  paymentNote?: string
 }): string {
   const items = input.lines
     .map((l) => `• ${l.qty} × ${l.name} — ${formatCOP(l.lineTotal)}`)
@@ -34,14 +35,18 @@ export function orderWhatsAppMessage(input: {
     items,
     '',
     `Total productos: ${formatCOP(input.productsTotal)}`,
-    'Envío: se cotiza',
+    `Envío: ${formatCOP(input.shipping)}`,
+    `Total a pagar: ${formatCOP(input.productsTotal + input.shipping)}`,
+  ]
+  if (input.orderCode) parts.push(`Código de pedido: ${input.orderCode}`)
+  parts.push(
     '',
     `Nombre: ${input.nombre}`,
     `Celular: ${input.celular}`,
     `Dirección: ${input.direccion}`,
     `Ciudad: ${input.ciudad} (${input.departamento})`,
-  ]
+  )
   if (input.notas) parts.push(`Notas: ${input.notas}`)
-  parts.push('', 'Pago: contraentrega en efectivo al recibir.')
+  parts.push('', `Pago: ${input.paymentNote ?? 'contraentrega en efectivo al recibir'}.`)
   return parts.join('\n')
 }

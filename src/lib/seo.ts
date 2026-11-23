@@ -1,8 +1,4 @@
-export const SITE_URL = (
-  import.meta.env.VITE_SITE_URL ?? 'https://esturel.shop'
-).replace(/\/$/, '')
-
-export const SITE_NAME = 'Esturel'
+import { site, SITE_URL, SITE_NAME } from '../config/site'
 
 export type SeoInput = {
   title: string
@@ -11,6 +7,13 @@ export type SeoInput = {
   image?: string
   noindex?: boolean
   jsonLd?: Record<string, unknown> | Record<string, unknown>[]
+}
+
+export function absoluteUrl(pathOrUrl: string): string {
+  if (!pathOrUrl) return SITE_URL
+  if (/^https?:\/\//i.test(pathOrUrl)) return pathOrUrl
+  const path = pathOrUrl.startsWith('/') ? pathOrUrl : `/${pathOrUrl}`
+  return `${SITE_URL}${path}`
 }
 
 function upsertMeta(attr: 'name' | 'property', key: string, content: string) {
@@ -48,23 +51,22 @@ export function applySeo({
   title,
   description,
   path = '/',
-  image = '/esturel-logo.png',
+  image = site.brand.ogImage,
   noindex = false,
   jsonLd,
 }: SeoInput): void {
   const fullTitle = title.includes(SITE_NAME) ? title : `${title} · ${SITE_NAME}`
-  const url = `${SITE_URL}${path.startsWith('/') ? path : `/${path}`}`
-  const absImage = image.startsWith('http') ? image : `${SITE_URL}${image}`
+  const url = absoluteUrl(path)
+  const absImage = absoluteUrl(image)
 
   document.title = fullTitle
   upsertMeta('name', 'description', description)
   upsertMeta('name', 'robots', noindex ? 'noindex, nofollow' : 'index, follow')
-
   upsertLink('canonical', url)
 
   upsertMeta('property', 'og:site_name', SITE_NAME)
   upsertMeta('property', 'og:type', path.startsWith('/producto/') ? 'product' : 'website')
-  upsertMeta('property', 'og:locale', 'es_CO')
+  upsertMeta('property', 'og:locale', site.brand.locale)
   upsertMeta('property', 'og:title', fullTitle)
   upsertMeta('property', 'og:description', description)
   upsertMeta('property', 'og:url', url)
@@ -82,66 +84,100 @@ export function applySeo({
   }
 }
 
-export function productJsonLd(p: {
-  name: string
-  description: string
-  slug: string
-  priceCOP: number
-  image: string
-  category: string
-  availability?: string
-}): Record<string, unknown> {
-  const inStock = (p.availability ?? 'disponible') !== 'agotado'
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'Product',
-    name: p.name,
-    description: p.description,
-    url: `${SITE_URL}/producto/${p.slug}`,
-    image: `${SITE_URL}${p.image}`,
-    brand: { '@type': 'Brand', name: SITE_NAME },
-    category: p.category,
-    offers: {
-      '@type': 'Offer',
-      priceCurrency: 'COP',
-      price: String(p.priceCOP),
-      url: `${SITE_URL}/producto/${p.slug}`,
-      availability: inStock
-        ? 'https://schema.org/InStock'
-        : 'https://schema.org/OutOfStock',
-      itemCondition: 'https://schema.org/NewCondition',
-    },
-  }
-}
-
-export function breadcrumbJsonLd(
-  items: { name: string; path: string }[],
-): Record<string, unknown> {
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: items.map((item, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: item.name,
-      item: `${SITE_URL}${item.path}`,
-    })),
-  }
-}
-
 export function organizationJsonLd(): Record<string, unknown> {
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: SITE_NAME,
     url: SITE_URL,
-    logo: `${SITE_URL}/esturel-logo.png`,
+    logo: absoluteUrl(site.brand.logo),
+    sameAs: [site.contact.instagram],
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'customer service',
-      areaServed: 'CO',
-      availableLanguage: ['es'],
-      telephone: '+573144572008',
+      availableLanguage: 'es',
+      telephone: `+${site.contact.whatsappNumber}`,
+      url: `https://wa.me/${site.contact.whatsappNumber}`,
     },
+  }
+}
+
+export function websiteJsonLd(): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE_NAME,
+    url: SITE_URL,
+    inLanguage: site.brand.locale,
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: `${SITE_URL}/catalogo?q={search_term_string}`,
+      'query-input': 'required name=search_term_string',
+    },
+  }
+}
+
+export function productJsonLd(input: {
+  name: string
+  description: string
+  slug: string
+  priceCOP: number
+  image: string
+  brand: string
+  sku: string
+  availability: string
+  condition: string
+  warrantyMonths: number
+}): Record<string, unknown> {
+  const stockMap: Record<string, string> = {
+    disponible: 'https://schema.org/InStock',
+    pedido: 'https://schema.org/PreOrder',
+    agotado: 'https://schema.org/OutOfStock',
+  }
+  const conditionMap: Record<string, string> = {
+    nuevo: 'https://schema.org/NewCondition',
+    reacondicionado: 'https://schema.org/RefurbishedCondition',
+  }
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: input.name,
+    description: input.description,
+    image: absoluteUrl(input.image),
+    sku: input.sku,
+    brand: { '@type': 'Brand', name: input.brand },
+    offers: {
+      '@type': 'Offer',
+      price: input.priceCOP,
+      priceCurrency: 'COP',
+      availability: stockMap[input.availability] ?? 'https://schema.org/InStock',
+      itemCondition: conditionMap[input.condition] ?? 'https://schema.org/NewCondition',
+      url: absoluteUrl(`/producto/${input.slug}`),
+    },
+  }
+}
+
+export function breadcrumbJsonLd(crumbs: { name: string; path: string }[]): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: crumbs.map((c, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: c.name,
+      item: absoluteUrl(c.path),
+    })),
+  }
+}
+
+export function faqJsonLd(items: { q: string; a: string }[]): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: items.map((i) => ({
+      '@type': 'Question',
+      name: i.q,
+      acceptedAnswer: { '@type': 'Answer', text: i.a },
+    })),
   }
 }

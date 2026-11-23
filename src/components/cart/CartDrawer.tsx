@@ -8,7 +8,7 @@ import { CartBadge } from './CartBadge'
 import { CartLineItem } from './CartLineItem'
 
 export function CartDrawer() {
-  const { isOpen, closeCart, items, total, count, setQty, removeItem, clearCart } = useCart()
+  const { isOpen, closeCart, items, subtotal, shipping, grandTotal, count, setQty, removeItem, clearCart } = useCart()
   const reduce = useReducedMotion()
   const panelRef = useRef<HTMLElement | null>(null)
 
@@ -63,9 +63,9 @@ export function CartDrawer() {
               ) : (
                 <ul className="space-y-3">
                   <AnimatePresence initial={false}>
-                    {items.map(({ product, qty, lineTotal }) => (
+                    {items.map(({ product, variant, qty, lineTotal, key, maxQty, image }) => (
                       <motion.li
-                        key={product.id}
+                        key={key}
                         layout
                         initial={reduce ? { opacity: 0 } : { opacity: 0, x: 24 }}
                         animate={{ opacity: 1, x: 0 }}
@@ -76,8 +76,12 @@ export function CartDrawer() {
                       >
                         <CartLineItem
                           product={product}
+                          variant={variant}
                           qty={qty}
                           lineTotal={lineTotal}
+                          lineKey={key}
+                          maxQty={maxQty}
+                          image={image}
                           compact
                           onQtyChange={setQty}
                           onRemove={removeItem}
@@ -92,9 +96,19 @@ export function CartDrawer() {
 
             {items.length > 0 && (
               <footer className="border-t border-line px-5 py-4 space-y-3">
-                <div className="flex items-center justify-between" aria-live="polite">
-                  <span className="text-sm text-muted">Total</span>
-                  <span className="text-xl font-bold">{formatCOP(total)}</span>
+                <div className="space-y-1 text-sm">
+                  <div className="flex items-center justify-between">
+                    <span className="text-muted">Subtotal</span>
+                    <span className="font-semibold">{formatCOP(subtotal)}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-muted">Envío</span>
+                    <span className="font-semibold">{shipping === 0 ? 'Gratis' : formatCOP(shipping)}</span>
+                  </div>
+                  <div className="flex items-center justify-between border-t border-line pt-1">
+                    <span className="text-muted font-bold">Total</span>
+                    <span className="text-xl font-bold">{formatCOP(grandTotal)}</span>
+                  </div>
                 </div>
                 <div className="flex gap-2">
                   <Link

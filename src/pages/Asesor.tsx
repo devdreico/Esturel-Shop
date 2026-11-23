@@ -3,6 +3,7 @@ import { Reveal } from '../components/ui/Motion'
 import { motion } from 'framer-motion'
 import { useSeo } from '../hooks/useSeo'
 import { waUrl, WHATSAPP_DISPLAY } from '../lib/whatsapp'
+import { site } from '../config/site'
 
 const topics = [
   'Audífonos / audio',
@@ -13,7 +14,7 @@ const topics = [
   'Otro',
 ]
 
-const CONTACT_EMAIL = 'hola@esturel.co'
+const CONTACT_EMAIL = site.contact.email
 
 export function AsesorPage() {
   const [sent, setSent] = useState(false)

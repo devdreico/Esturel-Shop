@@ -3,16 +3,20 @@
   "short_name": "Esturel",
   "description": "Tienda, asesor y noticiero de tecnología en Colombia.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
+  "display_override": ["window-controls-overlay", "minimal-ui"],
   "background_color": "#0A0A0B",
   "theme_color": "#8B5CF6",
   "lang": "es-CO",
   "icons": [
-    {
-      "src": "/esturel-logo.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
-    }
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Catálogo", "short_name": "Catálogo", "url": "/catalogo" },
+    { "name": "Carrito", "short_name": "Carrito", "url": "/carrito" },
+    { "name": "Asesoría", "short_name": "Asesoría", "url": "/asesor" }
   ]
 }

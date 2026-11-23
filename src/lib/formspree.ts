@@ -1,11 +1,6 @@
-import { formatCOP } from './format'
+import { site } from '../config/site'
 
-/**
- * Formspree — recepción de pedidos contraentrega (no requiere backend).
- * Los pedidos llegan al correo asociado a la cuenta de Formspree.
- * NOTA: la primera submission requiere activar el formulario por correo.
- */
-export const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xbglnlgb'
+export const FORMSPREE_ENDPOINT = site.integrations.formspreeEndpoint
 
 export type OrderPayload = {
   nombre: string
@@ -17,36 +12,47 @@ export type OrderPayload = {
   notas: string
   resumen: string
   totalProductos: number
+  idempotencyKey?: string
 }
 
 export async function submitOrder(payload: OrderPayload): Promise<void> {
-  const res = await fetch(FORMSPREE_ENDPOINT, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    },
-    body: JSON.stringify({
-      nombre: payload.nombre,
-      celular: payload.celular,
-      correo: payload.correo || '(no informado)',
-      direccion: payload.direccion,
-      ciudad: payload.ciudad,
-      departamento: payload.departamento,
-      notas: payload.notas || '(sin notas)',
-      pedido: payload.resumen,
-      total_productos: formatCOP(payload.totalProductos),
-      tipo_pago: 'Contraentrega',
-    }),
-  })
-  if (!res.ok) {
-    let detail = ''
-    try {
-      const data = (await res.json()) as { errors?: { message?: string }[] }
-      detail = data.errors?.map((e) => e.message).filter(Boolean).join('; ') ?? ''
-    } catch {
-      /* cuerpo no JSON: ignorar */
+  if (!FORMSPREE_ENDPOINT) throw new Error('Formspree no configurado.')
+  const ctrl = new AbortController()
+  const t = setTimeout(() => ctrl.abort(), 12000)
+  try {
+    const res = await fetch(FORMSPREE_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({
+        nombre: payload.nombre,
+        celular: payload.celular,
+        correo: payload.correo || '(no informado)',
+        direccion: payload.direccion,
+        ciudad: payload.ciudad,
+        departamento: payload.departamento,
+        notas: payload.notas || '(sin notas)',
+        pedido: payload.resumen,
+        total_productos: payload.totalProductos,
+        idempotency_key: payload.idempotencyKey,
+        _gotcha: '',
+        tipo_pago: 'Contraentrega',
+      }),
+      signal: ctrl.signal,
+    })
+    if (!res.ok) {
+      let detail = ''
+      try {
+        const data = (await res.json()) as { errors?: { message?: string }[] }
+        detail = data.errors?.map((e) => e.message).filter(Boolean).join('; ') ?? ''
+      } catch {
+        /* cuerpo no JSON */
+      }
+      throw new Error(detail || `Formspree respondió ${res.status}.`)
     }
-    throw new Error(detail || `Formspree respondió ${res.status}. Intenta de nuevo o escríbenos por WhatsApp.`)
+  } finally {
+    clearTimeout(t)
   }
 }

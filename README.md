@@ -1,73 +1,68 @@
 # Esturel Shop
 
-Tienda e-commerce de tecnología en Colombia: **asesor · tienda · noticiero**.
+Tienda e-commerce de tecnología en Colombia: **asesor · tienda · noticiero**. Pago **contraentrega** en efectivo, pedidos por WhatsApp y correo.
 
 ## Stack
 
-- Vite + React + TypeScript (**strict**)
-- Tailwind CSS v4 (glassmorphism + autotheme claro/oscuro)
-- Framer Motion (microanimaciones, scroll, route transitions + code splitting)
-- React Router · Vitest · oxlint · GitHub Actions CI
-- Pago **contraentrega** (efectivo) · Pedidos vía **Formspree** · Coordinación por **WhatsApp**
-- Feed RSS externo con fallback local + allowlist `https`
-- Tipografía **Montserrat** (Bold títulos / regular cuerpo)
+- Vite + React 19 + TypeScript (strict) + Tailwind CSS v4
+- Framer Motion · React Router 7 · Vitest · oxlint · GitHub Actions
+- Supabase (opcional) para pedidos e inventario · Vercel para deploy
 
-## Scripts
+## Desarrollo
 
 ```bash
 npm install
-npm run dev
-npm run build
+npm run dev          # http://localhost:5173
+npm run build        # tsc + vite + prerender + sitemap
 npm run typecheck
 npm run lint
 npm run test
 npm run preview
 ```
 
-## Pagos contraentrega + pedidos
+## Configurar la tienda (CTAs, contacto, envíos)
 
-La tienda no usa pasarelas de pago en línea. El cliente:
+Todo lo configurable vive en `content/site.json`. También se puede sobreescribir con variables de entorno (ver `.env.example`).
 
-1. Añade productos al carrito.
-2. En `/checkout` llena nombre, celular, dirección, ciudad y departamento.
-3. El pedido se envía a **Formspree** (`src/lib/formspree.ts` → endpoint `FORMSPREE_ENDPOINT`) y llega al correo del dueño del formulario.
-4. Se coordina la entrega por **WhatsApp** (`+57 314 457 2008`, `src/lib/whatsapp.ts`). El pago es en efectivo al recibir.
+Campos clave: `contact.whatsappNumber`, `contact.email`, `contact.instagram`, `business.*`, `shipping.flatRateCOP` / `freeFromCOP`, `announcement`, `hero`, `cta`, `integrations.*`.
 
-**Formspree:** la primera vez que llegue un pedido, Formspree enviará un correo de activación al dueño de la cuenta. Confírmalo para que los pedidos empiecen a llegar.
+## Añadir productos
 
-## WhatsApp
+Ver `docs/ADDING-PRODUCTS.md`. Resumen:
 
-- Botón flotante en todas las páginas (`WhatsAppFab`, `src/components/ui/WhatsAppFab.tsx`).
-- Footer y página de asesoría con enlace directo.
-- Número: `+57 314 457 2008` (configurable en `src/lib/whatsapp.ts`).
+1. Edita `content/products.json`.
+2. Sube fotos a `public/products/<slug>/01.webp` (cuadradas ~1200 px, WebP < 150 KB).
+3. `npm run products:check && npm run images:check`.
+4. `npm run build`.
 
-## Sitio asociado: Paceform (running)
+## Lanzamiento
 
-- URL externa: `https://paceform.presentto.online` (`src/lib/partners.ts`).
-- Ruta interna de redirección: `/paceform` (SPA) + reglas en `public/_redirects` (Netlify).
-- Banner promocional en el home y enlace en el footer.
+Ver `docs/LAUNCH.md`.
 
-## Redes sociales
+## Supabase (pedidos persistentes)
 
-- Instagram: **@esturelco** (`src/lib/social.ts` → `INSTAGRAM_URL`).
-- Redirección: `/instagram` y `/ig` → `https://www.instagram.com/esturelco/`.
-- Enlace en el footer (Contacto).
+Ver `supabase/README.md`. Sin Supabase, los pedidos se notifican por Formspree y se coordinan por WhatsApp.
 
-## Productos (preparado para inventario real)
+## Estructura
 
-- Catálogo en `src/data/products.ts` (TypeScript, sin backend).
-- Guía paso a paso en el encabezado del archivo para reemplazar los productos demo por el inventario real.
-- Fotos: subir a `public/products/` (cuadradas ~1200px) y referenciar en `image`.
-- `stockHint` solo pinta una etiqueta (`disponible | pedido | agotado`).
+```
+content/          # productos y configuración (JSON, editable sin tocar código)
+src/
+  config/         # site config tipado + env
+  data/           # repositorio de productos, categorías, Colombia (DIVIPOLA)
+  lib/            # orders, shipping, analytics, seo, storage, rss, ...
+  components/     # UI por dominio
+  pages/          # rutas
+  content/        # textos legales y FAQ
+scripts/          # validación, imágenes, prerender, sitemap, sync
+api/              # Vercel functions (news)
+supabase/         # migraciones SQL
+```
 
-## SEO
+## Deploy
 
-- `public/robots.txt` + `public/sitemap.xml`
-- Meta/OG/canonical/JSON-LD por ruta (`src/lib/seo.ts`, `useSeo`)
-- Manifest + `_headers` / `_redirects` (Netlify)
-- Variable `VITE_SITE_URL` (default `https://esturel.shop`)
+Configurado para Vercel (`vercel.json`): rewrites SPA, `cleanUrls`, headers de seguridad (CSP), redirects de redes. Define `VITE_SITE_URL=https://esturel.presentto.online` (o tu dominio) en Vercel.
 
-## Tema
+## Licencia
 
-- Auto según `prefers-color-scheme` al cargar.
-- Toggle manual persistido en `localStorage` (`esturel-theme`: `system | light | dark`).
+Privado. © Esturel.

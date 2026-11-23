@@ -1,5 +1,5 @@
 import type { CartLine } from '../data/types'
-import { getProductById } from '../data/products'
+import { getProductById, maxQty } from '../data/products'
 
 export function readJSON<T>(key: string, fallback: T): T {
   try {
@@ -19,19 +19,40 @@ export function writeJSON(key: string, value: unknown): void {
   }
 }
 
+export function removeKey(key: string): void {
+  try {
+    localStorage.removeItem(key)
+  } catch {
+    /* private mode */
+  }
+}
+
 export function sanitizeCartLines(raw: unknown): CartLine[] {
   if (!Array.isArray(raw)) return []
   const out: CartLine[] = []
   for (const entry of raw) {
     if (!entry || typeof entry !== 'object') continue
-    const { productId, qty } = entry as { productId?: unknown; qty?: unknown }
+    const { productId, variantId, qty } = entry as {
+      productId?: unknown
+      variantId?: unknown
+      qty?: unknown
+    }
     if (typeof productId !== 'string') continue
-    if (!getProductById(productId)) continue
+    const product = getProductById(productId)
+    if (!product) continue
+    const variant =
+      typeof variantId === 'string' && variantId ? variantId : undefined
+    if (variant && !product.variants?.some((v) => v.id === variant)) continue
+
     const n = Number(qty)
     if (!Number.isFinite(n) || n < 1) continue
-    const q = Math.min(Math.floor(n), 99)
-    if (out.some((l) => l.productId === productId)) continue
-    out.push({ productId, qty: q })
+    const cap = maxQty(product, variant)
+    const q = cap > 0 ? Math.min(Math.floor(n), cap) : Math.min(Math.floor(n), 99)
+    if (q < 1) continue
+
+    const key = (l: CartLine) => `${l.productId}::${l.variantId ?? ''}`
+    if (out.some((l) => key(l) === key({ productId, variantId: variant, qty: q }))) continue
+    out.push({ productId, ...(variant ? { variantId: variant } : {}), qty: q })
   }
   return out
 }
@@ -44,4 +65,6 @@ export const STORAGE_KEYS = {
   cart: 'esturel-cart',
   theme: 'esturel-theme',
   newsCache: 'esturel-news-cache',
+  consent: 'esturel-consent',
+  lastOrder: 'esturel-last-order',
 } as const

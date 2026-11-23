@@ -3,8 +3,8 @@ import { useCart } from '../../hooks/useCart'
 import { formatCOP } from '../../lib/format'
 
 export function AddToast() {
-  const { lastAddedId, items } = useCart()
-  const line = items.find((i) => i.product.id === lastAddedId)
+  const { lastAddedKey, items } = useCart()
+  const line = items.find((i) => i.key === lastAddedKey)
 
   return (
     <AnimatePresence>

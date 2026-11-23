@@ -2,5 +2,7 @@ User-agent: *
 Allow: /
 Disallow: /carrito
 Disallow: /checkout
+Disallow: /pedido
+Disallow: /admin
 
-Sitemap: https://esturel.shop/sitemap.xml
+Sitemap: https://esturel.presentto.online/sitemap.xml

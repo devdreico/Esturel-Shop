@@ -1,0 +1,97 @@
+{
+  "brand": {
+    "name": "Esturel",
+    "legalName": "Esturel",
+    "tagline": "Tecnología con criterio en Colombia",
+    "description": "Tienda de tecnología en Colombia con pago contraentrega. Audífonos, periféricos, streaming y frontera tech con asesoría real.",
+    "url": "https://esturel.presentto.online",
+    "locale": "es-CO",
+    "currency": "COP",
+    "logo": "/esturel-logo.png",
+    "ogImage": "/og-esturel.png"
+  },
+  "contact": {
+    "whatsappNumber": "573144572008",
+    "whatsappDisplay": "+57 314 457 2008",
+    "email": "hola@esturel.co",
+    "instagram": "https://www.instagram.com/esturelco/",
+    "instagramHandle": "@esturelco",
+    "city": "Bogotá, Colombia",
+    "hours": "Lun–Vie 9:00–18:00",
+    "responseTime": "Respondemos en menos de 24 horas hábiles"
+  },
+  "business": {
+    "nit": "",
+    "address": "",
+    "city": "Bogotá",
+    "country": "Colombia"
+  },
+  "announcement": {
+    "enabled": true,
+    "text": "Pago contraentrega en todo Colombia · Envío gratis desde $350.000",
+    "linkLabel": "Ver catálogo",
+    "linkHref": "/catalogo"
+  },
+  "hero": {
+    "eyebrow": "Asesor · Tienda · Noticiero",
+    "title": "Tecnología con",
+    "titleAccent": "criterio",
+    "titleEnd": "en Colombia",
+    "subtitle": "Curamos hardware que vale la pena: audio, periféricos, streaming y frontera tech. Pagas contraentrega cuando lo recibes.",
+    "bullets": [
+      "Pago contraentrega",
+      "Envíos a todo Colombia",
+      "Garantía y soporte real"
+    ],
+    "primaryCta": "Ver catálogo",
+    "secondaryCta": "Asesoría gratis"
+  },
+  "cta": {
+    "product": "Pedir contraentrega",
+    "productUnavailable": "Avísame cuando llegue",
+    "cart": "Continuar pedido",
+    "checkout": "Confirmar pedido",
+    "whatsapp": "Hablar por WhatsApp",
+    "advisor": "Solicitar asesoría",
+    "emptyCart": "Ver catálogo",
+    "viewProduct": "Ver producto",
+    "addToCart": "Añadir al carrito"
+  },
+  "shipping": {
+    "flatRateCOP": 15000,
+    "freeFromCOP": 350000,
+    "estimate": "2–5 días hábiles",
+    "coverage": "Todo Colombia",
+    "note": "Envío gratis desde $350.000. Zonas remotas pueden tener recargo; lo confirmamos por WhatsApp antes de despachar."
+  },
+  "payments": {
+    "cod": true,
+    "online": false,
+    "codNote": "Pagas en efectivo al recibir tu pedido. No pedimos datos de tarjeta."
+  },
+  "features": {
+    "news": true,
+    "advisor": true,
+    "analyticsConsent": true
+  },
+  "integrations": {
+    "formspreeEndpoint": "https://formspree.io/f/xbglnlgb",
+    "supabaseUrl": "",
+    "supabaseAnonKey": "",
+    "newsEndpoint": "/api/news",
+    "ga4Id": "",
+    "metaPixelId": "",
+    "umamiScriptUrl": "",
+    "umamiWebsiteId": ""
+  },
+  "partners": {
+    "paceformName": "Paceform",
+    "paceformUrl": "https://paceform.presentto.online",
+    "paceformBlurb": "Running y entrenamiento con criterio, el otro proyecto del equipo."
+  },
+  "legal": {
+    "lastUpdated": "2026-11-23",
+    "returnsDays": 5,
+    "warrantyMonthsDefault": 6
+  }
+}

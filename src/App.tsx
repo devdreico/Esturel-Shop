@@ -12,23 +12,24 @@ import { ExternalRedirect } from './components/ui/ExternalRedirect'
 import { applySeo, organizationJsonLd } from './lib/seo'
 import { PACEFORM_URL } from './lib/partners'
 import { INSTAGRAM_URL } from './lib/social'
+import { site } from './config/site'
+import { AnnouncementBar } from './components/layout/AnnouncementBar'
+import { ConsentBanner } from './components/layout/ConsentBanner'
+import { ErrorBoundary } from './components/layout/ErrorBoundary'
+import { initAnalytics } from './lib/analytics'
 
 const HomePage = lazy(() => import('./pages/Home').then((m) => ({ default: m.HomePage })))
-const CatalogPage = lazy(() =>
-  import('./pages/Catalog').then((m) => ({ default: m.CatalogPage })),
-)
-const ProductDetailPage = lazy(() =>
-  import('./pages/ProductDetail').then((m) => ({ default: m.ProductDetailPage })),
-)
+const CatalogPage = lazy(() => import('./pages/Catalog').then((m) => ({ default: m.CatalogPage })))
+const ProductDetailPage = lazy(() => import('./pages/ProductDetail').then((m) => ({ default: m.ProductDetailPage })))
 const CartPage = lazy(() => import('./pages/Cart').then((m) => ({ default: m.CartPage })))
-const CheckoutPage = lazy(() =>
-  import('./pages/Checkout').then((m) => ({ default: m.CheckoutPage })),
-)
+const CheckoutPage = lazy(() => import('./pages/Checkout').then((m) => ({ default: m.CheckoutPage })))
 const NewsPage = lazy(() => import('./pages/News').then((m) => ({ default: m.NewsPage })))
 const AsesorPage = lazy(() => import('./pages/Asesor').then((m) => ({ default: m.AsesorPage })))
-const NotFoundPage = lazy(() =>
-  import('./pages/NotFound').then((m) => ({ default: m.NotFoundPage })),
-)
+const FaqPage = lazy(() => import('./pages/Faq').then((m) => ({ default: m.FaqPage })))
+const ContactPage = lazy(() => import('./pages/Contact').then((m) => ({ default: m.ContactPage })))
+const LegalPage = lazy(() => import('./pages/Legal').then((m) => ({ default: m.LegalPage })))
+const OrderConfirmedPage = lazy(() => import('./pages/OrderConfirmed').then((m) => ({ default: m.OrderConfirmedPage })))
+const NotFoundPage = lazy(() => import('./pages/NotFound').then((m) => ({ default: m.NotFoundPage })))
 
 function PageLoader() {
   return (
@@ -58,9 +59,8 @@ function RootSeo() {
     const path = location.pathname
     if (path === '/' || path === '') {
       applySeo({
-        title: 'Esturel · Tecnología en Colombia',
-        description:
-          'Tienda, asesor y noticiero de tecnología en Colombia. Audífonos, periféricos y frontera tech con pago contraentrega.',
+        title: `${site.brand.name} · ${site.brand.tagline}`,
+        description: site.brand.description,
         path: '/',
         jsonLd: organizationJsonLd(),
       })
@@ -68,7 +68,7 @@ function RootSeo() {
       applySeo({
         title: 'Catálogo de tecnología',
         description:
-          'Explora audífonos, periféricos, streaming y frontera tech en Colombia. Precios en COP y pago seguro.',
+          'Explora audífonos, periféricos, streaming y frontera tech en Colombia. Precios en COP y pago contraentrega.',
         path: '/catalogo',
         noindex: Boolean(location.search),
       })
@@ -99,8 +99,11 @@ function RootSeo() {
         path: '/checkout',
         noindex: true,
       })
+    } else if (path === '/faq') {
+      applySeo({ title: 'Preguntas frecuentes', description: 'Envíos, pagos, devoluciones y garantía.', path: '/faq' })
+    } else if (path === '/contacto') {
+      applySeo({ title: 'Contacto', description: 'Canales de contacto de Esturel.', path: '/contacto' })
     }
-    // product pages set their own SEO
   }, [location.pathname, location.search])
   return null
 }
@@ -121,6 +124,7 @@ function Shell({ children }: { children: ReactNode }) {
     <div className="relative min-h-screen font-sans">
       <AuroraBackdrop />
       <ScrollProgress />
+      <AnnouncementBar />
       <SkipLink />
       <ScrollToTop />
       <RootSeo />
@@ -135,6 +139,7 @@ function Shell({ children }: { children: ReactNode }) {
       <AddToast />
       <WhatsAppFab />
       <BackToTop />
+      <ConsentBanner />
     </div>
   )
 }
@@ -142,40 +147,58 @@ function Shell({ children }: { children: ReactNode }) {
 export default function App() {
   const location = useLocation()
 
+  useEffect(() => {
+    const onConsent = () => initAnalytics()
+    window.addEventListener('esturel:consent', onConsent)
+    initAnalytics()
+    return () => window.removeEventListener('esturel:consent', onConsent)
+  }, [])
+
   return (
     <MotionConfig reducedMotion="user">
-      <Shell>
-        <AnimatePresence mode="wait">
-          <FadePage key={location.pathname}>
-            <Suspense fallback={<PageLoader />}>
-              <Routes location={location}>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/catalogo" element={<CatalogPage />} />
-                <Route path="/producto/:slug" element={<ProductDetailPage />} />
-                <Route path="/carrito" element={<CartPage />} />
-                <Route path="/checkout" element={<CheckoutPage />} />
-                <Route path="/noticias" element={<NewsPage />} />
-                <Route path="/asesor" element={<AsesorPage />} />
-                <Route
-                  path="/paceform"
-                  element={<ExternalRedirect to={PACEFORM_URL} label="Paceform" />}
-                />
-                <Route
-                  path="/instagram"
-                  element={
-                    <ExternalRedirect
-                      to={INSTAGRAM_URL}
-                      label="Instagram @esturelco"
-                      path="/instagram"
-                    />
-                  }
-                />
-                <Route path="*" element={<NotFoundPage />} />
-              </Routes>
-            </Suspense>
-          </FadePage>
-        </AnimatePresence>
-      </Shell>
+      <ErrorBoundary>
+        <Shell>
+          <AnimatePresence mode="wait">
+            <FadePage key={location.pathname}>
+              <Suspense fallback={<PageLoader />}>
+                <Routes location={location}>
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/catalogo" element={<CatalogPage />} />
+                  <Route path="/producto/:slug" element={<ProductDetailPage />} />
+                  <Route path="/carrito" element={<CartPage />} />
+                  <Route path="/checkout" element={<CheckoutPage />} />
+                  <Route path="/pedido/confirmado" element={<OrderConfirmedPage />} />
+                  <Route path="/noticias" element={<NewsPage />} />
+                  <Route path="/asesor" element={<AsesorPage />} />
+                  <Route path="/faq" element={<FaqPage />} />
+                  <Route path="/contacto" element={<ContactPage />} />
+                  <Route path="/privacidad" element={<LegalPage />} />
+                  <Route path="/terminos" element={<LegalPage />} />
+                  <Route path="/envios" element={<LegalPage />} />
+                  <Route path="/devoluciones" element={<LegalPage />} />
+                  <Route path="/garantia" element={<LegalPage />} />
+                  <Route
+                    path="/paceform"
+                    element={<ExternalRedirect to={PACEFORM_URL} label="Paceform" />}
+                  />
+                  <Route
+                    path="/instagram"
+                    element={
+                      <ExternalRedirect
+                        to={INSTAGRAM_URL}
+                        label="Instagram @esturelco"
+                        path="/instagram"
+                      />
+                    }
+                  />
+                  <Route path="/ig" element={<ExternalRedirect to={INSTAGRAM_URL} label="Instagram @esturelco" path="/ig" />} />
+                  <Route path="*" element={<NotFoundPage />} />
+                </Routes>
+              </Suspense>
+            </FadePage>
+          </AnimatePresence>
+        </Shell>
+      </ErrorBoundary>
     </MotionConfig>
   )
 }

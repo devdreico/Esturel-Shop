@@ -1,5 +1,5 @@
-/** Sitios asociados de Esturel. */
+import { site } from '../config/site'
 
-export const PACEFORM_URL = 'https://paceform.presentto.online'
-export const PACEFORM_NAME = 'Paceform'
-export const PACEFORM_BLURB = 'Running con datos: planifica, registra y analiza tus carreras.'
+export const PACEFORM_URL = site.partners.paceformUrl
+export const PACEFORM_NAME = site.partners.paceformName
+export const PACEFORM_BLURB = site.partners.paceformBlurb

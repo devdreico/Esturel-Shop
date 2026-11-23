@@ -8,14 +8,19 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && node scripts/prerender.mjs && node scripts/sitemap.mjs",
     "typecheck": "tsc -b --pretty false",
     "lint": "oxlint",
     "test": "vitest run",
     "test:watch": "vitest",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "products:check": "node scripts/validate-products.mjs",
+    "images:check": "node scripts/check-images.mjs",
+    "products:sync": "node scripts/sync-products.mjs",
+    "launch:check": "npm run products:check && npm run images:check && npm run lint && npm run typecheck && npm run test && npm run build"
   },
   "dependencies": {
+    "fast-xml-parser": "^5.12.1",
     "framer-motion": "^13.4.2",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",

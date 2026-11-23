@@ -1,6 +1,6 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { getFeaturedProducts } from '../data/products'
+import { getFeaturedProducts, categoryCounts } from '../data/products'
 import { useNews } from '../hooks/useNews'
 import { formatCOP } from '../lib/format'
 import { ProductCard } from '../components/product/ProductCard'
@@ -8,33 +8,35 @@ import { NewsCard, NewsSkeleton } from '../components/news/NewsCard'
 import { categories } from '../data/categories'
 import { Reveal } from '../components/ui/Motion'
 import { useSeo } from '../hooks/useSeo'
-import { organizationJsonLd } from '../lib/seo'
+import { organizationJsonLd, websiteJsonLd } from '../lib/seo'
+import { site } from '../config/site'
 import { PACEFORM_BLURB, PACEFORM_NAME, PACEFORM_URL } from '../lib/partners'
+import { waUrl } from '../lib/whatsapp'
 import { HeroCarousel } from '../components/home/HeroCarousel'
+import { trackWhatsApp } from '../lib/analytics'
 
 export function HomePage() {
-  const featured = getFeaturedProducts()
+  const featured = getFeaturedProducts(8)
   const { items: news, loading } = useNews()
   const reduce = useReducedMotion()
   const hero = featured[0]
+  const counts = categoryCounts()
 
   useSeo({
-    title: 'Esturel · Tecnología en Colombia',
-    description:
-      'Tienda, asesor y noticiero de tecnología en Colombia. Audífonos, periféricos y frontera tech con pago contraentrega.',
+    title: site.hero.title + ' ' + site.hero.titleAccent + ' ' + site.hero.titleEnd,
+    description: site.brand.description,
     path: '/',
-    jsonLd: organizationJsonLd(),
+    jsonLd: [organizationJsonLd(), websiteJsonLd()],
   })
 
   return (
-    <div className="space-y-16 sm:space-y-20">
+    <div className="space-y-16 sm:space-y-24">
       {/* Hero */}
       <section className="relative overflow-hidden pt-4 pb-12 sm:pt-8 sm:pb-16">
         <div className="pointer-events-none absolute -top-32 -left-32 h-96 w-96 rounded-full bg-urple-500/20 blur-3xl" />
         <div className="pointer-events-none absolute -right-32 top-1/3 h-80 w-80 rounded-full bg-urple-400/15 blur-3xl" />
 
         <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-14">
-          {/* Visual: primero en mobile para impacto */}
           <motion.div
             initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.94, y: 24 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -63,7 +65,6 @@ export function HomePage() {
             )}
           </motion.div>
 
-          {/* Copy */}
           <div className="order-2 lg:order-1">
             <motion.p
               initial={reduce ? { opacity: 0 } : { opacity: 0, y: 16 }}
@@ -75,7 +76,7 @@ export function HomePage() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-urple-400 opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-urple-500" />
               </span>
-              Asesor · Tienda · Noticiero
+              {site.hero.eyebrow}
             </motion.p>
             <motion.h1
               initial={reduce ? { opacity: 0 } : { opacity: 0, y: 20 }}
@@ -83,202 +84,201 @@ export function HomePage() {
               transition={{ duration: 0.5, delay: 0.05, ease: [0, 0, 0.2, 1] }}
               className="text-[2.5rem] leading-[1.04] font-bold tracking-tight sm:text-5xl lg:text-6xl"
             >
-              Tecnología con{' '}
-              <span className="gradient-text-animated">criterio</span> en Colombia
+              {site.hero.title}{' '}
+              <span className="gradient-text-animated">{site.hero.titleAccent}</span>{' '}
+              {site.hero.titleEnd}
             </motion.h1>
             <motion.p
               initial={reduce ? { opacity: 0 } : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.12 }}
-              className="mt-5 max-w-lg text-base text-muted sm:text-lg"
+              transition={{ duration: 0.5, delay: 0.1, ease: [0, 0, 0.2, 1] }}
+              className="mt-4 max-w-xl text-base text-muted sm:text-lg"
             >
-              Desde audífonos hasta frontera tech. Catálogo curado, asesoría real y un feed de
-              noticias al día — con pago{' '}
-              <strong className="text-ink">contraentrega en efectivo</strong> y envíos a todo
-              Colombia.
+              {site.hero.subtitle}
             </motion.p>
-            <motion.div
-              initial={reduce ? { opacity: 0 } : { opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="mt-8 flex flex-wrap gap-3"
-            >
-              <Link to="/catalogo" className="btn-primary rounded-full px-6 py-3 text-sm">
-                Ver catálogo
-              </Link>
-              <Link
-                to="/asesor"
-                className="glass rounded-full px-6 py-3 text-sm font-bold hover:border-urple-500/40 hover:text-urple-500"
-              >
-                Hablar con un asesor
-              </Link>
-              <Link
-                to="/noticias"
-                className="glass rounded-full px-6 py-3 text-sm font-bold hover:border-urple-500/40 hover:text-urple-500"
-              >
-                Feed tech
-              </Link>
-            </motion.div>
+
             <motion.ul
               initial={reduce ? { opacity: 0 } : { opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="mt-6 flex flex-wrap gap-x-4 gap-y-2 text-xs font-semibold text-muted"
+              transition={{ duration: 0.4, delay: 0.15 }}
+              className="mt-5 flex flex-wrap gap-2"
             >
-              {['Contraentrega', 'Envíos Colombia', 'Soporte por WhatsApp'].map((t) => (
-                <li key={t} className="inline-flex items-center gap-1.5">
-                  <span className="text-urple-500">✓</span>
-                  {t}
+              {site.hero.bullets.map((b) => (
+                <li
+                  key={b}
+                  className="inline-flex items-center gap-1.5 rounded-full glass px-3 py-1.5 text-xs font-semibold"
+                >
+                  <span className="h-1.5 w-1.5 rounded-full bg-urple-500" />
+                  {b}
                 </li>
               ))}
             </motion.ul>
+
+            <motion.div
+              initial={reduce ? { opacity: 0 } : { opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2, ease: [0, 0, 0.2, 1] }}
+              className="mt-7 flex flex-wrap items-center gap-3"
+            >
+              <Link to="/catalogo" className="btn-primary rounded-full px-6 py-3 text-sm">
+                {site.hero.primaryCta}
+              </Link>
+              <a
+                href={waUrl('Hola Esturel, quiero asesoría para elegir un producto.')}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackWhatsApp('hero')}
+                className="glass rounded-full px-6 py-3 text-sm font-bold hover:text-urple-500"
+              >
+                {site.hero.secondaryCta}
+              </a>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Trust */}
-      <section className="mx-auto max-w-7xl px-3 sm:px-6">
-        <Reveal>
-          <div className="flex flex-wrap justify-center gap-3">
-            {[
-              'Envíos Colombia',
-              'Pago contraentrega',
-              'Asesoría humana',
-              'Garantía local',
-            ].map((t) => (
-              <span key={t} className="glass rounded-full px-4 py-2 text-xs font-semibold">
-                {t}
-              </span>
-            ))}
-          </div>
-        </Reveal>
-      </section>
-
       {/* Categorías */}
-      <section className="mx-auto max-w-7xl px-3 sm:px-6">
+      <section className="mx-auto max-w-7xl px-4 sm:px-6">
         <Reveal>
-          <div className="mb-4 flex items-end justify-between sm:mb-6">
+          <div className="flex items-end justify-between gap-4">
             <div>
-              <p className="text-xs font-bold tracking-widest text-urple-500 uppercase">
-                Categorías
-              </p>
-              <h2 className="mt-1 text-2xl font-bold sm:text-3xl">Explora por línea</h2>
+              <p className="text-xs font-bold tracking-widest text-urple-500 uppercase">Categorías</p>
+              <h2 className="mt-1 text-2xl font-bold sm:text-3xl">Explora por uso</h2>
             </div>
-            <Link to="/catalogo" className="text-sm font-bold text-urple-500 hover:underline">
+            <Link to="/catalogo" className="text-sm font-semibold text-urple-500 hover:underline">
               Ver todo →
             </Link>
           </div>
         </Reveal>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+        <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-5">
           {categories.map((c, i) => (
             <Reveal key={c.id} delay={i * 0.05}>
               <Link
                 to={`/catalogo?cat=${c.id}`}
-                className="glass-card block h-full rounded-2xl p-4 text-center"
+                className="glass-card group flex h-full flex-col items-start gap-2 rounded-2xl p-4 transition hover:border-urple-500/40"
               >
-                <span className="block text-2xl transition-transform duration-300 hover:scale-110">
-                  {c.emoji}
-                </span>
-                <span className="mt-2 block text-sm font-bold">{c.label}</span>
-                <span className="mt-1 block text-xs text-muted">{c.blurb}</span>
+                <span className="text-2xl">{c.emoji}</span>
+                <p className="text-sm font-bold">{c.label}</p>
+                <p className="text-xs text-muted">{c.blurb}</p>
+                <p className="mt-auto text-[11px] font-semibold text-urple-500">
+                  {counts[c.id]} productos
+                </p>
               </Link>
             </Reveal>
           ))}
         </div>
       </section>
 
-      {/* Destacados */}
-      <section className="mx-auto max-w-7xl px-3 sm:px-6">
+      {/* Cómo comprar */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6">
         <Reveal>
-          <div className="mb-4 flex items-end justify-between sm:mb-6">
-            <div>
-              <p className="text-xs font-bold tracking-widest text-urple-500 uppercase">
-                Selección Esturel
-              </p>
-              <h2 className="mt-1 text-2xl font-bold sm:text-3xl">Productos destacados</h2>
+          <div className="glass-strong rounded-3xl p-6 sm:p-10">
+            <p className="text-xs font-bold tracking-widest text-urple-500 uppercase">Cómo comprar</p>
+            <h2 className="mt-1 text-2xl font-bold sm:text-3xl">En 3 pasos, sin tarjeta</h2>
+            <div className="mt-6 grid gap-4 sm:grid-cols-3">
+              {[
+                { n: '01', t: 'Elige', d: 'Arma tu carrito con lo que necesitas.' },
+                { n: '02', t: 'Confirma', d: 'Te contactamos por WhatsApp para validar stock y envío.' },
+                { n: '03', t: 'Recibe', d: 'Pagas en efectivo contraentrega.' },
+              ].map((s) => (
+                <div key={s.n} className="glass-card rounded-2xl p-5">
+                  <p className="text-2xl font-bold text-urple-500">{s.n}</p>
+                  <p className="mt-1 font-bold">{s.t}</p>
+                  <p className="mt-1 text-sm text-muted">{s.d}</p>
+                </div>
+              ))}
             </div>
-            <Link to="/catalogo" className="text-sm font-bold text-urple-500 hover:underline">
-              Catálogo →
+          </div>
+        </Reveal>
+      </section>
+
+      {/* Destacados */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6">
+        <Reveal>
+          <div className="flex items-end justify-between gap-4">
+            <div>
+              <p className="text-xs font-bold tracking-widest text-urple-500 uppercase">Destacados</p>
+              <h2 className="mt-1 text-2xl font-bold sm:text-3xl">Lo más pedido</h2>
+            </div>
+            <Link to="/catalogo" className="text-sm font-semibold text-urple-500 hover:underline">
+              Ver catálogo →
             </Link>
           </div>
         </Reveal>
-        <div className="grid grid-cols-2 gap-2.5 sm:gap-4 lg:grid-cols-4">
-          {featured.slice(0, 8).map((p, i) => (
+        <div className="mt-6 grid grid-cols-2 gap-2.5 sm:gap-4 lg:grid-cols-4">
+          {featured.map((p, i) => (
             <ProductCard key={p.id} product={p} index={i} />
           ))}
         </div>
       </section>
 
-      {/* News preview */}
-      <section className="mx-auto max-w-7xl px-3 sm:px-6">
+      {/* Paceform */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6">
         <Reveal>
-          <div className="mb-4 flex items-end justify-between sm:mb-6">
+          <div className="glass-card flex flex-col items-start gap-4 rounded-3xl p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
             <div>
               <p className="text-xs font-bold tracking-widest text-urple-500 uppercase">
-                Noticiero tech
+                Proyecto asociado
               </p>
-              <h2 className="mt-1 text-2xl font-bold sm:text-3xl">Feed en vivo</h2>
+              <h2 className="mt-1 text-xl font-bold sm:text-2xl">{PACEFORM_NAME}</h2>
+              <p className="mt-1 max-w-xl text-sm text-muted">{PACEFORM_BLURB}</p>
             </div>
-            <Link to="/noticias" className="text-sm font-bold text-urple-500 hover:underline">
-              Todas →
-            </Link>
+            <a
+              href={PACEFORM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary rounded-full px-6 py-3 text-sm"
+            >
+              Ir a Paceform ↗
+            </a>
           </div>
         </Reveal>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {loading
-            ? Array.from({ length: 3 }).map((_, i) => <NewsSkeleton key={i} />)
-            : news.slice(0, 3).map((n, i) => <NewsCard key={n.id} item={n} index={i} />)}
-        </div>
       </section>
 
-      {/* Sitio asociado Paceform */}
-      <section className="mx-auto max-w-7xl px-3 sm:px-6">
-        <Reveal>
-          <a
-            href={PACEFORM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="glass-strong group flex flex-col items-start justify-between gap-5 rounded-3xl p-6 transition hover:border-urple-500/40 sm:flex-row sm:items-center sm:p-8"
-          >
-            <div>
-              <p className="text-xs font-bold tracking-widest text-urple-500 uppercase">
-                Sitio asociado
-              </p>
-              <h2 className="mt-1 text-2xl font-bold">
-                {PACEFORM_NAME} · running con datos
-              </h2>
-              <p className="mt-2 max-w-xl text-sm text-muted">
-                {PACEFORM_BLURB} Planifica tus carreras, registra tus tiempos y analiza tu
-                progreso.
-              </p>
+      {/* Noticias */}
+      {site.features.news && (
+        <section className="mx-auto max-w-7xl px-4 sm:px-6">
+          <Reveal>
+            <div className="flex items-end justify-between gap-4">
+              <div>
+                <p className="text-xs font-bold tracking-widest text-urple-500 uppercase">Noticiero</p>
+                <h2 className="mt-1 text-2xl font-bold sm:text-3xl">Tecnología en vivo</h2>
+              </div>
+              <Link to="/noticias" className="text-sm font-semibold text-urple-500 hover:underline">
+                Ver feed →
+              </Link>
             </div>
-            <span className="btn-primary inline-flex shrink-0 rounded-full px-6 py-3 text-sm">
-              Ir a {PACEFORM_NAME} ↗
-            </span>
-          </a>
-        </Reveal>
-      </section>
+          </Reveal>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {loading
+              ? Array.from({ length: 3 }).map((_, i) => <NewsSkeleton key={i} />)
+              : news.slice(0, 3).map((n, i) => <NewsCard key={n.id} item={n} index={i} />)}
+          </div>
+        </section>
+      )}
 
-      {/* CTA Asesor */}
-      <section className="mx-auto max-w-7xl px-3 sm:px-6">
+      {/* CTA final */}
+      <section className="mx-auto max-w-7xl px-4 pb-4 sm:px-6">
         <Reveal>
-          <div className="glass-strong relative overflow-hidden rounded-3xl p-8 text-center sm:p-12">
-            <div className="absolute -top-20 left-1/2 h-40 w-80 -translate-x-1/2 rounded-full bg-urple-500/30 blur-3xl" />
-            <p className="text-xs font-bold tracking-widest text-urple-500 uppercase">
-              Asesoría Esturel
+          <div className="glass-strong rounded-3xl p-8 text-center sm:p-12">
+            <h2 className="text-2xl font-bold sm:text-3xl">¿Dudas para elegir?</h2>
+            <p className="mt-2 text-sm text-muted">
+              Te asesoramos por WhatsApp según presupuesto y uso real.
             </p>
-            <h2 className="mx-auto mt-2 max-w-2xl text-2xl font-bold sm:text-3xl">
-              ¿No sabes qué equipo comprar? Te decimos con datos, no con humo.
-            </h2>
-            <p className="mx-auto mt-3 max-w-xl text-sm text-muted">
-              Comparamos specs, presupuesto y uso real en Colombia (envíos, garantías, aranceles).
-            </p>
-            <Link
-              to="/asesor"
-              className="btn-primary mt-6 inline-flex rounded-full px-7 py-3 text-sm"
-            >
-              Solicitar asesoría
-            </Link>
+            <div className="mt-6 flex flex-wrap justify-center gap-3">
+              <Link to="/asesor" className="btn-primary rounded-full px-6 py-3 text-sm">
+                {site.cta.advisor}
+              </Link>
+              <a
+                href={waUrl('Hola Esturel, quiero información sobre sus productos.')}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackWhatsApp('home-cta')}
+                className="glass rounded-full px-6 py-3 text-sm font-bold hover:text-urple-500"
+              >
+                {site.cta.whatsapp}
+              </a>
+            </div>
           </div>
         </Reveal>
       </section>

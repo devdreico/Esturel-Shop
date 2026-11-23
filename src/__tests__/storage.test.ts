@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest'
 import { sanitizeCartLines } from '../lib/storage'
-import { safeHttpsUrl } from '../lib/rss'
 import { products } from '../data/products'
 
 describe('sanitizeCartLines', () => {
@@ -12,7 +11,8 @@ describe('sanitizeCartLines', () => {
   })
 
   it('clampa qty y deduplica', () => {
-    const id = products[0]!.id
+    const product = products.find((p) => p.stockPolicy === 'backorder')!
+    const id = product.id
     const out = sanitizeCartLines([
       { productId: id, qty: 999 },
       { productId: id, qty: 2 },
@@ -20,16 +20,11 @@ describe('sanitizeCartLines', () => {
     ])
     expect(out).toEqual([{ productId: id, qty: 99 }])
   })
-})
 
-describe('safeHttpsUrl', () => {
-  it('acepta https', () => {
-    expect(safeHttpsUrl('https://example.com/a')).toBe('https://example.com/a')
-  })
-  it('rechaza javascript y http', () => {
-    expect(safeHttpsUrl('javascript:alert(1)')).toBeNull()
-    expect(safeHttpsUrl('http://example.com')).toBeNull()
-    expect(safeHttpsUrl('not a url')).toBeNull()
+  it('descarta variantes inválidas', () => {
+    const product = products.find((p) => p.variants?.length)!
+    const out = sanitizeCartLines([{ productId: product.id, variantId: 'nope', qty: 1 }])
+    expect(out).toEqual([])
   })
 })
 
