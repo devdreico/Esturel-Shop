@@ -154,8 +154,6 @@ export function HeroCarousel() {
         <link rel="prefetch" as="image" href={heroSlides[nextIndex]!.src} />
       </div>
 
-      {/* Sombra / glow bajo el carrusel */}
-      <div className="absolute -right-4 -bottom-4 -z-10 h-full w-full rounded-3xl bg-urple-500/20 blur-2xl" />
     </div>
   )
 }

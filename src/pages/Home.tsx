@@ -36,12 +36,12 @@ export function HomePage() {
         <div className="pointer-events-none absolute -top-32 -left-32 h-96 w-96 rounded-full bg-urple-500/20 blur-3xl" />
         <div className="pointer-events-none absolute -right-32 top-1/3 h-80 w-80 rounded-full bg-urple-400/15 blur-3xl" />
 
-        <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-14">
+        <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:gap-12">
           <motion.div
             initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.94, y: 24 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0, 0, 0.2, 1] }}
-            className="order-1 lg:order-2"
+            className="order-1 min-w-0 lg:order-2"
           >
             <HeroCarousel />
             {hero && (
@@ -65,7 +65,7 @@ export function HomePage() {
             )}
           </motion.div>
 
-          <div className="order-2 lg:order-1">
+          <div className="order-2 min-w-0 lg:order-1">
             <motion.p
               initial={reduce ? { opacity: 0 } : { opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
